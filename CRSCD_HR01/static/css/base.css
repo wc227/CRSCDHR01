@@ -1,0 +1,57 @@
+body{
+	padding-top: 50px;
+}
+
+.navbar-brand{
+	padding-top:0;
+}
+
+.navbar{
+	margin-bottom: 0;
+}
+
+
+.jumbotron{
+	padding-top:0;
+	padding-bottom:0;
+}
+
+.panel-primary {
+	max-width: 310px;
+    margin: 10px auto 20px;
+}
+
+.panel-primary>.panel-heading{
+	background-color: rgb(1, 32, 75);
+}
+
+.table tbody tr td{
+    line-height: 1.42857143;
+    vertical-align: top;
+	border-top: none;
+	border-bottom: 1px solid rgba(0,7,34,0.1);
+    font-size: 6px;
+    padding:4px;
+    text-align: center;
+
+}
+
+.post_des{
+	padding: 2px;
+}
+
+#footer{
+	border-top: 1px solid rgba(0,7,34,0.1);
+	text-align: center;
+	color: #777;
+	font-size: 12px;
+
+}
+
+.breadcrumb{
+	background-color: white;
+	padding: 10px 15px 5px 15px;
+	margin-bottom: 0;
+	font-size: 12px;
+	text-decoration: none;
+}
