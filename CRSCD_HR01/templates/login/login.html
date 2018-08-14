@@ -1,34 +1,108 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="/static/css/pages.css">
+    <script type="text/javascript" src="/static/js/register.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
 {% endblock head %}
 
 {% block body %}
     <div class="container" id="login_body">
         <div class="row" id="input_row">
-            <div class="col-lg-6">
-
+            <div class="col-lg-6 col-md-6 hidden-sm hidden-xs">
+                <div class="div" id="login_pic">
+                    <img src="/static/images/login.jpg" alt="login" class="img-responsive img-circle">
+                </div>
             </div>
 
-            <div class="col-lg-6" id="input_form">
+            <div class="col-lg-6 col-md-6 col-md-0 col-sm-0 center-block" id="input_form">
                 <div class="form-group">
                     <label for="exampleInputEmail1" id="email">登录邮箱</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
                 </div>
+
                 <div class="form-group">
                     <label for="exampleInputPassword1" id="password">登录密码</label>
                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                 </div>
                 <button type="submit" class="btn btn-default" id="login_btn">登录</button>
                 <div class="container" id="link_user">
-                    <a href="#" id="link_register">用户注册</a>
+                    <a id="link_register" data-toggle="modal" data-target="#register_modal">用户注册</a>
                     <a href="#" id="link_reset">忘记密码</a>
                 </div>
-
 
             </div>
         </div>
     </div>
+     <!--注册弹框-->
+    <div class="modal fade" id="register_modal" tabindex="-1">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">用户注册</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="/user/register_handle/" method="post" id="reg_form">
+                        {% csrf_token %}
+
+                        <div class="form-group has-feedback" id="emailBox">
+                            <label for="exampleInputEmail1"><span id="must">*</span>邮箱</label>
+                            <input type="text" class="form-control" id="user_email" name="user_email" placeholder="Email" aria-describedby="helpBlock1">
+                            <span class="glyphicon glyphicon-ok form-control-feedback hidden" aria-hidden="true" id="email_true"></span>
+                            <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                            <span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true" id="email_false"></span>
+                            <span id="inputError2Status" class="sr-only">(error)</span>
+                            <span id="email_warn" class="help-block hidden"></span>
+                        </div>
+
+                        <div class="form-group has-feedback" id="pwdBox">
+                            <label for="exampleInputPassword1"><span id="must">*</span>登录密码</label>
+                            <input type="password" class="form-control" id="user_pwd" name="user_pwd" placeholder="Password">
+                            <span class="glyphicon glyphicon-ok form-control-feedback hidden" aria-hidden="true" id="pwd_true"></span>
+                            <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                            <span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true" id="pwd_false"></span>
+                            <span id="inputError2Status" class="sr-only">(error)</span>
+                            <span id="pwd_warn" class="help-block hidden"></span>
+                        </div>
+
+                        <div class="form-group has-feedback" id="cpwdBox">
+                            <label for="exampleInputPassword1"><span id="must">*</span>确认密码</label>
+                            <input type="password" class="form-control" id="user_cpwd" name="user_cpwd" placeholder="Password">
+                            <span class="glyphicon glyphicon-ok form-control-feedback hidden" aria-hidden="true" id="cpwd_true"></span>
+                            <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                            <span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true" id="cpwd_false"></span>
+                            <span id="inputError2Status" class="sr-only">(error)</span>
+                            <span id="cpwd_warn" class="help-block hidden"></span>
+                        </div>
+
+                        <div class="form-group has-feedback" id="phoneBox">
+                            <label for="exampleInputPassword1"><span id="must">*</span>手机号码</label>
+                            <input type="number" class="form-control" id="user_phone" name="user_phone" placeholder="Mobile">
+                            <span class="glyphicon glyphicon-ok form-control-feedback hidden" aria-hidden="true" id="phone_true"></span>
+                            <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                            <span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true" id="phone_false"></span>
+                            <span id="inputError2Status" class="sr-only">(error)</span>
+                            <span id="phone_warn" class="help-block hidden"></span>
+                        </div>
+
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="agree" style="zoom:150%"> <a href="#" id="declaration">我同意通号院集团法律声明及隐私权政策。</a>
+                            </label>
+                            <p class="" id="check_warn">请仔细阅读声明并选择同意。</p>
+                        </div>
+
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-primary" value="提交">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div><!--modal-content-->
+        </div><!--modal-dialog-->
+    </div><!--model fade-->
 {% endblock body %}
+
 

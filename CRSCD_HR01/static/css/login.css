@@ -1,0 +1,95 @@
+#login_body{
+    height: 500px;
+
+}
+
+#input_row{
+    margin-left: 0;
+}
+
+.input_box{
+    width:350px;
+    height:320px;
+    text-align: center;
+    border: 1px solid #777;
+    margin: 100px auto;
+}
+
+#input_form{
+    padding-top: 100px;
+}
+
+.form-control{
+    width: 300px;
+}
+
+#email, #password{
+    font-weight: normal;
+    font-size: 12px;
+}
+
+#login_btn{
+    width: 300px;
+    background-color: rgb(255,140,0);
+    color: white;
+    margin: 20px 0 10px 0;
+    font-weight: bold;
+}
+
+#register_btn{
+    margin-left: 188px;
+}
+
+#link_user{
+    padding: 0;
+}
+
+#link_reset{
+    margin-left: 202px;
+}
+
+#link_user, #link_reset{
+    font-size: 12px;
+    cursor: pointer;
+}
+
+#login_pic{
+    width: 300px;
+    margin-top: 80px;
+    margin-left: 100px;
+}
+
+label{
+    width: 100%;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.modal-dialog .form-control{
+    width: 100%;
+}
+
+#must{
+    color: red;
+    margin-right: 5px;
+}
+
+#agree{
+    margin-top: 1px;
+    margin-left:-12px;
+}
+
+#declaration{
+    margin-left:15px;
+}
+
+.help-block{
+    font-size: 12px;
+    padding: 5px;
+}
+#check_warn{
+    color: #a94442;
+    font-size: 12px;
+    margin-top: 10px;
+    margin-left: 5px;
+}
