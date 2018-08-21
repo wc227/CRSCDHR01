@@ -4,40 +4,62 @@ $(function(){
     var error_password = false;
     var error_check_password = false;
     var error_email = false;
-    var error_phone = false;
-    var error_check = false;
+    var error_check = true;
+    var error_name = false;
+    var error_login = true
     var user_email = $('#user_email');
     var user_pwd = $('#user_pwd');
     var user_cpwd = $('#user_cpwd');
-    var user_phone = $('#user_phone');
+    var name = $('#name');
+    var login_email = $('#login_email');
+    var login_pwd = $('#login_pwd');
 
     //定义失去焦点函数
+    name.blur(function(){check_name();});
     user_email.blur(function(){check_email();});
     user_pwd.blur(function(){check_pwd();});
     user_cpwd.blur(function(){check_cpwd();});
-    user_phone.blur(function(){check_phone();});
+    login_email.blur(function(){login_email_check();});
 
     //校验是否同意声明
-    $('#allow').click(function(){
+    $('#agree').click(function(){
         if($(this).is(':checked')){
             error_check = false;
-            $('#check_warn').addClass('hidden');
+            $('#agree_warn').addClass('hidden');
         }
         else{
-            error_check = false;
-            $('#check_warn').removeClass('hidden');
+            error_check = true;
+            $('#agree_warn').removeClass('hidden');
         }
     });
 
+    //姓名校验函数
+    function check_name(){
+        var len = name.val().length;
+        var name_box = $('#nameBox');
+        var name_false = $('#name_false');
+        var name_true = $('#name_true');
+        var name_warn = $('#name_warn');
 
-
-    $('#email_false').click(function(){
-        user_email.val('');
-    });
+        if(len<=0||len>5){
+            name_box.addClass('has-error').removeClass('has-success');
+            name_false.removeClass('hidden');
+            name_true.addClass('hidden');
+            name_warn.removeClass('hidden').html('此输入正确的姓名。');
+            error_name = true;
+        }
+        else{
+            name_box.removeClass('has-error').addClass('has-success');
+            name_false.addClass('hidden');
+            name_true.removeClass('hidden');
+            name_warn.addClass('hidden');
+            error_name = false;
+        }
+    }
 
     //邮箱校验函数
     function check_email(){
-        var re = /^[a-z0-9][\w\.\-]*@[a-z0-9\-]+(\.[a-z]{2,5}){1,2}$/;
+        var re = /^[a-z0-9][\w\.\-]*@[a-z0-9\-]+(\.[a-z]{2,5}){1,2}$/
         var email_box = $('#emailBox');
         var email_false = $('#email_false');
         var email_true = $('#email_true');
@@ -77,8 +99,8 @@ $(function(){
     function check_pwd(){
         var pwd_box = $('#pwdBox');
         var pwd_warn = $('#pwd_warn');
-        var pwd_true = $('#pwd_true')
-        var pwd_false = $('#pwd_false')
+        var pwd_true = $('#pwd_true');
+        var pwd_false = $('#pwd_false');
         var len = $('#user_pwd').val().length;
 
         if(len<8||len>20){
@@ -123,55 +145,19 @@ $(function(){
         }
     }
 
-    //校验手机号函数
-    function check_phone(){
-        var re = /^\d{11,11}$/
-        var phone_box = $('#phoneBox');
-        var phone_true = $('#phone_true ');
-        var phone_false = $('#phone_false');
-        var phone_warn = $('#phone_warn');
-
-        if(re.test(user_phone.val())){
-            phone_box.addClass('has-success').removeClass('has-error');
-            phone_true.removeClass('hidden');
-            phone_false.addClass('hidden');
-            phone_warn.addClass('hidden');
-            error_phone = false;
-        }
-        else{
-            phone_box.addClass('has-error').removeClass('has-success');
-            phone_true.addClass('hidden');
-            phone_false.removeClass('hidden');
-            phone_warn.removeClass('hidden').html('请输入正确的手机号。');
-            error_phone = true;
-        }
-    }
-
-    //校验声明是否勾选
-    $('#agree').click(function(){
-        if($(this).is(':checked')){
-            $('#check_warn').addClass('hidden');
-            error_check = false;
-        }
-        else{
-            $('#check_warn').removeClass('hidden');
-            error_check = true;
-        }
-    })
-
-    //提交综合校验
+    //提交注册综合校验
     $('#reg_form').submit(function(){
+        check_name();
         check_email();
         check_pwd();
         check_cpwd();
-        check_phone();
-
-        if(error_email==false && error_password==false && error_check_password==false && error_phone==false && error_check==false){
-            alert('注册成功，请登录！');
+        if(error_name==false && error_email==false && error_password==false && error_check_password==false && error_check==false){
+            alert('注册成功')
             return true;
-
         }
-        else{return false;}
-    })
+        else {
+            return false;
+        }
+    });
 });
 

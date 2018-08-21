@@ -75,21 +75,38 @@ label{
 }
 
 #agree{
-    margin-top: 1px;
-    margin-left:-12px;
+    margin-top: 5px;
+    padding: 1px;
+}
+
+#agree a{
+    font-size: 12px;
+}
+
+#agree_warn{
+    color:#a94442;
+    font-size:12px;
 }
 
 #declaration{
     margin-left:15px;
+    padding: 0;
 }
 
 .help-block{
     font-size: 12px;
     padding: 5px;
 }
-#check_warn{
+
+#agree_warn{
     color: #a94442;
     font-size: 12px;
     margin-top: 10px;
     margin-left: 5px;
+}
+
+#login_email_warn, #login_warn{
+    color: #a94442;
+    font-size: 12px;
+    margin-top: 5px;
 }
