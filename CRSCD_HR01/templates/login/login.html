@@ -16,7 +16,7 @@
             }
     });
     </script>
-    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/user.css">
 {% endblock head %}
 
 {% block body %}
@@ -66,8 +66,8 @@
                     <div class="modal-body">
                         {% csrf_token %}
                         <div class="form-group has-feedback" id="nameBox">
-                            <label for="exampleInputEmail1"><span id="must">*</span>姓名</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Name" aria-describedby="helpBlock1">
+                            <label for="name"><span id="must">*</span>姓名</label>
+                            <input type="text" class="form-control" id="name" name="name">
                             <span class="glyphicon glyphicon-ok form-control-feedback hidden" aria-hidden="true" id="name_true"></span>
                             <span id="inputSuccess2Status" class="sr-only">(success)</span>
                             <span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true" id="name_false"></span>
@@ -75,8 +75,8 @@
                             <span id="name_warn" class="help-block hidden"></span>
                         </div>
                         <div class="form-group has-feedback" id="emailBox">
-                            <label for="exampleInputEmail1"><span id="must">*</span>邮箱</label>
-                            <input type="text" class="form-control" id="user_email" name="user_email" placeholder="Email" aria-describedby="helpBlock1">
+                            <label for="user_email"><span id="must">*</span>邮箱</label>
+                            <input type="text" class="form-control" id="user_email" name="user_email">
                             <span class="glyphicon glyphicon-ok form-control-feedback hidden" aria-hidden="true" id="email_true"></span>
                             <span id="inputSuccess2Status" class="sr-only">(success)</span>
                             <span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true" id="email_false"></span>
@@ -85,7 +85,7 @@
                         </div>
                         <div class="form-group has-feedback" id="pwdBox">
                             <label for="exampleInputPassword1"><span id="must">*</span>登录密码</label>
-                            <input type="password" class="form-control" id="user_pwd" name="user_pwd" placeholder="Password">
+                            <input type="password" class="form-control" id="user_pwd" name="user_pwd">
                             <span class="glyphicon glyphicon-ok form-control-feedback hidden" aria-hidden="true" id="pwd_true"></span>
                             <span id="inputSuccess2Status" class="sr-only">(success)</span>
                             <span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true" id="pwd_false"></span>
@@ -94,7 +94,7 @@
                         </div>
                         <div class="form-group has-feedback" id="cpwdBox">
                             <label for="exampleInputPassword1"><span id="must">*</span>确认密码</label>
-                            <input type="password" class="form-control" id="user_cpwd" name="user_cpwd" placeholder="Password">
+                            <input type="password" class="form-control" id="user_cpwd" name="user_cpwd">
                             <span class="glyphicon glyphicon-ok form-control-feedback hidden" aria-hidden="true" id="cpwd_true"></span>
                             <span id="inputSuccess2Status" class="sr-only">(success)</span>
                             <span class="glyphicon glyphicon-remove form-control-feedback hidden" aria-hidden="true" id="cpwd_false"></span>

@@ -1,1 +1,189 @@
 {% extends 'base.html' %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/user.css">
+    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript" src="/static/js/center.js"></script>
+
+
+
+{% endblock head %}
+{% block body %}
+    <!--个人中心导航条-->
+    <div class="container" id="nav_box">
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="#">我的简历</a></li>
+            <li role="presentation"><a href="#">我的申请</a></li>
+            <li role="presentation"><a href="#">我的收藏</a></li>
+            <li role="presentation"><a href="#">我的账户</a></li>
+        </ul>
+    </div>
+
+    <!--我的简历-->
+    <div class="container" id="resume">
+        <div class="row" id="resume_row">
+            <div class="col-lg-3" id="photo_con">
+                <div class="container" id="photo_border">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true" id="face"></span>
+                    <img src="#" alt="photo" class="img-rounded hidden">
+                </div>
+                <form>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label"></label>
+                        <div class="col-sm-4">
+                            <label for="file" id="photo_upload">上传照片</label>
+                            <input id="file" type="file" style="display: none">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-9" id="resume_con">
+                <form class="form-horizontal" id="resume_form">
+                    <!--基本信息-->
+                    <p class="info_label">基本信息:</p>
+                    <div class="info_box">
+                        <div class="form-group form-group-sm has-feedback">
+                            <label for="name" class="col-sm-2 control-label"><span id="must">*</span>姓名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="name" name="name">
+                                <p class='warn hidden'></p>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <label for="phone" class="col-sm-2 control-label"><span id="must">*</span>手机号</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="phone" name="phone">
+                                <p class="warn hidden"></p>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <label for="age" class="col-sm-2 control-label"><span id="must">*</span>年龄</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="age" name="age">
+                                <p class="warn hidden"></p>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <label for="work_year" class="col-sm-2 control-label"><span id="must">*</span>工作年限</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="work_year">
+                                    <option value="请选择">请选择</option>
+                                    <option value="应届毕业生">应届毕业生</option>
+                                    <option value="1年以下">1年以下</option>
+                                    <option value="1年以上">1年以上</option>
+                                    <option value="2年以上">2年以上</option>
+                                    <option value="3年以上">3年以上</option>
+                                    <option value="4年以上">4年以上</option>
+                                    <option value="5年以上">5年以上</option>
+                                    <option value="10年以上">10年以上</option>
+                                    <option value="15年以上">15年以上</option>
+                                    <option value="20年以上">20年以上</option>
+                                    <option value="30年以上">30年以上</option>
+                                </select>
+                                <p class='warn hidden'></p>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <label for=party" class="col-sm-2 control-label"><span id="must">*</span>政治面貌</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="party">
+                                    <option value="请选择">请选择</option>
+                                    <option value="群众">群众</option>
+                                    <option value="党员">中国共产党党员</option>
+                                    <option value="团员">中国共产主义青年团团员</option>
+                                    <option value="中国民主促进会会员">中国民主促进会会员</option>
+                                    <option value="中国民主建国会会员">中国民主建国会会员</option>
+                                    <option value="中国民主同盟盟员">中国民主同盟盟员</option>
+                                    <option value="中国农工民主党党员">中国农工民主党党员</option>
+                                    <option value="中国致公党党员">中国致公党党员</option>
+                                    <option value="九三学社社员">九三学社社员</option>
+                                    <option value="其他">其他</option>
+                                </select>
+                                <p class='warn hidden'></p>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <label for="live_location" class="col-sm-2 control-label"><span id="must">*</span>现居住地</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="live_location" name="live_location" placeholder="北京市海淀区">
+                                <p class="warn hidden"></p>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <label for="study_location" class="col-sm-2 control-label"><span id="must">*</span>生源地</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="study_location" name="study_location" placeholder="北京市">
+                                <p class="warn hidden"></p>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <label for="identity_id" class="col-sm-2 control-label"><span id="must">*</span>身份证号</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="identity_id" name="identity_id">
+                                <p class="warn hidden"></p>
+                            </div>
+                        </div>
+                    </div><!--basic_info_box-->
+
+                    <!--工作信息-->
+                    <p class="info_label">工作经历:</p>
+                    <div class="info_box">
+                        <div class="form-group form-group-sm has-feedback">
+                            <label for="company" class="col-sm-2 control-label"><span id="must">*</span>工作单位</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="company" name="company">
+                                <p class='warn hidden'></p>
+                            </div>
+                        </div>
+                        <div class="form-group form-group-sm">
+                            <label for="post" class="col-sm-2 control-label"><span id="must">*</span>职位</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="post" name="post">
+                                <p class="warn hidden"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-group-sm">
+                            <label for="post" class="col-sm-2 control-label"><span id="must">*</span>时间</label>
+                            <input size="16" type="text" value="" class="form_datetime" id="work_start_time">
+                        </div>
+
+                        <div class="form-group form-group-sm">
+                            <label for="post_desc" class="col-sm-2 control-label"><span id="must">*</span>职责描述</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" rows="3" id="post_desc" name="post_desc"></textarea>
+                                <p class="warn hidden"></p>
+                            </div>
+                        </div>
+
+
+
+
+                    </div><!--basic_info_box-->
+                    <!--工作信息-->
+
+
+
+                </form>
+            </div><!--resume_con-->
+        </div><!--resume_row-->
+    </div><!--resume-->
+
+    <div class="container hidden" id="resume">
+
+    </div>
+    <!--我的申请-->
+    <div class="container hidden">
+
+    </div>
+
+    <!--我的收藏-->
+    <div class="container hidden">
+
+    </div>
+
+    <!--我的账户-->
+    <div class="container hidden">
+
+    </div>
+{% endblock body %}

@@ -41,7 +41,7 @@ $(function(){
         var name_true = $('#name_true');
         var name_warn = $('#name_warn');
 
-        if(len<=0||len>5){
+        if(len<=1||len>10){
             name_box.addClass('has-error').removeClass('has-success');
             name_false.removeClass('hidden');
             name_true.addClass('hidden');
