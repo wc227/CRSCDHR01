@@ -126,6 +126,7 @@ label{
     border:1px solid rgb(204,204,204);
     padding-top:20px;
     padding-left:10px;
+    margin-bottom: 30px;
 }
 
 #photo_con{
@@ -137,6 +138,7 @@ label{
     width:178px;
     height:214px;
     margin-top:49px;
+    padding: 0;
 }
 
 #face{
@@ -166,3 +168,31 @@ label{
 .info_label{
     margin-top: 20px;
 }
+
+.datetime{
+    height: 30px;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.span_to{
+    color: rgb(204,204,204);
+    font-size: 14px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+.add_more{
+    border-top: 1px dashed rgb(204,204,204);
+    margin-right: 25px;
+    font-size: 12px;
+    padding: 5px;
+}
+

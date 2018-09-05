@@ -72,8 +72,6 @@ def register_exist(request):
     return JsonResponse({'count': count})
 
 
-# 个人中心
-def center(request):
-    return render(request, 'center.html')
+
 
 
