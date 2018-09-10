@@ -131,117 +131,119 @@
                     <!--工作信息-->
                     <p class="info_label" id="info_work">工作经历:</p>
                     <div class="info_box" id="info_work_box">
-                        <div class="form-group form-group-sm has-feedback">
-                            <label for="company" class="col-sm-2 control-label"><span id="must">*</span>工作单位</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="company" name="company">
-                                <p class='warn hidden'></p>
+                        <div id="work_input">
+                            <div class="form-group form-group-sm has-feedback">
+                                <label for="company" class="col-sm-2 control-label"><span id="must">*</span>工作单位</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="company" name="company">
+                                    <p class='warn hidden'></p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group form-group-sm">
-                            <label for="post" class="col-sm-2 control-label"><span id="must">*</span>职位</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="post" name="post">
-                                <p class="warn hidden"></p>
+                            <div class="form-group form-group-sm">
+                                <label for="post" class="col-sm-2 control-label"><span id="must">*</span>职位</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="post" name="post">
+                                    <p class="warn hidden"></p>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group form-group-sm">
-                            <label for="post" class="col-sm-2 control-label"><span id="must">*</span>时间</label>
-                            <div class="col-sm-10">
-                                <input size="15" type="text" class="datetime" id="work_start_time" name="work_start_time" placeholder="开始时间" readonly>
-                                <span class="span_to">-</span>
-                                <input size="15" type="text" class="datetime" id="work_end_time" name="work_end_time" placeholder="结束时间" readonly>
-                                <p class="warn hidden"></p>
+                            <div class="form-group form-group-sm">
+                                <label for="post" class="col-sm-2 control-label"><span id="must">*</span>时间</label>
+                                <div class="col-sm-10">
+                                    <input size="15" type="text" class="datetime" id="work_start_time" name="work_start_time" placeholder="开始时间" readonly>
+                                    <span class="span_to">-</span>
+                                    <input size="15" type="text" class="datetime" id="work_end_time" name="work_end_time" placeholder="结束时间" readonly>
+                                    <p class="warn hidden"></p>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-group form-group-sm">
-                            <label for="post_desc" class="col-sm-2 control-label"><span id="must">*</span>职责描述</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" rows="4" id="post_desc" name="post_desc"></textarea>
-                                <p class="warn hidden"></p>
+                            <div class="form-group form-group-sm">
+                                <label for="post_desc" class="col-sm-2 control-label"><span id="must">*</span>职责描述</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" rows="4" id="post_desc" name="post_desc"></textarea>
+                                    <p class="warn hidden"></p>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="add_more" id="add_more">
-                            <a href="#">新增一条</a>
-                            <a href="#" style="float: right">删除此条</a>
+                            <div class="work_add" id="work_add_one">
+                                <a id="work_add">新增一条</a>
+                                <a href="#" id="work_delete" style="float: right">删除此条</a>
+                            </div>
                         </div>
                     </div><!--work_info_box-->
 
                     <!--教育经历-->
                     <p class="info_label" id="info_education">教育经历:</p>
                     <div class="info_box" id="info_education_box">
-                        <div class="form-group form-group-sm has-feedback">
-                            <label for="school" class="col-sm-2 control-label"><span id="must">*</span>毕业学校</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="school" name="school">
-                                <p class='warn hidden'></p>
-                            </div>
-                        </div>
-                        <div class="form-group form-group-sm">
-                            <label for="profession" class="col-sm-2 control-label"><span id="must">*</span>专业</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="profession" name="profession">
-                                <p class="warn hidden"></p>
-                            </div>
-                        </div>
-                        <div class="form-group form-group-sm">
-                            <label for="education" class="col-sm-2 control-label"><span id="must">*</span>学历</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" id="education" name="education">
-                                    <option value="请选择">请选择</option>
-                                    <option value="本科">大学本科</option>
-                                    <option value="硕士">硕士研究生</option>
-                                    <option value="博士">博士研究生</option>
-                                    <option value="大专">大学专科</option>
-                                    <option value="中专">中等专科</option>
-                                    <option value="高中">高中毕业</option>
-                                    <option value="初中">初中毕业</option>
-                                    <option value="其他">其他</option>
-                                </select>
-                                <p class='warn hidden'></p>
-                            </div>
-                        </div>
-                        <div class="form-group form-group-sm">
-                            <label for="degree" class="col-sm-2 control-label"><span id="must">*</span>学位</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" id="degree" name="degree">
-                                    <option value="请选择">请选择</option>
-                                    <option value="学士">学士</option>
-                                    <option value="硕士">硕士</option>
-                                    <option value="专业硕士">专业硕士</option>
-                                    <option value="工程硕士">工程硕士</option>
-                                    <option value="博士">博士</option>
-                                    <option value="无学位">无学位</option>
-                                    <option value="其他">其他</option>
-                                </select>
-                                <p class="warn hidden"></p>
-                            </div>
-                        </div>
-
-                        <div class="form-group form-group-sm">
-                            <label for="school_start_time" class="col-sm-2 control-label"><span id="must">*</span>时间</label>
-                            <div class="col-sm-10">
-                                <input size="15" type="text" class="datetime" id="school_start_time" name="school_start_time" placeholder="开始时间" readonly>
-                                <span class="span_to">-</span>
-                                <input size="15" type="text" class="datetime" id="school_end_time" name="school_end_time" placeholder="结束时间" readonly>
-                                <p class="warn hidden"></p>
-                            </div>
-                        </div>
-
-                        <div class="form-group form-group-sm">
-                            <label for="profession_desc" class="col-sm-2 control-label">专业描述</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" rows="4" id="profession_desc" name="profession_desc"></textarea>
-                                <p class="warn hidden"></p>
-                            </div>
-                        </div>
-
-                        <div class="add_more" id="add_more">
-                            <a href="#">新增一条</a>
-                            <a href="#" style="float: right">删除此条</a>
+                        <ul id="edu_list" class="edu_list">
+                            <li>
+                                <div class="form-group form-group-sm has-feedback">
+                                    <label for="school" class="col-sm-2 control-label"><span id="must">*</span>毕业学校</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="school" name="school">
+                                        <p class='warn hidden'></p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="profession" class="col-sm-2 control-label"><span id="must">*</span>专业</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="profession" name="profession">
+                                        <p class="warn hidden"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="education" class="col-sm-2 control-label"><span id="must">*</span>学历</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="education" name="education">
+                                            <option value="请选择">请选择</option>
+                                            <option value="本科">大学本科</option>
+                                            <option value="硕士">硕士研究生</option>
+                                            <option value="博士">博士研究生</option>
+                                            <option value="大专">大学专科</option>
+                                            <option value="中专">中等专科</option>
+                                            <option value="高中">高中毕业</option>
+                                            <option value="初中">初中毕业</option>
+                                            <option value="其他">其他</option>
+                                        </select>
+                                        <p class='warn hidden'></p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="degree" class="col-sm-2 control-label"><span id="must">*</span>学位</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="degree" name="degree">
+                                            <option value="请选择">请选择</option>
+                                            <option value="学士">学士</option>
+                                            <option value="硕士">硕士</option>
+                                            <option value="专业硕士">专业硕士</option>
+                                            <option value="工程硕士">工程硕士</option>
+                                            <option value="博士">博士</option>
+                                            <option value="无学位">无学位</option>
+                                            <option value="其他">其他</option>
+                                        </select>
+                                        <p class="warn hidden"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="school_start_time" class="col-sm-2 control-label"><span id="must">*</span>时间</label>
+                                    <div class="col-sm-10">
+                                        <input size="15" type="text" class="datetime" id="edu_stime" name="edu_stime" placeholder="入学时间" readonly>
+                                        <span class="span_to">-</span>
+                                        <input size="15" type="text" class="datetime" id="edu_etime" name="edu_etime" placeholder="毕业时间" readonly>
+                                        <p class="warn hidden"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="profession_desc" class="col-sm-2 control-label">专业描述</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" rows="4" id="profession_desc" name="profession_desc"></textarea>
+                                        <p class="warn hidden"></p>
+                                    </div>
+                                </div>
+                                <div class="del_box">
+                                    <a href="javascript:" id="edu_del" class="hidden">删除此条</a>
+                                </div>
+                            </li><!--education_input-->
+                        </ul>
+                        <div class="func_box" id="func_box">
+                            <a href="javascript:" id="edu_add">新增一条</a>
                         </div>
                     </div><!--education_info_box-->
 
@@ -253,7 +255,7 @@
 
                         </form>
                     </div><!--education_info_box-->
-
+                    <button class="btn btn-default" type="submit" action=""></button>
                 </form>
             </div><!--resume_con-->
         </div><!--resume_row-->

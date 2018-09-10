@@ -189,10 +189,32 @@ label{
     margin-right: 8px;
 }
 
-.add_more{
-    border-top: 1px dashed rgb(204,204,204);
-    margin-right: 25px;
-    font-size: 12px;
-    padding: 5px;
+.edu_list{
+    list-style: none;
 }
 
+.func_box{
+    width: 90%;
+    margin: -15px auto 0;
+    height: 50px;
+    line-height: 50px;
+    padding-left: -5px;
+}
+
+#edu_del{
+    float: right;
+}
+
+#edu_list{
+    padding: 0;
+}
+
+#edu_list li{
+    border-bottom: 1px dotted #ccc;
+    margin-right: 5px;
+    margin-bottom: 20px;
+}
+
+.del_box{
+    height:30px;
+}
