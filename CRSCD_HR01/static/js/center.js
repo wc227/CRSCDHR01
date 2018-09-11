@@ -15,13 +15,11 @@ $(function(){
         pickerPosition:'bottom-center',
         });
     });
-
     //样式调整函数(输入正确）
     function input_true(field){
         field.parent().parent().addClass('has-success').removeClass('has-error');
         field.next('p').addClass('hidden');
     }
-
     //样式调整函数(输入错误）
     function input_false(field,text){
         field.parent().parent().addClass('has-error').removeClass('has-success');
@@ -56,7 +54,7 @@ $(function(){
             error_name = true;
         }
         else{
-            input_true();
+            input_true(name);
             error_name = false;
         }
     }
@@ -94,11 +92,11 @@ $(function(){
     //工作年限校验函数
     function check_work_year(){
         var value = work_year.val();
-        if(value=='请选择'){
+        if(value==='请选择'){
             input_false(work_year, '请选择工作年限。');
             error_work_year = true;
         }
-        if(value=='应届毕业生'){
+        if(value==='应届毕业生'){
             $('#info_work').addClass('hidden');
             $('#info_work_box').addClass('hidden');
             input_true(work_year);
@@ -120,8 +118,7 @@ $(function(){
         }
         else{
             input_false(party, '请选择政治面貌。');
-            error_work_year = true;
-
+            error_party = true;
         }
     }
 
@@ -177,19 +174,74 @@ $(function(){
     party.blur(function(){check_party();});
 
 //工作信息校验
-    var company = $('#company');
-    var post = $('#post');
-    var work_start_time = $('#work_start_time');
-    var work_end_time = $('#work_end_time');
-    var post_desc = $('#post_desc');
-    var error_work_info = false;
     var error_company = false;
     var error_post = false;
-    var error_workTime = false;
+    var error_work_time = false;
     var error_pos_desc = false;
 
+    //新增与删除工作信息
+    var work_list = $('#work_list');
+    var work_count = 1;
+    var work_add = $('#work_add');
+    var work_li = $('#work_list li:first').html();
+    var work_li_val = $('<li>' + work_li + '</li>');
+    var work_clone = work_li_val.clone();
+    work_add.click(function(){
+        if(edu_count<20){
+            work_clone.clone().appendTo(work_list);
+            work_count += 1;
+            $('#work_list li div').removeClass('hidden');
+            if(work_count===20){
+                work_add.addClass('hidden');
+            }
+        }
+    });
+    work_list.delegate('a', 'click', function(){
+        if(work_count>1){
+            $(this).parent().parent().remove();
+            work_count -= 1;
+            work_add.removeClass('hidden');
+            if(work_count===1){
+              $('#work_list li div:last').addClass('hidden');
+            }
+        }
+    });
+
+    //工作信息校验代理
+    work_list.delegate('input, select, textarea', 'blur', function(){
+        var id_val = $(this).attr('id');
+        switch(id_val){
+            case 'company':
+                var company = $(this);
+                check_company(company);
+                break;
+            case 'post':
+                var post = $(this);
+                check_post(post);
+                break;
+            case 'post_desc':
+                var post_desc = $(this);
+                check_post_desc(post_desc);
+                break;
+        }
+    });
+    work_list.delegate('.datetime', 'change', function(){
+        var stime = $(this);
+        var etime = $(this).siblings('input');
+        if($(this).attr('id')==='work_stime'){
+            check_work_time(stime, etime);
+        }
+    });
+    work_list.delegate('.datetime', 'change', function(){
+        var stime = $(this).siblings('input');
+        var etime = $(this);
+        if($(this).attr('id')==='work_etime'){
+            check_work_time(stime, etime);
+        }
+    });
+
     //工作单位校验函数
-    function check_company(){
+    function check_company(company){
         var len = company.val().length;
         if(len>0 && len<50){
             input_true(company);
@@ -201,62 +253,62 @@ $(function(){
             error_company = true;
         }
     }
-
     //职位校验函数
-    function check_post(){
+    function check_post(post){
         var len = post.val().length;
         if(len>0 && len<50){
             input_true(post);
             error_post = false;
         }
         else{
-            var text = '请输入正确的职务。';
+            var text = '请输入职务名称。';
             input_false(post, text);
             error_post = true;
         }
     }
-
-    //工作时间校验函数
-    function check_workTime(){
-        var value1 = work_start_time.val();
-        var value2 = work_end_time.val();
-        if(value1!=='' && value2!=='' && value2>value1){
-            input_true(work_start_time);
-            input_true(work_end_time);
-            error_workTime = false;
-        }
-        if(value1==''||value2==''){
-            var text = '请选择开始时间和结束时间。';
-            input_false(work_start_time,text);
-            input_false(work_end_time,text);
-            error_workTime = true;
-        }
-        if(value2<=value1){
-            text  = '开始时间应早于结束时间。';
-            input_false(work_start_time,text);
-            input_false(work_end_time, text);
-            error_workTime = true;
-        }
-    }
-
     //职责描述校验函数
-    function check_post_desc(){
+    function check_post_desc(post_desc){
         var len = post_desc.val().length;
-        if(len>0){
+        if(len>0 && len<200){
             input_true(post_desc);
             error_pos_desc = false;
         }
         else{
-            var text = '请输入职责描述。';
+            var text = '请输入职责描述，最多200个字符。';
             input_false(post_desc, text);
             error_pos_desc = true;
         }
     }
-    company.blur(function(){check_company();});
-    post.blur(function(){check_post();});
-    post_desc.blur(function(){check_post_desc();});
-
-
+    //工作时间校验函数
+    function check_work_time(stime, etime){
+        var stime_val = stime.val();
+        var stime_len = stime.val().length;
+        var etime_val = etime.val();
+        var etime_len = etime.val().length;
+        if(stime_len>0 && etime_len>0 && etime_val>stime_val){
+            input_true(etime);
+            stime.css("border", "1px solid #3c763d").siblings('input').css("border", "1px solid #3c763d");
+            error_work_time = false;
+        }
+        if(stime_len===0){
+            var text = '请选择入学时间。';
+            input_false(etime, text);
+            stime.css("border", "1px solid #a94442").siblings('input').css("border", "1px solid #a94442");
+            error_work_time = true;
+        }
+        if(etime_len===0){
+            text = '请选择毕业时间。';
+            input_false(etime, text);
+            stime.css("border", "1px solid #a94442").siblings('input').css("border", "1px solid #a94442");
+            error_work_time = true;
+        }
+        if(stime_val>=etime_val && etime_len!==0 && stime_len!==0){
+            text = '毕业时间应早于开学时间。';
+            stime.css("border", "1px solid #a94442").siblings('input').css("border", "1px solid #a94442");
+            input_false(etime, text);
+            error_work_time = true;
+        }
+    }
 
 //教育信息校验
     var error_edu = false;
@@ -266,23 +318,22 @@ $(function(){
     var error_education = false;
     var error_degree = false;
     var error_profession_desc = false;
-    //新增与删除教育信息
 
+    //新增与删除教育信息
     var edu_list = $('#edu_list');
     var edu_count = 1;
     var edu_add = $('#edu_add');
-    var edu_del = $('#edu_del');
+    var edu_li = $('#edu_list li:first').html();
+    var edu_li_val = $('<li>' + edu_li + '</li>' );
+    var edu_clone = edu_li_val.clone();
     edu_add.click(function(){
-        $('#edu_del').removeClass('hidden');
-        var $li = $('#edu_list li:first').html();
-        var $li_val = $('<li>' + $li + '</li>' );
-        if(edu_count<4) {
+        if(edu_count<4){
+            edu_clone.clone().appendTo(edu_list);
             edu_count += 1;
-            $li_val.clone().appendTo('#edu_list');
-            edu_del.removeClass('hidden');
-        }
-        if(edu_count===3){
-            edu_add.addClass('hidden');
+            $('#edu_list li div').removeClass('hidden');
+            if(edu_count===4){
+                edu_add.addClass('hidden');
+            }
         }
     });
     edu_list.delegate('a', 'click', function(){
@@ -291,12 +342,12 @@ $(function(){
             edu_count -= 1;
             edu_add.removeClass('hidden');
             if(edu_count===1){
-               edu_del.addClass('hidden');
+              $('#edu_list li div:last').addClass('hidden');
             }
         }
     });
 
-    //学历信息校验代理
+    //学历校验代理函数
     edu_list.delegate('input, select, textarea', 'blur', function(){
         var id_val = $(this).attr('id');
         switch(id_val){
@@ -322,6 +373,21 @@ $(function(){
                 break;
         }
     });
+    edu_list.delegate('.datetime', 'change', function(){
+        var stime = $(this);
+        var etime = $(this).siblings('input');
+        if($(this).attr('id')==='edu_stime'){
+            check_edu_time(stime, etime);
+        }
+    });
+    edu_list.delegate('.datetime', 'change', function(){
+        var stime = $(this).siblings('input');
+        var etime = $(this);
+        if($(this).attr('id')==='edu_etime'){
+            check_edu_time(stime, etime);
+        }
+    });
+
     //学校校验函数
     function check_school(school){
         var len = school.val().length;
@@ -387,35 +453,35 @@ $(function(){
             error_profession_desc =false;
         }
     }
-    //学历时间校验函数
-    function check_edu_stime(edu_stime){
-        var stime = edu_stime.val();
-        var len = edu_stime.val().length;
-        var edu_etime = $('#edu_etime');
-        var etime = edu_etime.val();
-        if(len==0){
+    //学历日期校验函数
+    function check_edu_time(stime, etime){
+        var stime_val = stime.val();
+        var stime_len = stime.val().length;
+        var etime_val = etime.val();
+        var etime_len = etime.val().length;
+        if(stime_len>0 && etime_len>0 && etime_val>stime_val){
+            input_true(etime);
+            stime.css("border", "1px solid #3c763d").siblings('input').css("border", "1px solid #3c763d");
+            error_edu_time = false;
+        }
+        if(stime_len===0){
             var text = '请选择入学时间。';
-            input_false(edu_etime, text);
+            input_false(etime, text);
+            stime.css("border", "1px solid #a94442").siblings('input').css("border", "1px solid #a94442");
             error_edu_time = true;
         }
-        if(len>0 && etime>stime){
-            input_true(edu_etime);
-            error_edu_time = false;
+        if(etime_len===0){
+            text = '请选择毕业时间。';
+            input_false(etime, text);
+            stime.css("border", "1px solid #a94442").siblings('input').css("border", "1px solid #a94442");
+            error_edu_time = true;
         }
-    }
-    function check_edu_etime(edu_etime){
-        var edu_stime = $('#edu_stime');
-        var stime = edu_stime.val();
-        var len = stime.length;
-        var etime = edu_etime.val();
-        if(len>0 && etime>stime){
-            input_true(edu_etime);
-            error_edu_time = false;
-        }
-        else{
-            var text = '请选择正确的入学时间和毕业时间。';
-            input_false(edu_etime, text);
+        if(stime_val>=etime_val && etime_len!==0 && stime_len!==0){
+            text = '毕业时间应早于开学时间。';
+            stime.css("border", "1px solid #a94442").siblings('input').css("border", "1px solid #a94442");
+            input_false(etime, text);
             error_edu_time = true;
         }
     }
+
 });

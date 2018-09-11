@@ -114,8 +114,9 @@ label{
     margin-top:20px;
 }
 
+
 #nav_box ul li a{
-    font-size:12px;
+    font-size:14px;
 }
 
 .basic_info{
@@ -133,7 +134,7 @@ label{
     margin-left: 0;
 }
 
-#photo_border{
+#photo_frame{
     border:1px solid rgb(204,204,204);
     width:178px;
     height:214px;
@@ -185,11 +186,11 @@ label{
 .span_to{
     color: rgb(204,204,204);
     font-size: 14px;
-    margin-left: 8px;
-    margin-right: 8px;
+    margin-left: 12px;
+    margin-right: 12px;
 }
 
-.edu_list{
+.edu_list, .work_list{
     list-style: none;
 }
 
@@ -201,15 +202,15 @@ label{
     padding-left: -5px;
 }
 
-#edu_del{
+#edu_del, #work_del{
     float: right;
 }
 
-#edu_list{
+#edu_list, #work_list{
     padding: 0;
 }
 
-#edu_list li{
+#edu_list li, #work_list li{
     border-bottom: 1px dotted #ccc;
     margin-right: 5px;
     margin-bottom: 20px;
@@ -217,4 +218,8 @@ label{
 
 .del_box{
     height:30px;
+}
+
+.photo_submit{
+    margin: 10px auto 0;
 }
