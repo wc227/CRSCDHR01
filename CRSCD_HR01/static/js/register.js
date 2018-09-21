@@ -6,7 +6,7 @@ $(function(){
     var error_email = false;
     var error_check = true;
     var error_name = false;
-    var error_login = true
+    var error_login = true;
     var user_email = $('#user_email');
     var user_pwd = $('#user_pwd');
     var user_cpwd = $('#user_cpwd');
@@ -19,7 +19,7 @@ $(function(){
     user_email.blur(function(){check_email();});
     user_pwd.blur(function(){check_pwd();});
     user_cpwd.blur(function(){check_cpwd();});
-    login_email.blur(function(){login_email_check();});
+    //login_email.blur(function(){login_email_check();});
 
     //校验是否同意声明
     $('#agree').click(function(){

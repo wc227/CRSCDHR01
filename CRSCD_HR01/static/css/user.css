@@ -1,3 +1,8 @@
+input[readonly]{
+    background-color: white!important;
+    color: black!important;
+}
+
 #login_body{
     height: 500px;
 }
@@ -44,11 +49,11 @@
 }
 
 #link_reset{
-    margin-left: 202px;
+    margin-left: 192px;
 }
 
 #link_user, #link_reset{
-    font-size: 12px;
+    font-size: 13px;
     cursor: pointer;
 }
 
@@ -61,7 +66,7 @@
 label{
     width:100%;
     font-weight: normal;
-    font-size: 14px;
+    font-size: 13px!important;
 }
 
 .modal-dialog .form-control{
@@ -177,8 +182,7 @@ label{
     line-height: 1.5;
     border-radius: 3px;
     color: #555;
-    background-color: #fff;
-    background-image: none;
+    background-color: white;
     border: 1px solid #ccc;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
@@ -202,7 +206,7 @@ label{
     padding-left: -5px;
 }
 
-#edu_del, #work_del{
+#edu_del, #work_del, #resume_del{
     float: right;
 }
 
@@ -222,4 +226,24 @@ label{
 
 .photo_submit{
     margin: 10px auto 0;
+}
+
+#resume_upload_box{
+    border-bottom: 1px dotted #ccc;
+    margin: 10px 5px 20px -5px;
+    padding-bottom: 20px;
+    height: 80px;
+}
+
+#nav_box ul li a {
+    font-size: 14px;
+    padding: 10px 12px;
+}
+
+#resume_label{
+    text-align: right;
+}
+
+#file_label{
+    text-align: right;
 }

@@ -484,4 +484,30 @@ $(function(){
         }
     }
 
+    //简历上传函数
+    $('#resume_file').fileinput({
+        language: 'zh',
+        uploadUrl: '/center/resume_up/',
+        allowedFileExtensions: ['pdf', 'jpg', 'png', 'bpm', 'jpeg'],
+        showPreview: false,
+        overwriteInitial: true,
+        maxFileCount: 1,
+        maxFileSize: 1024*10,
+        autoReplace: true,
+        required: true,
+    }).on("fileuploaded", function(event, data){
+       if(data.response){
+           var fileName = data.filenames;
+           $('#fileUpBox').addClass('hidden');
+           $('#fileViewBox').removeClass('hidden');
+           $('#fileView').html(fileName);
+           $('#fileFuncBox').removeClass('hidden');
+       }
+    });
+
+    //表单提交函数
+    $('#save').click(function(){
+        $('#resume_form').submit();
+    });
+
 });

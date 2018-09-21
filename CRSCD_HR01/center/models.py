@@ -1,10 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # 简历基本信息
 class BasicInfo(models.Model):
     class Meta:
-        verbose_name_plural = '简历'
+        verbose_name_plural = '应聘人员'
 
     name = models.CharField(max_length=10)
     phone = models.CharField(max_length=11)
@@ -19,6 +20,7 @@ class BasicInfo(models.Model):
     resume = models.FileField(upload_to='center/resume', null=True, blank=True)
     resume_create_time = models.DateTimeField(auto_now_add=True)
     resume_update_time = models.DateTimeField(auto_now=True)
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     is_Delete = models.BooleanField(default=False)
     reserved_info01 = models.CharField(max_length=50, null=True, blank=True)
     reserved_info02 = models.CharField(max_length=50, null=True, blank=True)
@@ -46,6 +48,9 @@ class WorkInfo(models.Model):
     reserved_info09 = models.IntegerField(null=True, blank=True)
     work_foreignkey = models.ForeignKey(BasicInfo, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.company
+
 
 # 简历教育信息
 class EducationInfo(models.Model):
@@ -62,6 +67,10 @@ class EducationInfo(models.Model):
     reserved_info11 = models.CharField(max_length=50, null=True, blank=True)
     reserved_info12 = models.CharField(max_length=50, null=True, blank=True)
     reserved_info13 = models.IntegerField(null=True, blank=True)
-    education_foreignkey = models.ForeignKey(BasicInfo, on_delete=models.CASCADE)
+    education_foreignkey = models.ForeignKey
 
+
+
+class Resume(models.Model):
+    resume_path = models.CharField(max_length=128)
 
