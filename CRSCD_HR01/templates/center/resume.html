@@ -23,30 +23,31 @@
 
     <!--我的简历-->
     <div class="container" id="resume">
-        <!--简历容器-->
+        <!--简历编辑容器-->
+        {% if view_para != 1 %}
         <div class="col-lg-7" id="resume_con">
-            <form class="form-horizontal" id="resume_form"  action="/center/submit_handel/">
+            <form class="form-horizontal" id="resume_form" method="post" action="/center/resume_submit/">
                 {% csrf_token %}
                 <p class="info_label">基本信息:</p>
                 <div class="info_box">
                     <div class="form-group form-group-sm has-feedback">
                         <label for="name" class="col-sm-2 control-label"><span id="must">*</span>姓名</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name">
+                            <input type="text" class="form-control" id="name" name="name" value="{{ name }}">
                             <p class='warn hidden'></p>
                         </div>
                     </div>
                     <div class="form-group form-group-sm">
                         <label for="phone" class="col-sm-2 control-label"><span id="must">*</span>手机号</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="phone" name="phone">
+                            <input type="text" class="form-control" id="phone" name="phone" value="{{ phone }}">
                             <p class="warn hidden"></p>
                         </div>
                     </div>
                     <div class="form-group form-group-sm">
                         <label for="age" class="col-sm-2 control-label"><span id="must">*</span>年龄</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="age" name="age">
+                            <input type="text" class="form-control" id="age" name="age" value="{{ age }}">
                             <p class="warn hidden"></p>
                         </div>
                     </div>
@@ -92,26 +93,27 @@
                     <div class="form-group form-group-sm">
                         <label for="live_location" class="col-sm-2 control-label"><span id="must">*</span>现居住地</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="live_location" name="live_location" placeholder="北京市海淀区">
+                            <input type="text" class="form-control" id="live_location" name="live_location" placeholder="北京市海淀区" value="{{ live_location }}">
                             <p class="warn hidden"></p>
                         </div>
                     </div>
                     <div class="form-group form-group-sm">
                         <label for="study_location" class="col-sm-2 control-label"><span id="must">*</span>生源地</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="study_location" name="study_location" placeholder="北京市">
+                            <input type="text" class="form-control" id="study_location" name="study_location" placeholder="北京市" value="{{ study_location }}">
                             <p class="warn hidden"></p>
                         </div>
                     </div>
                     <div class="form-group form-group-sm">
                         <label for="identity_id" class="col-sm-2 control-label"><span id="must">*</span>身份证号</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="identity_id" name="identity_id">
+                            <input type="text" class="form-control" id="identity_id" name="identity_id" value="{{ identity_id }}">
                             <p class="warn hidden"></p>
                         </div>
                     </div>
                 </div><!--basic_info_box-->
 
+                {% for w in work_info %}
                 <p class="info_label">工作履历:</p>
                 <div class="info_box">
                     <ul id="work_list" class="work_list">
@@ -119,30 +121,30 @@
                             <div class="form-group form-group-sm has-feedback">
                                 <label for="company" class="col-sm-2 control-label"><span id="must">*</span>工作单位</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="company" name="company">
+                                    <input type="text" class="form-control" id="company" name="company" value="{{ w.company }}">
                                     <p class='warn hidden'></p>
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
                                 <label for="post" class="col-sm-2 control-label"><span id="must">*</span>职位</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="post" name="post">
+                                    <input type="text" class="form-control" id="position" name="position" value="{{ w.position }}">
                                     <p class="warn hidden"></p>
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
                                 <label for="post" class="col-sm-2 control-label"><span id="must">*</span>时间</label>
                                 <div class="col-sm-10">
-                                    <input size="15" type="text" class="datetime form-control" id="work_stime" name="work_stime" placeholder="开始时间" readonly>
+                                    <input size="15" type="text" class="datetime form-control" id="work_stime" name="work_stime" placeholder="开始时间" readonly value="{{ w.work_stime|date:"Y-m-d"}}">
                                     <span class="span_to">-</span>
-                                    <input size="15" type="text" class="datetime form-control" id="work_etime" name="work_etime" placeholder="结束时间" readonly>
+                                    <input size="15" type="text" class="datetime form-control" id="work_etime" name="work_etime" placeholder="结束时间" readonly value="{{ w.work_etime|date:"Y-m-d" }}">
                                     <p class="warn hidden"></p>
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
                                 <label for="post_desc" class="col-sm-2 control-label"><span id="must">*</span>职责描述</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" rows="4" id="post_desc" name="post_desc"></textarea>
+                                    <textarea class="form-control" rows="4" id="work_desc" name="work_desc" >{{ w.work_desc }}</textarea>
                                     <p class="warn hidden"></p>
                                 </div>
                             </div>
@@ -155,8 +157,10 @@
                         <a href="javascript:" id="work_add">新增一条</a>
                     </div>
                 </div><!--work_info_box-->
+                {% endfor %}
 
 
+                {% for e in edu_info %}
                 <p class="info_label" id="info_education">教育背景:</p>
                 <div class="info_box" id="info_education_box">
                     <ul id="edu_list" class="edu_list">
@@ -164,14 +168,14 @@
                             <div class="form-group form-group-sm has-feedback">
                                 <label for="school" class="col-sm-2 control-label"><span id="must">*</span>毕业学校</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="school" name="school">
+                                    <input type="text" class="form-control" id="school" name="school" value="{{ e.school }}">
                                     <p class='warn hidden'></p>
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
                                 <label for="profession" class="col-sm-2 control-label"><span id="must">*</span>专业</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="profession" name="profession">
+                                    <input type="text" class="form-control" id="profession" name="profession" value={{ e.profession }}>
                                     <p class="warn hidden"></p>
                                 </div>
                             </div>
@@ -211,16 +215,16 @@
                             <div class="form-group form-group-sm">
                                 <label for="school_start_time" class="col-sm-2 control-label"><span id="must">*</span>时间</label>
                                 <div class="col-sm-10">
-                                    <input size="15" type="text" class="datetime form-control" id="edu_stime" name="edu_stime" placeholder="入学时间" readonly>
+                                    <input size="15" type="text" class="datetime form-control" id="edu_stime" name="edu_stime" placeholder="入学时间" readonly value="{{ e.school_stime|date:"Y-m-d" }}">
                                     <span class="span_to">-</span>
-                                    <input size="15" type="text" class="datetime form-control" id="edu_etime" name="edu_etime" placeholder="毕业时间" readonly>
+                                    <input size="15" type="text" class="datetime form-control" id="edu_etime" name="edu_etime" placeholder="毕业时间" readonly value="{{ e.school_etime|date:"Y-m-d" }}">
                                     <p class="warn hidden"></p>
                                 </div>
                             </div>
                             <div class="form-group form-group-sm">
                                 <label for="profession_desc" class="col-sm-2 control-label">专业描述</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" rows="4" id="profession_desc" name="profession_desc"></textarea>
+                                    <textarea class="form-control" rows="4" id="profession_desc" name="profession_desc">{{ e.profession_desc }}</textarea>
                                     <p class="warn hidden"></p>
                                 </div>
                             </div>
@@ -233,13 +237,14 @@
                         <a href="javascript:" id="edu_add">新增一条</a>
                     </div>
                 </div><!--education_info_box-->
+                {% endfor %}
             </form>
 
             <p class="info_label">简历上传:</p>
             <div class="info_box">
                 <div class="row">
                     <div class="col-sm-10" id="fileUpBox">
-                        <input type="file" id="resume_file" name="resume_file">
+                        <input type="file" size="16" id="resume_file" name="resume_file">
                         {% csrf_token %}
                         <p class="help-block">支持文件类型：.pdf .jpg .png .bpm,最大支持10M。</p>
                         <div class="warn hidden" id="file_warn"></div>
@@ -251,14 +256,79 @@
                         </div>
                     </div>
                     <div class="func_box hidden" id="fileFuncBox">
-                        <a href="javascript:" id="edu_add">下载简历</a>
-                        <a href="javascript:" id="edu_add">删除简历</a>
+                        <a href="javascript:" id="resumeDel">删除简历</a>
                     </div>
                 </div>
             </div><!--resume_info_box-->
 
-            <button class="btn btn-primary" type="button" id="save">保存信息</button>
+            <button class="btn btn-primary" type="button" id="save">保存并预览</button>
         </div><!--resume_con-->
+        {% endif %}
+
+        <!--简历浏览容器-->
+        {% if view_para == 1 %}
+        <div class="col-lg-7" id="viewCon">
+
+            <!--基本信息框-->
+            <p class="viewLabel">基本信息</p>
+            <div class="viewBox">
+                <table class="viewTable">
+                    <tr><th class="tableTitle">姓名：</th><th>{{ name }}</th></tr>
+                    <tr><th class="tableTitle">手机号：</th><th>{{ phone }}</th></tr>
+                    <tr><th class="tableTitle">邮箱：</th><th>{{ email }}</th></tr>
+                    <tr><th class="tableTitle">身份证号：</th><th>{{ identity_id }}</th></tr>
+                    <tr><th class="tableTitle">性别：</th><th>{{ gender }}</th></tr>
+                    <tr><th class="tableTitle">政治面貌：</th><th>{{ party }}</th></tr>
+                    <tr><th class="tableTitle">工作年限：</th><th>{{ work_year }}</th></tr>
+                    <tr><th class="tableTitle">居住地：</th><th>{{ live_location }}</th></tr>
+                    <tr><th class="tableTitle">生源地：</th><th>{{ study_location }}</th></tr>
+                </table>
+            </div>
+
+            <!--工作信息框-->
+            <p class="viewLabel">工作信息</p>
+            <div class="viewBox">
+                <ul class="viewTable" id="workViewBox">
+                    {% for w in work_info %}
+                    <li>
+                        {{ w.work_stime|date:"Y/m"}}
+                        <span>-</span>
+                        {{ w.work_etime|date:"Y/m"}}
+                        &nbsp;&nbsp;
+                        {{ w.company }}
+                        &nbsp;&nbsp;
+                        {{ w.position }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!--教育信息框-->
+            <p class="viewLabel">教育信息</p>
+            <div class="viewBox">
+                <ul class="viewTable" id="eduViewBox">
+                    {% for e in edu_info %}
+                    <li>
+                        {{ e.school_stime|date:"Y-m"}}
+                        <span>-</span>
+                        {{ e.school_etime|date:"Y-m"}}
+                        &nbsp;&nbsp;
+                        {{ e.school }}
+                        &nbsp;&nbsp;
+                        {{ e.profession }}
+                        &nbsp;&nbsp;
+                        {{ e.education }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!--修改简历按钮-->
+            <a href="/center/resume_modify/">
+                <button class="btn btn-primary" type="button" id="modify">修改简历</button>
+            </a>
+        </div>
+        {% endif %}
     </div><!--resume-->
 
     <!--我的申请-->

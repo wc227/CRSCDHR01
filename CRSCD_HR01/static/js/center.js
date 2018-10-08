@@ -3,16 +3,13 @@ $(function(){
     //日期函数
     $('body*').delegate('.datetime', 'mouseenter', function(){
         $('.datetime').datetimepicker({
-        format: "yyyy-mm-dd",
-        weekStart: '1',
-        start:'1990-01-01',
-        language:'zh-CN',
-        todayHighlight:1,
-        minView: 2,
-        forceParse: 0,
-        showMeridian:1,
-        autoclose:1,
-        pickerPosition:'bottom-center',
+            format: "yyyy-mm-dd",
+            weekStart: '1',
+            startView: 2,
+            language:'zh-CN',
+            minView: 2,
+            autoclose: 1,
+            pickerPosition:'bottom-center',
         });
     });
     //样式调整函数(输入正确）
@@ -175,9 +172,9 @@ $(function(){
 
 //工作信息校验
     var error_company = false;
-    var error_post = false;
+    var error_position = false;
     var error_work_time = false;
-    var error_pos_desc = false;
+    var error_work_desc = false;
 
     //新增与删除工作信息
     var work_list = $('#work_list');
@@ -215,13 +212,13 @@ $(function(){
                 var company = $(this);
                 check_company(company);
                 break;
-            case 'post':
-                var post = $(this);
-                check_post(post);
+            case 'position':
+                var position = $(this);
+                check_position(position);
                 break;
-            case 'post_desc':
-                var post_desc = $(this);
-                check_post_desc(post_desc);
+            case 'work_desc':
+                var work_desc = $(this);
+                check_work_desc(work_desc);
                 break;
         }
     });
@@ -254,28 +251,28 @@ $(function(){
         }
     }
     //职位校验函数
-    function check_post(post){
-        var len = post.val().length;
+    function check_position(position){
+        var len = position.val().length;
         if(len>0 && len<50){
-            input_true(post);
-            error_post = false;
+            input_true(position);
+            error_position = false;
         }
         else{
             var text = '请输入职务名称。';
-            input_false(post, text);
-            error_post = true;
+            input_false(position, text);
+            error_position = true;
         }
     }
     //职责描述校验函数
-    function check_post_desc(post_desc){
-        var len = post_desc.val().length;
+    function check_work_desc(work_desc){
+        var len = work_desc.val().length;
         if(len>0 && len<200){
-            input_true(post_desc);
+            input_true(work_desc);
             error_pos_desc = false;
         }
         else{
             var text = '请输入职责描述，最多200个字符。';
-            input_false(post_desc, text);
+            input_false(work_desc, text);
             error_pos_desc = true;
         }
     }
@@ -291,19 +288,19 @@ $(function(){
             error_work_time = false;
         }
         if(stime_len===0){
-            var text = '请选择入学时间。';
+            var text = '请选择开始时间。';
             input_false(etime, text);
             stime.css("border", "1px solid #a94442").siblings('input').css("border", "1px solid #a94442");
             error_work_time = true;
         }
         if(etime_len===0){
-            text = '请选择毕业时间。';
+            text = '请选择结束时间。';
             input_false(etime, text);
             stime.css("border", "1px solid #a94442").siblings('input').css("border", "1px solid #a94442");
             error_work_time = true;
         }
         if(stime_val>=etime_val && etime_len!==0 && stime_len!==0){
-            text = '毕业时间应早于开学时间。';
+            text = '开始时间应早于结束时间。';
             stime.css("border", "1px solid #a94442").siblings('input').css("border", "1px solid #a94442");
             input_false(etime, text);
             error_work_time = true;
@@ -505,9 +502,22 @@ $(function(){
        }
     });
 
+    // 简历删除函数
+    $('#resumeDel').click(function(){
+        $.post('/center/resume_del/', function(data){
+            if(data.delete===1){
+                $('#fileUpBox').removeClass('hidden');
+                $('#fileViewBox').addClass('hidden');
+                $('#fileFuncBox').addClass('hidden');
+            }
+        });
+    });
+
+
     //表单提交函数
     $('#save').click(function(){
         $('#resume_form').submit();
     });
+
 
 });
