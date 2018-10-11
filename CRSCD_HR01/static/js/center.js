@@ -178,30 +178,28 @@ $(function(){
 
     //新增与删除工作信息
     var work_list = $('#work_list');
-    var work_count = 1;
     var work_add = $('#work_add');
     var work_li = $('#work_list li:first').html();
     var work_li_val = $('<li>' + work_li + '</li>');
     var work_clone = work_li_val.clone();
+    var workLen = $('#workLen').html();
     work_add.click(function(){
-        if(edu_count<20){
-            work_clone.clone().appendTo(work_list);
-            work_count += 1;
-            $('#work_list li div').removeClass('hidden');
-            if(work_count===20){
-                work_add.addClass('hidden');
-            }
-        }
+        work_clone.clone().appendTo(work_list);
+        workLen += 1;
     });
+
     work_list.delegate('a', 'click', function(){
-        if(work_count>1){
+        if(workLen>1){
+            var workId = $(this).parent().parent().children('div:first-child').html();
+            $.get('/center/work_del/', {workID: workId});
             $(this).parent().parent().remove();
-            work_count -= 1;
+            workLen -= 1;
             work_add.removeClass('hidden');
-            if(work_count===1){
+            if(workLen===1){
               $('#work_list li div:last').addClass('hidden');
             }
         }
+
     });
 
     //工作信息校验代理
@@ -316,30 +314,34 @@ $(function(){
     var error_degree = false;
     var error_profession_desc = false;
 
-    //新增与删除教育信息
+    //新增教育信息
     var edu_list = $('#edu_list');
-    var edu_count = 1;
     var edu_add = $('#edu_add');
     var edu_li = $('#edu_list li:first').html();
-    var edu_li_val = $('<li>' + edu_li + '</li>' );
+    var edu_li_val = $('<li>' + edu_li + '</li>');
     var edu_clone = edu_li_val.clone();
+    var eduLen = parseInt($('#eduLen').html());
+
     edu_add.click(function(){
-        if(edu_count<4){
+        if(eduLen<4){
             edu_clone.clone().appendTo(edu_list);
-            edu_count += 1;
-            $('#edu_list li div').removeClass('hidden');
-            if(edu_count===4){
+            eduLen ++;
+            if(eduLen===4){
                 edu_add.addClass('hidden');
             }
         }
     });
+
+    //删除教育信息
     edu_list.delegate('a', 'click', function(){
-        if(edu_count>1){
+        if(eduLen>1){
+            var eduId = $(this).parent().parent().children('div:first-child').html();
+            $.get('/center/edu_del/', {eduId: eduId});
             $(this).parent().parent().remove();
-            edu_count -= 1;
+            eduLen --;
             edu_add.removeClass('hidden');
-            if(edu_count===1){
-              $('#edu_list li div:last').addClass('hidden');
+            if(eduLen===1){
+                $('#edu_list li div:last').addClass('hidden');
             }
         }
     });

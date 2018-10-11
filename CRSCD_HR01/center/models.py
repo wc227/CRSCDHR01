@@ -14,9 +14,7 @@ class BasicInfo(models.Model):
     study_location = models.CharField("生源地", max_length=20)
     identity_id = models.CharField("身份证号", max_length=20)
     gender = models.CharField("性别", max_length=1)
-    resume = models.FileField("简历", upload_to='center/resume', null=True, blank=True)
     is_Delete = models.BooleanField(default=False)
-
     reserved_info01 = models.CharField("备注1", max_length=50, null=True, blank=True)
     reserved_info02 = models.CharField("备注2", max_length=50, null=True, blank=True)
     reserved_info03 = models.CharField("备注3", max_length=50, null=True, blank=True)
@@ -76,3 +74,23 @@ class EduInfo(models.Model):
 
     class Meta:
         verbose_name_plural = '教育信息'
+
+
+# 简历上传函数
+def resume_upload(instance, filename):
+    return 'resume/{1}'.format(instance, filename)
+
+
+# 简历文件
+class ResumeFile(models.Model):
+    resume_file = models.FileField("简历", upload_to='resume/', null=True, blank=True)
+    file_name = models.CharField(max_length=100)
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        related_name='resume',
+        on_delete=models.CASCADE,
+    )
+
+
+
+

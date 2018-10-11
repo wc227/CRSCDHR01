@@ -28,7 +28,7 @@
         <div class="col-lg-7" id="resume_con">
             <form class="form-horizontal" id="resume_form" method="post" action="/center/resume_submit/">
                 {% csrf_token %}
-                <p class="info_label">基本信息:</p>
+                <p class="info_label">基本信息</p>
                 <div class="info_box">
                     <div class="form-group form-group-sm has-feedback">
                         <label for="name" class="col-sm-2 control-label"><span id="must">*</span>姓名</label>
@@ -113,148 +113,267 @@
                     </div>
                 </div><!--basic_info_box-->
 
-                {% for w in work_info %}
-                <p class="info_label">工作履历:</p>
+                <p class="info_label">工作履历</p>
                 <div class="info_box">
+                    <div class="hidden" id="workLen">{{ work_len }}</div><!--接收履历数量的隐藏参数-->
                     <ul id="work_list" class="work_list">
-                        <li>
-                            <div class="form-group form-group-sm has-feedback">
-                                <label for="company" class="col-sm-2 control-label"><span id="must">*</span>工作单位</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="company" name="company" value="{{ w.company }}">
-                                    <p class='warn hidden'></p>
+                        {% if work_len > 0 %}
+                            {% for w in work_info %}
+                            <li>
+                                <div class="hidden">{{ w.id }}</div>
+                                <div class="form-group form-group-sm has-feedback">
+                                    <label for="company" class="col-sm-2 control-label"><span id="must">*</span>工作单位</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="company" name="company" value="{{ w.company }}">
+                                        <p class='warn hidden'></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="post" class="col-sm-2 control-label"><span id="must">*</span>职位</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="position" name="position" value="{{ w.position }}">
-                                    <p class="warn hidden"></p>
+                                <div class="form-group form-group-sm">
+                                    <label for="post" class="col-sm-2 control-label"><span id="must">*</span>职位</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="position" name="position" value="{{ w.position }}">
+                                        <p class="warn hidden"></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="post" class="col-sm-2 control-label"><span id="must">*</span>时间</label>
-                                <div class="col-sm-10">
-                                    <input size="15" type="text" class="datetime form-control" id="work_stime" name="work_stime" placeholder="开始时间" readonly value="{{ w.work_stime|date:"Y-m-d"}}">
-                                    <span class="span_to">-</span>
-                                    <input size="15" type="text" class="datetime form-control" id="work_etime" name="work_etime" placeholder="结束时间" readonly value="{{ w.work_etime|date:"Y-m-d" }}">
-                                    <p class="warn hidden"></p>
+                                <div class="form-group form-group-sm">
+                                    <label for="post" class="col-sm-2 control-label"><span id="must">*</span>时间</label>
+                                    <div class="col-sm-10">
+                                        <input size="15" type="text" class="datetime form-control" id="work_stime" name="work_stime" placeholder="开始时间" readonly value="{{ w.work_stime|date:"Y-m-d"}}">
+                                        <span class="span_to">-</span>
+                                        <input size="15" type="text" class="datetime form-control" id="work_etime" name="work_etime" placeholder="结束时间" readonly value="{{ w.work_etime|date:"Y-m-d" }}">
+                                        <p class="warn hidden"></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="post_desc" class="col-sm-2 control-label"><span id="must">*</span>职责描述</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="4" id="work_desc" name="work_desc" >{{ w.work_desc }}</textarea>
-                                    <p class="warn hidden"></p>
+                                <div class="form-group form-group-sm">
+                                    <label for="post_desc" class="col-sm-2 control-label"><span id="must">*</span>职责描述</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" rows="4" id="work_desc" name="work_desc" >{{ w.work_desc }}</textarea>
+                                        <p class="warn hidden"></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="del_box hidden">
-                                <a href="javascript:" id="work_del">删除此条</a>
-                            </div>
-                        </li>
+                                <div class="del_box">
+                                    <a href="javascript:" id="work_del">删除此条</a>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        {% elif work_len == 0 %}
+                            <li>
+                                <div class="form-group form-group-sm has-feedback">
+                                    <label for="company" class="col-sm-2 control-label"><span id="must">*</span>工作单位</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="company" name="company" value="{{ w.company }}">
+                                        <p class='warn hidden'></p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="post" class="col-sm-2 control-label"><span id="must">*</span>职位</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="position" name="position" value="{{ w.position }}">
+                                        <p class="warn hidden"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="post" class="col-sm-2 control-label"><span id="must">*</span>时间</label>
+                                    <div class="col-sm-10">
+                                        <input size="15" type="text" class="datetime form-control" id="work_stime" name="work_stime" placeholder="开始时间" readonly value="{{ w.work_stime|date:"Y-m-d"}}">
+                                        <span class="span_to">-</span>
+                                        <input size="15" type="text" class="datetime form-control" id="work_etime" name="work_etime" placeholder="结束时间" readonly value="{{ w.work_etime|date:"Y-m-d" }}">
+                                        <p class="warn hidden"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="post_desc" class="col-sm-2 control-label"><span id="must">*</span>职责描述</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" rows="4" id="work_desc" name="work_desc" >{{ w.work_desc }}</textarea>
+                                        <p class="warn hidden"></p>
+                                    </div>
+                                </div>
+                                <div class="del_box">
+                                    <a href="javascript:" id="work_del">删除此条</a>
+                                </div>
+                            </li>
+                        {% endif %}
                     </ul>
                     <div class="func_box" id="func_box">
                         <a href="javascript:" id="work_add">新增一条</a>
                     </div>
                 </div><!--work_info_box-->
-                {% endfor %}
 
 
-                {% for e in edu_info %}
-                <p class="info_label" id="info_education">教育背景:</p>
+                <p class="info_label" id="info_education">教育背景</p>
                 <div class="info_box" id="info_education_box">
+                    <div class="hidden" id="eduLen">{{ edu_len }}</div><!--接收学历数量的隐藏参数-->
                     <ul id="edu_list" class="edu_list">
-                        <li>
-                            <div class="form-group form-group-sm has-feedback">
-                                <label for="school" class="col-sm-2 control-label"><span id="must">*</span>毕业学校</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="school" name="school" value="{{ e.school }}">
-                                    <p class='warn hidden'></p>
+                        {% if edu_len > 0 %}
+                            {% for e in edu_info %}
+                            <li>
+                                <div class="hidden" id="edu_id">{{ e.id }}</div><!--接收教育信息ID的隐藏标签-->
+                                <div class="form-group form-group-sm has-feedback">
+                                    <label for="school" class="col-sm-2 control-label"><span id="must">*</span>毕业学校</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="school" name="school" value="{{ e.school }}">
+                                        <p class='warn hidden'></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="profession" class="col-sm-2 control-label"><span id="must">*</span>专业</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="profession" name="profession" value={{ e.profession }}>
-                                    <p class="warn hidden"></p>
+                                <div class="form-group form-group-sm">
+                                    <label for="profession" class="col-sm-2 control-label"><span id="must">*</span>专业</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="profession" name="profession" value={{ e.profession }}>
+                                        <p class="warn hidden"></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="education" class="col-sm-2 control-label"><span id="must">*</span>学历</label>
-                                <div class="col-sm-10">
-                                    <select class="form-control" id="education" name="education">
-                                        <option value="请选择">请选择</option>
-                                        <option value="本科">大学本科</option>
-                                        <option value="硕士">硕士研究生</option>
-                                        <option value="博士">博士研究生</option>
-                                        <option value="大专">大学专科</option>
-                                        <option value="中专">中等专科</option>
-                                        <option value="高中">高中毕业</option>
-                                        <option value="初中">初中毕业</option>
-                                        <option value="其他">其他</option>
-                                    </select>
-                                    <p class='warn hidden'></p>
+                                <div class="form-group form-group-sm">
+                                    <label for="education" class="col-sm-2 control-label"><span id="must">*</span>学历</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="education" name="education">
+                                            <option value="请选择">请选择</option>
+                                            <option value="本科">大学本科</option>
+                                            <option value="硕士">硕士研究生</option>
+                                            <option value="博士">博士研究生</option>
+                                            <option value="大专">大学专科</option>
+                                            <option value="中专">中等专科</option>
+                                            <option value="高中">高中毕业</option>
+                                            <option value="初中">初中毕业</option>
+                                            <option value="其他">其他</option>
+                                        </select>
+                                        <p class='warn hidden'></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="degree" class="col-sm-2 control-label"><span id="must">*</span>学位</label>
-                                <div class="col-sm-10">
-                                    <select class="form-control" id="degree" name="degree">
-                                        <option value="请选择">请选择</option>
-                                        <option value="学士">学士</option>
-                                        <option value="硕士">硕士</option>
-                                        <option value="专业硕士">专业硕士</option>
-                                        <option value="工程硕士">工程硕士</option>
-                                        <option value="博士">博士</option>
-                                        <option value="无学位">无学位</option>
-                                        <option value="其他">其他</option>
-                                    </select>
-                                    <p class="warn hidden"></p>
+                                <div class="form-group form-group-sm">
+                                    <label for="degree" class="col-sm-2 control-label"><span id="must">*</span>学位</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="degree" name="degree">
+                                            <option value="请选择">请选择</option>
+                                            <option value="学士">学士</option>
+                                            <option value="硕士">硕士</option>
+                                            <option value="专业硕士">专业硕士</option>
+                                            <option value="工程硕士">工程硕士</option>
+                                            <option value="博士">博士</option>
+                                            <option value="无学位">无学位</option>
+                                            <option value="其他">其他</option>
+                                        </select>
+                                        <p class="warn hidden"></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="school_start_time" class="col-sm-2 control-label"><span id="must">*</span>时间</label>
-                                <div class="col-sm-10">
-                                    <input size="15" type="text" class="datetime form-control" id="edu_stime" name="edu_stime" placeholder="入学时间" readonly value="{{ e.school_stime|date:"Y-m-d" }}">
-                                    <span class="span_to">-</span>
-                                    <input size="15" type="text" class="datetime form-control" id="edu_etime" name="edu_etime" placeholder="毕业时间" readonly value="{{ e.school_etime|date:"Y-m-d" }}">
-                                    <p class="warn hidden"></p>
+                                <div class="form-group form-group-sm">
+                                    <label for="school_start_time" class="col-sm-2 control-label"><span id="must">*</span>时间</label>
+                                    <div class="col-sm-10">
+                                        <input size="15" type="text" class="datetime form-control" id="edu_stime" name="edu_stime" placeholder="入学时间" readonly value="{{ e.school_stime|date:"Y-m-d" }}">
+                                        <span class="span_to">-</span>
+                                        <input size="15" type="text" class="datetime form-control" id="edu_etime" name="edu_etime" placeholder="毕业时间" readonly value="{{ e.school_etime|date:"Y-m-d" }}">
+                                        <p class="warn hidden"></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group form-group-sm">
-                                <label for="profession_desc" class="col-sm-2 control-label">专业描述</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="4" id="profession_desc" name="profession_desc">{{ e.profession_desc }}</textarea>
-                                    <p class="warn hidden"></p>
+                                <div class="form-group form-group-sm">
+                                    <label for="profession_desc" class="col-sm-2 control-label">专业描述</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" rows="4" id="profession_desc" name="profession_desc">{{ e.profession_desc }}</textarea>
+                                        <p class="warn hidden"></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="del_box hidden">
-                                <a href="javascript:" id="edu_del">删除此条</a>
-                            </div>
-                        </li><!--education_input-->
+                                <div class="del_box">
+                                    <a href="javascript:" id="edu_del">删除此条</a>
+                                </div>
+                            </li><!--education_input-->
+                            {% endfor %}
+                        {% elif edu_len == 0 %}
+                            <li>
+                                <div class="form-group form-group-sm has-feedback">
+                                    <label for="school" class="col-sm-2 control-label"><span id="must">*</span>毕业学校</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="school" name="school" value="{{ e.school }}">
+                                        <p class='warn hidden'></p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="profession" class="col-sm-2 control-label"><span id="must">*</span>专业</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="profession" name="profession" value={{ e.profession }}>
+                                        <p class="warn hidden"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="education" class="col-sm-2 control-label"><span id="must">*</span>学历</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="education" name="education">
+                                            <option value="请选择">请选择</option>
+                                            <option value="本科">大学本科</option>
+                                            <option value="硕士">硕士研究生</option>
+                                            <option value="博士">博士研究生</option>
+                                            <option value="大专">大学专科</option>
+                                            <option value="中专">中等专科</option>
+                                            <option value="高中">高中毕业</option>
+                                            <option value="初中">初中毕业</option>
+                                            <option value="其他">其他</option>
+                                        </select>
+                                        <p class='warn hidden'></p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="degree" class="col-sm-2 control-label"><span id="must">*</span>学位</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="degree" name="degree">
+                                            <option value="请选择">请选择</option>
+                                            <option value="学士">学士</option>
+                                            <option value="硕士">硕士</option>
+                                            <option value="专业硕士">专业硕士</option>
+                                            <option value="工程硕士">工程硕士</option>
+                                            <option value="博士">博士</option>
+                                            <option value="无学位">无学位</option>
+                                            <option value="其他">其他</option>
+                                        </select>
+                                        <p class="warn hidden"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="school_start_time" class="col-sm-2 control-label"><span id="must">*</span>时间</label>
+                                    <div class="col-sm-10">
+                                        <input size="15" type="text" class="datetime form-control" id="edu_stime" name="edu_stime" placeholder="入学时间" readonly value="{{ e.school_stime|date:"Y-m-d" }}">
+                                        <span class="span_to">-</span>
+                                        <input size="15" type="text" class="datetime form-control" id="edu_etime" name="edu_etime" placeholder="毕业时间" readonly value="{{ e.school_etime|date:"Y-m-d" }}">
+                                        <p class="warn hidden"></p>
+                                    </div>
+                                </div>
+                                <div class="form-group form-group-sm">
+                                    <label for="profession_desc" class="col-sm-2 control-label">专业描述</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" rows="4" id="profession_desc" name="profession_desc">{{ e.profession_desc }}</textarea>
+                                        <p class="warn hidden"></p>
+                                    </div>
+                                </div>
+                                <div class="del_box">
+                                        <a href="javascript:" id="edu_del">删除此条</a>
+                                </div>
+                            </li><!--education_input-->
+                        {% endif %}
                     </ul>
                     <div class="func_box" id="func_box">
                         <a href="javascript:" id="edu_add">新增一条</a>
                     </div>
                 </div><!--education_info_box-->
-                {% endfor %}
+
             </form>
 
-            <p class="info_label">简历上传:</p>
+            <p class="info_label">简历上传</p>
             <div class="info_box">
                 <div class="row">
+                    <!--简历上传-->
                     <div class="col-sm-10" id="fileUpBox">
                         <input type="file" size="16" id="resume_file" name="resume_file">
                         {% csrf_token %}
                         <p class="help-block">支持文件类型：.pdf .jpg .png .bpm,最大支持10M。</p>
                         <div class="warn hidden" id="file_warn"></div>
                     </div>
+
+                    <!--简历显示-->
                     <div class="col-sm-10 hidden" id="fileViewBox">
                         <div class="form-group form-group-sm">
                             <label class="col-sm-2 control-label" id="file_label">我的简历</label>
-                            <p class="col-sm-10" id="fileView"></p>
+                            <p class="col-sm-8" id="fileView">{{ file.file_name }}</p>
                         </div>
                     </div>
+
+                    <!--简历删除-->
                     <div class="func_box hidden" id="fileFuncBox">
                         <a href="javascript:" id="resumeDel">删除简历</a>
                     </div>
@@ -262,7 +381,7 @@
             </div><!--resume_info_box-->
 
             <button class="btn btn-primary" type="button" id="save">保存并预览</button>
-        </div><!--resume_con-->
+            </div><!--resume_con-->
         {% endif %}
 
         <!--简历浏览容器-->
@@ -285,6 +404,7 @@
                 </table>
             </div>
 
+            {% if work_len > 0 %}
             <!--工作信息框-->
             <p class="viewLabel">工作信息</p>
             <div class="viewBox">
@@ -302,6 +422,7 @@
                     {% endfor %}
                 </ul>
             </div>
+            {% endif %}
 
             <!--教育信息框-->
             <p class="viewLabel">教育信息</p>
@@ -320,6 +441,16 @@
                         {{ e.education }}
                     </li>
                     {% endfor %}
+                </ul>
+            </div>
+
+            <!--简历信息框-->
+            <p class="viewLabel">简历附件</p>
+            <div class="viewBox">
+                <ul class="viewTable" id="fileViewBox">
+                    <li>
+                        {{ file.file_name}}
+                    </li>
                 </ul>
             </div>
 

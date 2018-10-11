@@ -8,45 +8,47 @@ from django.contrib.auth.decorators import login_required
 from django.core.files import File
 from django.core.files.storage import default_storage
 from . import models
+from django.core.exceptions import ObjectDoesNotExist
 
-resume_count = 0
-
-'''
-#  创建简历
-@login_required
-def resume(request):
-    name = request.user.first_name + request.user.last_name
-    view_para = 0
-    context = {
-        'name': name,
-        'view_para': view_para,
-    }
-    return render(request, 'center/resume.html', context)
-'''
 
 # 上传简历附件
 @login_required
 def resume_up(request):
-    if request.method == 'GET':
-        resume_list = models.Resume.objects.all()
-        return render(request, 'center/resume.html/', {'resume_list': resume_list})
-    elif request.method == 'POST':
-        resume = request.FILES['resume_file']
-        resume_rear = os.path.splitext(resume.name)[1]
-        file_name = str(request.user.id) + '-' + request.user.first_name + request.user.last_name + resume_rear
-        global resume_path
-        resume_path = settings.MEDIA_ROOT + '/resume/' + file_name
-        with open(resume_path, 'wb+') as f:
-            resume_file = File(f)
-            for chunk in resume.chunks():
-                resume_file.write(chunk)
-        return JsonResponse({'file_name': file_name}, safe=False)
+    if request.method == 'POST':
+        resume_file = request.FILES['resume_file']
+        # 用户信息
+        user_id = str(request.user.id)
+        user_name = request.user.first_name + request.user.last_name
+        rear = os.path.splitext(resume_file.name)[1]
+        # 原文件名
+        file_name = resume_file.name
+        # 修改后文件名
+        resume_file.name = user_id + '-' + user_name + '-简历' + rear
+        # 删除既有简历
+        try:
+            exist_file = models.ResumeFile.objects.filter(user__exact=request.user.id)
+            for e in exist_file:
+                e.resume_file.delete()
+                e.delete()
+        except ObjectDoesNotExist:
+            pass
+        # 创建用户外键
+        u = User.objects.get(id=request.user.id)
+        # 实例化文件
+        models.ResumeFile.objects.create(file_name=file_name, resume_file=resume_file, user=u)
+        return JsonResponse({'success': 1})
 
 
 # 删除简历附件
 @login_required()
 def resume_del(request):
-    default_storage.delete(resume_path)
+    try:
+        exist_file = models.ResumeFile.objects.filter(user=request.user.id)
+        for e in exist_file:
+            e.resume_file.delete()
+            e.delete()
+    except ObjectDoesNotExist:
+        pass
     return JsonResponse({'delete': 1})
 
 
@@ -107,7 +109,9 @@ def resume_submit(request):
         u.save()
 
         # 存储工作信息
-
+        work_list = models.WorkInfo.objects.filter(work_foreignkey__exact=request.user.id)
+        for w in work_list:
+            w.delete()
         for c, p, s, e, d in zip(company, position, work_stime, work_etime, work_desc):
             models.WorkInfo.objects.create(
                 company=c,
@@ -119,7 +123,9 @@ def resume_submit(request):
             )
 
         # 存储学历信息
-
+        edu_list = models.EduInfo.objects.filter(edu_foreignkey__exact=request.user.id)
+        for e in edu_list:
+            e.delete()
         for s, p, e, d, ss, se, pd in zip(
             school, profession, education, degree, school_stime, school_etime, profession_desc
         ):
@@ -140,10 +146,10 @@ def resume_submit(request):
 @login_required()
 def resume(request):
     user = User.objects.get(id=request.user.id)
-    work_list = models.WorkInfo.objects.filter(work_foreignkey__exact=request.user.id)
-    work_info = work_list
-    edu_list = models.EduInfo.objects.filter(edu_foreignkey__exact=request.user.id)
-    edu_info = edu_list
+    work_info = models.WorkInfo.objects.filter(work_foreignkey__exact=request.user.id)
+    work_len = work_info.count()
+    edu_info = models.EduInfo.objects.filter(edu_foreignkey__exact=request.user.id)
+    file = models.ResumeFile.objects.get(user__exact=request.user.id)
     if hasattr(user, 'basic_info'):
         context = {
             # 传输基本信息
@@ -159,7 +165,9 @@ def resume(request):
             'party': user.basic_info.party,
             'work_info': work_info,
             'edu_info': edu_info,
+            'file': file,
             'view_para': 1,
+            'work_len': work_len,
         }
 
     else:
@@ -174,10 +182,14 @@ def resume(request):
 @login_required()
 def resume_modify(request):
     user = User.objects.get(id=request.user.id)
-    work_list = models.WorkInfo.objects.filter(work_foreignkey__exact=request.user.id)
-    work_info = work_list
-    edu_list = models.EduInfo.objects.filter(edu_foreignkey__exact=request.user.id)
-    edu_info = edu_list
+    work_info = models.WorkInfo.objects.filter(work_foreignkey__exact=request.user.id)
+    work_len = work_info.count()
+    edu_info = models.EduInfo.objects.filter(edu_foreignkey__exact=request.user.id)
+    edu_len = edu_info.count()
+    try:
+        file = models.ResumeFile.objects.get(user=request.user.id)
+    except ObjectDoesNotExist:
+        file = None
     context = {
         'name': user.basic_info.name,
         'email': user.email,
@@ -192,5 +204,36 @@ def resume_modify(request):
         'work_info': work_info,
         'edu_info': edu_info,
         'view_para': 0,
+        'work_len': work_len,
+        'edu_len': edu_len,
+        'file': file,
     }
     return render(request, 'center/resume.html', context)
+
+
+# 删除工作条目
+@login_required()
+def work_del(request):
+    if request.method == 'GET':
+        work_id = request.GET.get('workId')
+        try:
+            models.WorkInfo.objects.filter(id=work_id).delete()
+            work_len = models.WorkInfo.objects.filter(work_foreignkey__exact=request.user.id).count()
+            return JsonResponse({'work_len': work_len})
+        except ValueError:
+            pass
+
+
+# 删除教育条目
+@login_required()
+def edu_del(request):
+    if request.method == 'GET':
+        edu_id = request.GET.get('eduId')
+        try:
+            models.EduInfo.objects.filter(id=edu_id).delete()
+            edu_len = models.EduInfo.objects.filter(edu_foreignkey__exact=request.user.id).count()
+            return JsonResponse({'edu_len': edu_len})
+        except ValueError:
+            pass
+
+

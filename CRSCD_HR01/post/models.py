@@ -1,20 +1,84 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
-# Create your models here.
+# 岗位创建
 class Post(models.Model):
     class Meta:
         verbose_name_plural = '岗位管理'
-    post_name = models.CharField(max_length=10)
-    department = models.CharField(max_length=20)
-    post_company = models.CharField(max_length=20)
-    release_time = models.DateTimeField()
-    expire_time = models.DateTimeField()
-    location = models.CharField(max_length=6)
-    exp_requirement = models.CharField(max_length=10)
-    edu_requirement = models.CharField(max_length=10)
-    post_number = models.IntegerField()
-    responsibility = models.TextField(max_length=500)
-    post_requirement = models.TextField(max_length=500)
+    post_name = models.CharField('岗位名称', max_length=10)
+    COMPANY_CHOICES = (
+        ('总部', '总部'),
+        ('北京分公司', '北京分公司'),
+        ('上海分公司', '上海分公司'),
+        ('成都分公司', '成都分公司'),
+        ('沈阳分公司', '沈阳分公司'),
+        ('广州分公司', '广州分公司'),
+        ('武汉分公司', '武汉分公司'),
+        ('西安分公司', '西安分公司'),
+        ('新疆分公司', '新疆分公司'),
+        ('济南分公司', '济南分公司'),
+        ('昆明分公司', '昆明分公司'),
+        ('兰州分公司', '兰州分公司'),
+        ('南昌分公司', '南昌分公司'),
+        ('南宁分公司', '南宁分公司'),
+        ('郑州分公司', '郑州分公司'),
+    )
+    company = models.CharField(
+        '所属公司',
+        max_length=20,
+        choices=COMPANY_CHOICES,
+        default='总部',
+    )
+    department = models.CharField('所属部门', max_length=20)
+    public_date = models.DateField('发布时间')
+    expire_date = models.DateField('到期时间', null=True, blank=True)
+
+    EXP_CHOICES = (
+        (0, '应届生'),
+        (1, '一年以上'),
+        (2, '二年以上'),
+        (3, '三年以上'),
+        (4, '四年以上'),
+        (5, '五年以上'),
+        (6, '六年以上'),
+        (7, '七年以上'),
+        (8, '八年以上'),
+        (9, '九年以上'),
+        (10, '十年以上'),
+    )
+    exp_requirement = models.IntegerField(
+        '工作年限',
+        choices=EXP_CHOICES,
+        default=0
+    )
+    EDU_CHOICES = (
+        ('本科', '本科'),
+        ('研究生', '研究生'),
+        ('博士生', '博士生'),
+        ('专科', '专科'),
+        ('不限', '不限'),
+    )
+    edu_requirement = models.CharField(
+        '学历要求',
+        max_length=10,
+        choices=EDU_CHOICES,
+        default=0,
+    )
+    num = models.IntegerField('招聘人数', default=1)
+    responsibility = models.TextField('岗位描述', max_length=500)
+    post_requirement = models.TextField('岗位要求', max_length=500)
+    apply_num = models.IntegerField('应聘人数', default=0)
+    is_delete = models.BooleanField(default=0)
+
+
+    #def __str__(self):
+
+
+# 岗位申请
+class ApplyInfo(models.Model):
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    post = models.ForeignKey('post.Post', on_delete=models.CASCADE)
+    count = models.IntegerField()
 
 
