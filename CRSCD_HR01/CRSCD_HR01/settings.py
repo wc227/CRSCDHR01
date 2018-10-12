@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'user',
     'center',
     'post',
+    'django_object_actions',
 ]
 
 MIDDLEWARE = [

@@ -36,11 +36,6 @@ body{
 
 }
 
-.post_des{
-	padding: 2px;
-
-}
-
 #footer{
 	height:50px;
 	color: rgb(1, 32, 75);
@@ -48,3 +43,15 @@ body{
 	text-align: center;
 	line-height: 50px;
 }
+
+#showDetail, #hideDetail{
+    display: block;
+    text-align: center;
+    width: 30%;
+    margin: 5px auto 5px;
+}
+
+#postApply{
+    background-color: rgb(1, 32, 75);
+}
+

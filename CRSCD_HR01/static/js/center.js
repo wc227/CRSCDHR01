@@ -515,7 +515,6 @@ $(function(){
         });
     });
 
-
     //表单提交函数
     $('#save').click(function(){
         $('#resume_form').submit();

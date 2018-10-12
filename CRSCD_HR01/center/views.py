@@ -1,12 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from django.conf import settings
 from django.contrib.auth.models import User
 import os
-import re
 from django.contrib.auth.decorators import login_required
-from django.core.files import File
-from django.core.files.storage import default_storage
 from . import models
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -149,7 +145,10 @@ def resume(request):
     work_info = models.WorkInfo.objects.filter(work_foreignkey__exact=request.user.id)
     work_len = work_info.count()
     edu_info = models.EduInfo.objects.filter(edu_foreignkey__exact=request.user.id)
-    file = models.ResumeFile.objects.get(user__exact=request.user.id)
+    try:
+        file = models.ResumeFile.objects.get(user__exact=request.user.id)
+    except ObjectDoesNotExist:
+        file = None
     if hasattr(user, 'basic_info'):
         context = {
             # 传输基本信息

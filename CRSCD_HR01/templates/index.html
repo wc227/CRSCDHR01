@@ -6,6 +6,7 @@
 	<title>通号院集团招聘门户</title>
 	<script type="text/javascript" src="/static/js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/js/index.js"></script>
 	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/static/css/index.css">
 
@@ -52,51 +53,42 @@
 			</div><!--navbar collapse-->
 		</div><!--navbar container-->
 
-	
 	<!--巨幕-->
 	<div class="jumbotron clearfix">
 		<img class="img-responsive" src="/static/images/index_main_pic3.jpg">
 		<div class="container">			
 		</div>
 	</div>
-	
+
+    <!--最新职位-->
 	<div class="container">
 		<h4>最新职位</h4>
-		<div class="row">
-			<div class="col-sm-6 col-md-4 col-lg-3">
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<a href="#" style="color: white;">软件工程师</a>
-					</div>
-					<div class="panel-body">
-						
-					</div>
-				</div>			
-			</div>	
-			<div class="col-sm-6 col-md-4 col-lg-3">
-				<div class="panel panel-primary">
-					<div class="panel-heading"><a href="#" style="color: white;">软件工程师</a></div>
-					<div class="panel-body">
-							
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-md-4 col-lg-3">
-				<div class="panel panel-primary">
-					<div class="panel-heading"><a href="#" style="color: white;">软件工程师</a></div>
-					<div class="panel-body">
-						
-					</div>
-				</div>	
-			</div>
-			<div class="col-sm-6 col-md-4 col-lg-3">
-				<div class="panel panel-primary">
-					<div class="panel-heading"><a href="#" style="color: white;">软件工程师</a></div>
-					<div class="panel-body">
-						
-					</div>
-				</div>				
-			</div>
+		<div class="row" id="post_con">
+			{% for p in post %}
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <a href="/post/postView/?postId={{ p.id }}" style="color: white;" id="#postName">{{ p.post_name }}</a>
+                        </div>
+                        <div class="panel-body">
+                            <p>工作地：{{ p.location }}</p>
+                            <p>职位类别：{{ p.post_type }}</p>
+                            <p>招聘人数：{{ p.num }}</p>
+                            <p>招聘对象：{{ p.apply_type }}</p>
+                            <p>发布时间：{{ p.public_date|date:"Y-m-d" }}</p>
+                            <span class="glyphicon glyphicon-menu-down" aria-hidden="true" id="showDetail"></span>
+                            <div class="hidden" id="postDes">
+                                <p>岗位描述：</p>
+                                <p>{{ p.responsibilities|linebreaksbr }}</p>
+                                <p>岗位要求：</p>
+                                <p>{{ p.post_requirement|linebreaksbr }}</p>
+                                <button class="btn btn-primary btn-block" id="postApply">岗位申请</button>
+                            </div>
+                            <span class="glyphicon glyphicon-menu-up hidden" aria-hidden="true" id="hideDetail"></span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
 		</div><!--row-->
 	</div><!--container-->	
 
