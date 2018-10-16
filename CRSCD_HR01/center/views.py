@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib.auth.models import User
+from post.models import Post
 import os
 from django.contrib.auth.decorators import login_required
 from . import models
@@ -171,9 +172,14 @@ def resume(request):
 
     else:
         context = {
+            # 用于前端欢迎您的姓名
             'name': request.user.first_name + request.user.last_name,
             'view_para': 0,
         }
+
+    # 用于前端导航条active的参数
+    context['active'] = 1
+
     return render(request, 'center/resume.html', context)
 
 
@@ -206,6 +212,7 @@ def resume_modify(request):
         'work_len': work_len,
         'edu_len': edu_len,
         'file': file,
+        'active': 1,
     }
     return render(request, 'center/resume.html', context)
 
@@ -235,4 +242,19 @@ def edu_del(request):
         except ValueError:
             pass
 
+
+# 申请收藏浏览
+@login_required()
+def post_view(request):
+    req_type = request.GET.get('type')
+    post_applied = Post.objects.filter(applicants=request.user)
+    post_fav = Post.objects.filter(favorites=request.user)
+    context = {
+        'post_applied': post_applied,
+        'post_fav': post_fav,
+        'type': req_type,
+        'name': request.user.first_name + request.user.last_name,
+        'active': req_type,
+    }
+    return render(request, 'center/resume_post.html', context)
 

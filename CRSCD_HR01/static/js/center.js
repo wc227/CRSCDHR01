@@ -1,6 +1,5 @@
 $(function(){
-
-    //日期函数
+    // 日期函数
     $('body*').delegate('.datetime', 'mouseenter', function(){
         $('.datetime').datetimepicker({
             format: "yyyy-mm-dd",
@@ -12,18 +11,18 @@ $(function(){
             pickerPosition:'bottom-center',
         });
     });
-    //样式调整函数(输入正确）
+    // 样式调整函数(输入正确）
     function input_true(field){
         field.parent().parent().addClass('has-success').removeClass('has-error');
         field.next('p').addClass('hidden');
     }
-    //样式调整函数(输入错误）
+    // 样式调整函数(输入错误）
     function input_false(field,text){
         field.parent().parent().addClass('has-error').removeClass('has-success');
         field.next('p').removeClass('hidden').html(text);
     }
 
-//基本信息校验
+// 基本信息校验
     var name = $('#name');
     var phone = $('#phone');
     var work_year = $('#work_year');
@@ -42,7 +41,7 @@ $(function(){
     var error_identity_id = false;
     var error_party = false;
 
-     //姓名校验函数
+    // 姓名校验函数
     function check_name(){
         var len = name.val().length;
         if(len<=1||len>20){
@@ -56,7 +55,7 @@ $(function(){
         }
     }
 
-    //手机号校验函数
+    // 手机号校验函数
     function check_phone(){
         var re = /^1[34578]\d{9}$/;
         if(re.test(phone.val())){
@@ -70,7 +69,7 @@ $(function(){
         }
     }
 
-    //年龄校验函数
+    // 年龄校验函数
     function check_age(){
         var re = /^\d{2}$/;
         if(re.test(age.val()) && age.val()>=18 && age.val()<60){
@@ -86,7 +85,7 @@ $(function(){
         }
     }
 
-    //工作年限校验函数
+    // 工作年限校验函数
     function check_work_year(){
         var value = work_year.val();
         if(value==='请选择'){
@@ -107,7 +106,7 @@ $(function(){
         }
     }
 
-    //政治面貌校验函数
+    // 政治面貌校验函数
     function check_party(){
         if(party.val()!=='请选择'){
             input_true(party);
@@ -119,7 +118,7 @@ $(function(){
         }
     }
 
-    //居住地校验函数
+    // 居住地校验函数
     function check_live_location(){
         var len = live_location.val().length;
         if(len<=2||len>12){
@@ -133,7 +132,7 @@ $(function(){
         }
     }
 
-    //生源地校验函数
+    // 生源地校验函数
     function check_study_location(){
         var len = study_location.val().length;
         if(len<=2||len>8){
@@ -147,7 +146,7 @@ $(function(){
         }
     }
 
-    //身份证号校验函数
+    // 身份证号校验函数
     function check_identity_id(){
         var re = /^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/
         if(re.test(identity_id.val())){
@@ -170,13 +169,13 @@ $(function(){
     age.blur(function(){check_age();});
     party.blur(function(){check_party();});
 
-//工作信息校验
+// 工作信息校验
     var error_company = false;
     var error_position = false;
     var error_work_time = false;
     var error_work_desc = false;
 
-    //新增与删除工作信息
+    // 新增与删除工作信息
     var work_list = $('#work_list');
     var work_add = $('#work_add');
     var work_li = $('#work_list li:first').html();
@@ -202,7 +201,7 @@ $(function(){
 
     });
 
-    //工作信息校验代理
+    // 工作信息校验代理
     work_list.delegate('input, select, textarea', 'blur', function(){
         var id_val = $(this).attr('id');
         switch(id_val){
@@ -235,7 +234,7 @@ $(function(){
         }
     });
 
-    //工作单位校验函数
+    // 工作单位校验函数
     function check_company(company){
         var len = company.val().length;
         if(len>0 && len<50){
@@ -248,7 +247,7 @@ $(function(){
             error_company = true;
         }
     }
-    //职位校验函数
+    // 职位校验函数
     function check_position(position){
         var len = position.val().length;
         if(len>0 && len<50){
@@ -261,7 +260,7 @@ $(function(){
             error_position = true;
         }
     }
-    //职责描述校验函数
+    // 职责描述校验函数
     function check_work_desc(work_desc){
         var len = work_desc.val().length;
         if(len>0 && len<200){
@@ -274,7 +273,7 @@ $(function(){
             error_pos_desc = true;
         }
     }
-    //工作时间校验函数
+    // 工作时间校验函数
     function check_work_time(stime, etime){
         var stime_val = stime.val();
         var stime_len = stime.val().length;
@@ -305,7 +304,7 @@ $(function(){
         }
     }
 
-//教育信息校验
+// 教育信息校验
     var error_edu = false;
     var error_school = false;
     var error_profession = false;
@@ -314,7 +313,7 @@ $(function(){
     var error_degree = false;
     var error_profession_desc = false;
 
-    //新增教育信息
+    // 新增教育信息
     var edu_list = $('#edu_list');
     var edu_add = $('#edu_add');
     var edu_li = $('#edu_list li:first').html();
@@ -332,7 +331,7 @@ $(function(){
         }
     });
 
-    //删除教育信息
+    // 删除教育信息
     edu_list.delegate('a', 'click', function(){
         if(eduLen>1){
             var eduId = $(this).parent().parent().children('div:first-child').html();
@@ -346,7 +345,7 @@ $(function(){
         }
     });
 
-    //学历校验代理函数
+    // 学历校验代理函数
     edu_list.delegate('input, select, textarea', 'blur', function(){
         var id_val = $(this).attr('id');
         switch(id_val){
@@ -387,7 +386,7 @@ $(function(){
         }
     });
 
-    //学校校验函数
+    // 学校校验函数
     function check_school(school){
         var len = school.val().length;
         if(len>0 && len<50){
@@ -400,7 +399,7 @@ $(function(){
             error_school = true;
         }
     }
-    //学历校验函数
+    // 学历校验函数
     function check_education(education){
         var value = education.val();
         if(value==='请选择'){
@@ -413,7 +412,7 @@ $(function(){
             error_education = false;
         }
     }
-    //专业校验函数
+    // 专业校验函数
     function check_profession(profession){
         var len = profession.val().length;
         if(len>0 && len<50){
@@ -426,7 +425,7 @@ $(function(){
             error_profession = true;
         }
     }
-    //学位校验函数
+    // 学位校验函数
     function check_degree(degree){
         var value = degree.val();
         if(value==='请选择'){
@@ -439,7 +438,7 @@ $(function(){
             error_degree = false;
         }
     }
-    //专业描述校验函数
+    // 专业描述校验函数
     function check_profession_desc(profession_desc){
         var len = profession_desc.val().length;
         if(len>200){
@@ -452,7 +451,7 @@ $(function(){
             error_profession_desc =false;
         }
     }
-    //学历日期校验函数
+    // 学历日期校验函数
     function check_edu_time(stime, etime){
         var stime_val = stime.val();
         var stime_len = stime.val().length;
@@ -483,7 +482,7 @@ $(function(){
         }
     }
 
-    //简历上传函数
+    // 简历上传函数
     $('#resume_file').fileinput({
         language: 'zh',
         uploadUrl: '/center/resume_up/',
@@ -515,7 +514,7 @@ $(function(){
         });
     });
 
-    //表单提交函数
+    // 表单提交函数
     $('#save').click(function(){
         $('#resume_form').submit();
     });

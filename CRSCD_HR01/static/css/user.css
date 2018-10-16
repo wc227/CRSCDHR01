@@ -307,3 +307,13 @@ label{
     margin-left: 5px;
     margin-right: 10px;
 }
+
+#postList{
+    margin-top: 10px;
+}
+
+#postList tbody tr td{
+    font-size: 12px;
+
+}
+

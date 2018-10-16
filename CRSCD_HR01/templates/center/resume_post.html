@@ -1,0 +1,65 @@
+{% extends 'resume_base.html' %}
+{% block resume %}
+    <div class="container">
+        <!--申请信息-->
+        {% if type == 'apply' %}
+            <table class="table" id="postList">
+                <tr>
+                    <td>职位</td>
+                    <td>工作地</td>
+                    <td>类型</td>
+                    <td>操作</td>
+                </tr>
+                {% for p in post_applied %}
+                <tr>
+                    <td><a data-toggle="modal" data-target="#postDisplay">{{ p.post_name }}</a></td>
+                    <td>{{ p.company }}</td>
+                    <td>{{ p.post_type }}</td>
+                    <td><a href="javascript:" id="cancelApply">取消申请</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+
+        <!--收藏信息-->
+        {% if type == 'fav' %}
+            <table class="table" id="postList">
+                <tr>
+                    <td>职位</td>
+                    <td>工作地</td>
+                    <td>类型</td>
+                    <td>操作</td>
+                </tr>
+                {% for p in post_fav %}
+                    <tr>
+                        <td><a>{{ p.post_name }}</a></td>
+                        <td>{{ p.company }}</td>
+                        <td>{{ p.post_type }}</td>
+                        <td><a href="javascript:" id="cancelFav">取消收藏</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+
+    <!--岗位显示模态框-->
+    <div class="modal fade" tabindex="-1" role="dialog" id="postDisplay">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    软件工程师
+                    软件工程师软件工程师
+
+                </div><!-- /.modal-content -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+{% endblock resume %}

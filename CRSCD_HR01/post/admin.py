@@ -1,10 +1,9 @@
 from django.contrib import admin
 from .models import *
-from django_object_actions import DjangoObjectActions
 
 
 @admin.register(Post)
-class PostAdmin(DjangoObjectActions, admin.ModelAdmin):
+class PostAdmin(admin.ModelAdmin):
 
     # 设置默认排序字段
     ordering = ('department', '-public_date')
@@ -18,12 +17,12 @@ class PostAdmin(DjangoObjectActions, admin.ModelAdmin):
     # 设置进入编辑界面的链接字段
     list_display_links = ['post_name']
 
-
     # 设置在列表中显示的字段
     list_display = [
         'id',
         'post_name',
         'apply_num',
+        'fav_num',
         'company',
         'department',
         'edu_requirement',

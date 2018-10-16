@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^resume_modify/$', views.resume_modify),
     url(r'^work_del/$', views.work_del),
     url(r'^edu_del/$', views.edu_del),
+    url(r'^postView/$', views.post_view),
 ]

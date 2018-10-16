@@ -1,6 +1,26 @@
-{% extends 'resume_base.html' %}
+{% extends 'base.html' %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/fileinput.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/user.css">
+    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript" src="/static/js/fileinput.min.js"></script>
+    <script type="text/javascript" src="/static/js/locales/zh.js"></script>
+    <script type="text/javascript" src="/static/js/ajax-post-handle.js"></script>
+    <script type="text/javascript" src="/static/js/center.js"></script>
+{% endblock head %}
+{% block body %}
+    <!--个人中心导航条-->
+    <div class="container" id="nav_box">
+        <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="/center/resume/">我的简历</a></li>
+            <li role="presentation"><a href="#">我的申请</a></li>
+            <li role="presentation"><a href="#">我的收藏</a></li>
+            <li role="presentation"><a href="#">我的账户</a></li>
+        </ul>
+    </div>
 
-{% block resume %}
     <!--我的简历-->
     <div class="container" id="resume">
         <!--简历编辑容器-->
@@ -442,4 +462,18 @@
         {% endif %}
     </div><!--resume-->
 
-{% endblock resume %}
+    <!--我的申请-->
+    <div class="container hidden">
+
+    </div>
+
+    <!--我的收藏-->
+    <div class="container hidden">
+
+    </div>
+
+    <!--我的账户-->
+    <div class="container hidden">
+
+    </div>
+{% endblock body %}
