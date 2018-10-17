@@ -30,11 +30,11 @@
                 <div class="row">
                      <div class="col-lg-5 col-lg-offset-1">
                         <ul class="nav navbar-nav">
-                            <li><a href="/">首页</a></li>
-                            <li><a href="">社会招聘</a></li>
-                            <li><a href="">校园招聘</a></li>
-                            <li><a href="">了解通号</a></li>
-                            <li><a href="">个人中心</a></li>
+                            <li {% if nav == 1 %}class="active"{% endif %}><a href="/index/" {% if nav == 1 %}class="active"{% endif %}>首页</a></li>
+                            <li {% if nav == 2 %}class="active"{% endif %}><a href="">社会招聘</a></li>
+                            <li {% if nav == 3 %}class="active"{% endif %}><a href="">校园招聘</a></li>
+                            <li {% if nav == 4 %}class="active"{% endif %}><a href="">了解通号</a></li>
+                            <li {% if nav == 5 %}class="active"{% endif %}><a href="/center/resume/">个人中心</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-3">
@@ -57,16 +57,16 @@
     {% block body %}{% endblock body %}
 
     <!--页脚-->
-    <div class="footer navbar-fixed-bottom">
+    <div class="navbar-fixed-bottom" id="footerCon">
         <div class="container-fluid" id="footer">
-            <ol class="breadcrumb">
-                <li class="active"><a href="#">首页</a></li>
+            <ul class="breadcrumb">
+                <li><a href="#">首页</a></li>
                 <li><a href="#">校园招聘</a></li>
                 <li><a href="#">社会招聘</a></li>
                 <li><a href="#">了解通号</a></li>
-                <li><a href="#">个人中心</a></li>
-            </ol>
-            <p>@ 2018 通号院集团版权所有</p>
+                <li><a href="#">个人中心</a></li><br>
+                <li><div id="copyright" style="margin: 7px auto">@ 2018 通号院集团版权所有</div></li>
+            </ul>
         </div>
     </div>
 </body>

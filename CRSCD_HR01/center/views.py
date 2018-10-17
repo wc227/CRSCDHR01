@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib.auth.models import User
-from post.models import Post
+from post.models import Post, PostApply, PostFav
 import os
 from django.contrib.auth.decorators import login_required
 from . import models
@@ -11,6 +11,7 @@ from django.core.exceptions import ObjectDoesNotExist
 # 上传简历附件
 @login_required
 def resume_up(request):
+    """上传简历附件"""
     if request.method == 'POST':
         resume_file = request.FILES['resume_file']
         # 用户信息
@@ -39,6 +40,7 @@ def resume_up(request):
 # 删除简历附件
 @login_required()
 def resume_del(request):
+    """删除简历附件"""
     try:
         exist_file = models.ResumeFile.objects.filter(user=request.user.id)
         for e in exist_file:
@@ -52,6 +54,7 @@ def resume_del(request):
 # 提交简历
 @login_required()
 def resume_submit(request):
+    """提交简历表单"""
     if request.method == 'POST':
         post = request.POST
 
@@ -142,6 +145,7 @@ def resume_submit(request):
 # 浏览简历
 @login_required()
 def resume(request):
+    """浏览简历"""
     user = User.objects.get(id=request.user.id)
     work_info = models.WorkInfo.objects.filter(work_foreignkey__exact=request.user.id)
     work_len = work_info.count()
@@ -179,6 +183,8 @@ def resume(request):
 
     # 用于前端导航条active的参数
     context['active'] = 1
+    context['nav'] = 5
+    context['title'] = '个人中心'
 
     return render(request, 'center/resume.html', context)
 
@@ -243,18 +249,52 @@ def edu_del(request):
             pass
 
 
-# 申请收藏浏览
+# 访问个人中心我的申请、我的收藏
 @login_required()
 def post_view(request):
+    """访问个人中心我的申请、我的收藏"""
     req_type = request.GET.get('type')
-    post_applied = Post.objects.filter(applicants=request.user)
-    post_fav = Post.objects.filter(favorites=request.user)
+    apply_info = PostApply.objects.filter(user_foreignkey=request.user)
+    apply_list = []
+    fav_list = []
+    for a in apply_info:
+        post = a.post_foreignkey
+        apply_list.append(post)
+    fav_info = PostFav.objects.filter(user_foreignkey=request.user)
+    for f in fav_info:
+        fav = f.post_foreignkey
+        fav_list.append(fav)
     context = {
-        'post_applied': post_applied,
-        'post_fav': post_fav,
+        'post_applied': apply_list,
+        'post_fav': fav_list,
         'type': req_type,
         'name': request.user.first_name + request.user.last_name,
         'active': req_type,
+        'nav': 5,
     }
     return render(request, 'center/resume_post.html', context)
 
+
+# 浏览职位详情
+@login_required()
+def post_modal(request):
+    """浏览职位详情"""
+    post_id = request.GET.get('postId')
+    position = Post.objects.get(id=post_id)
+    context = {
+        'post_name': position.post_name,
+        'post_type': position.post_type,
+        'apply_type': position.apply_type,
+        'post_company': position.company,
+        'post_location': position.location,
+        'department': position.department,
+        'public_date': position.public_date,
+        'expire_date': position.expire_date,
+        'exp_requirement': position.exp_requirement,
+        'edu_requirement': position.edu_requirement,
+        'num': position.num,
+        'responsibilities': position.responsibilities,
+        'post_requirement': position.post_requirement,
+
+    }
+    return JsonResponse(context)

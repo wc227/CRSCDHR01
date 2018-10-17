@@ -1,8 +1,22 @@
 from django.contrib import admin
-from .models import *
+from . import models
 
 
-@admin.register(Post)
+def refresh_apply_fav(modeladmin, request, queryset):
+    """刷新职位申请与职位收藏情况"""
+    post = models.Post.objects.all()
+    for p in post:
+        post_apply = models.PostApply.objects.filter(post_foreignkey=p)
+        post_fav = models.PostFav.objects.filter(post_foreignkey=p)
+        p.apply_num = post_apply.count()
+        p.fav_num = post_fav.count()
+        p.save()
+
+
+refresh_apply_fav.short_description = "刷新申请情况"
+
+
+@admin.register(models.Post)
 class PostAdmin(admin.ModelAdmin):
 
     # 设置默认排序字段
@@ -30,3 +44,5 @@ class PostAdmin(admin.ModelAdmin):
         'num',
         'public_date',
     ]
+
+    actions = [refresh_apply_fav]

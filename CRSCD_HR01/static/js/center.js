@@ -520,4 +520,43 @@ $(function(){
     });
 
 
+    // 个人中心查看申请职位详情
+    $('#postDisplay').on('show.bs.modal', function(event){
+        var button = $(event.relatedTarget);
+        var recipient = button.data('post');
+        var modal = $(this);
+        $.get('/center/postModal/?postId='+recipient, function(data){
+            //接收岗位数据
+            var postName = data.post_name;
+            var postType = data.post_type;
+            var applyType = data.apply_type;
+            var company = data.post_company;
+            var location = data.post_location;
+            var department = data.department;
+            var publicDate = data.public_date;
+            var expireDate = data.expire_date;
+            var exp = data.exp_requirement;
+            var edu = data.edu_requirement;
+            var num = data.num;
+            var responbility = data.responsibilities;
+            var requirements = data.post_requirement;
+
+            var responsibilities = responbility.replace(/\n/g,'<br>',);
+            var requirement = requirements.replace(/\n/g,'<br>');
+            modal.find('.modal-title').text(postName);
+            modal.find('#modalPostType').text(postType);
+            modal.find('#modalApplyType').text(applyType);
+            modal.find('#modalCompany').text(company);
+            modal.find('#modalLocation').text(location);
+            modal.find('#modalDepartment').text(department);
+            modal.find('#modalPublicDate').text(publicDate);
+            modal.find('#modalExp').text(exp);
+            modal.find('#modalEdu').text(edu);
+            modal.find('#modalNum').text(num);
+            modal.find('#modalExpireDate').text(expireDate);
+            modal.find('#modalResponsibilities').html(responsibilities);
+            modal.find('#modalRequirement').html(requirement);
+        })
+    });
+
 });

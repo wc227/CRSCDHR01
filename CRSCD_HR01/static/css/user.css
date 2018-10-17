@@ -309,11 +309,29 @@ label{
 }
 
 #postList{
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 #postList tbody tr td{
-    font-size: 12px;
+    font-size: 13px;
+    line-height: 25px;
 
+}
+
+#postList tbody tr td a{
+    cursor: pointer;
+}
+
+#modalTable tbody tr td{
+    font-size: 12px;
+}
+
+.modalLabel{
+    font-size: 14px;
+    color: rgb(255,140,0);
+}
+
+.modalText{
+    font-size: 13px;
 }
 
