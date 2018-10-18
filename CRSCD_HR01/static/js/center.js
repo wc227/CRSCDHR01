@@ -556,7 +556,70 @@ $(function(){
             modal.find('#modalExpireDate').text(expireDate);
             modal.find('#modalResponsibilities').html(responsibilities);
             modal.find('#modalRequirement').html(requirement);
-        })
+        });
+
+        // 取消申请与收藏
+        var applyCancel =  $('#applyCancel');
+        var favCancel = $('#favCancel');
+        var confirmCancel = $('#confirmCancel');
+        var successCancel = $('#successCancel');
+        var successFavCancel = $('#successFavCancel');
+        var postApply = $('#applyPost');
+        var applySuccess = $('#applySuccess');
+
+        applyCancel.removeClass('hidden');
+        confirmCancel.addClass('hidden');
+        successCancel.addClass('hidden');
+        successFavCancel.addClass('hidden');
+        applySuccess.addClass('hidden');
+        postApply.removeClass('hidden');
+
+        // 取消申请
+        applyCancel.click(function(){
+           $(this).addClass('hidden');
+           confirmCancel.removeClass('hidden');
+        });
+
+        // 确认取消申请
+        confirmCancel.click(function(){
+            $.get('/post/postHandle/?type=applyCancel&positionID='+recipient,function(){
+                button.parent().parent().remove();
+                confirmCancel.addClass('hidden');
+                successCancel.removeClass('hidden');
+            });
+        });
+
+        // 取消收藏
+        favCancel.click(function(){
+            $.get('/post/postHandle/?type=favCancel&positionID='+recipient,function(){
+                button.parent().parent().remove();
+                favCancel.addClass('hidden');
+                successFavCancel.removeClass('hidden');
+                postApply.addClass('hidden');
+            });
+        });
+
+        // 申请职位
+        postApply.click(function(){
+            $.get('/post/postHandle/?type=apply&positionID='+recipient,function(){
+                $.get('/post/postHandle/?type=favCancel&positionID='+recipient, function(){
+                    button.parent().parent().remove();
+                });
+                postApply.addClass('hidden');
+                favCancel.addClass('hidden');
+                applySuccess.removeClass('hidden');
+            });
+        });
     });
+
+
+    /* 取消申请
+    $('#applyCancel').click(function(){
+        var postId = $('#modalPostId').data();
+        .get('/post/postHandle/?type=applyCancel&positionID='+postId, )
+    });
+    */
+
+    // 取消收藏
 
 });

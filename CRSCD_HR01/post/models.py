@@ -120,15 +120,15 @@ class Post(models.Model):
 
 class PostApply(models.Model):
     """职位申请"""
-    post_foreignkey = models.ForeignKey(Post, related_name="post_apply_foreignkey", on_delete=models.CASCADE)
-    user_foreignkey = models.ForeignKey(User, related_name="applicants", on_delete=models.CASCADE)
-    apply_status = models.CharField(max_length=10, default='未申请')
+    post = models.ForeignKey(Post, related_name="post", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="applicants", on_delete=models.CASCADE)
+    status = models.CharField(max_length=10, default='申请中')
     is_delete = models.BooleanField(default=0)
 
 
 class PostFav(models.Model):
     """职位收藏"""
-    post_foreignkey = models.ForeignKey(Post, related_name="post_fav_foreignkey", on_delete=models.CASCADE)
-    user_foreignkey = models.ForeignKey(User, related_name="favorites", on_delete=models.CASCADE)
-    fav_status = models.CharField(max_length=10, default='未收藏')
+    post = models.ForeignKey(Post, related_name="post_fav_foreignkey", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="favorites", on_delete=models.CASCADE)
+    status = models.CharField(max_length=10, default='已收藏')
     is_delete = models.BooleanField(default=0)

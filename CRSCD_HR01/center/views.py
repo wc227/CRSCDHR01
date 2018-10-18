@@ -254,19 +254,11 @@ def edu_del(request):
 def post_view(request):
     """访问个人中心我的申请、我的收藏"""
     req_type = request.GET.get('type')
-    apply_info = PostApply.objects.filter(user_foreignkey=request.user)
-    apply_list = []
-    fav_list = []
-    for a in apply_info:
-        post = a.post_foreignkey
-        apply_list.append(post)
-    fav_info = PostFav.objects.filter(user_foreignkey=request.user)
-    for f in fav_info:
-        fav = f.post_foreignkey
-        fav_list.append(fav)
+    apply_info = PostApply.objects.filter(user=request.user)
+    fav_info = PostFav.objects.filter(user=request.user)
     context = {
-        'post_applied': apply_list,
-        'post_fav': fav_list,
+        'apply_info': apply_info,
+        'fav_info': fav_info,
         'type': req_type,
         'name': request.user.first_name + request.user.last_name,
         'active': req_type,
@@ -295,6 +287,6 @@ def post_modal(request):
         'num': position.num,
         'responsibilities': position.responsibilities,
         'post_requirement': position.post_requirement,
-
+        'post_id': position.id,
     }
     return JsonResponse(context)

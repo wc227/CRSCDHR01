@@ -4,11 +4,14 @@ from post import models
 
 
 def index(request):
-    name = request.user.first_name + request.user.last_name
-    post = models.Post.objects.all()
-    context = {
-        'name': name,
-        'post': post,
-    }
+    try:
+        name = request.user.first_name + request.user.last_name
+        post = models.Post.objects.all()
+        context = {
+            'name': name,
+            'post': post,
+        }
+    except:
+        context = {}
     return render(request, 'index.html', context)
 

@@ -6,8 +6,8 @@ def refresh_apply_fav(modeladmin, request, queryset):
     """刷新职位申请与职位收藏情况"""
     post = models.Post.objects.all()
     for p in post:
-        post_apply = models.PostApply.objects.filter(post_foreignkey=p)
-        post_fav = models.PostFav.objects.filter(post_foreignkey=p)
+        post_apply = models.PostApply.objects.filter(post=p)
+        post_fav = models.PostFav.objects.filter(post=p)
         p.apply_num = post_apply.count()
         p.fav_num = post_fav.count()
         p.save()

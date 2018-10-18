@@ -1,4 +1,4 @@
-{% extends 'resume_base.html' %}
+{% extends 'center/resume_base.html' %}
 {% block resume %}
 
     <!--申请收藏职位信息-->
@@ -10,12 +10,15 @@
                     <td>职位</td>
                     <td>工作地</td>
                     <td>类型</td>
+                    <td>状态</td>
                 </tr>
-                {% for p in post_applied %}
+
+                {% for a in apply_info %}
                 <tr>
-                    <td><a data-toggle="modal" data-target="#postDisplay" data-post="{{ p.id }}">{{ p.post_name }}</a></td>
-                    <td>{{ p.company }}</td>
-                    <td>{{ p.post_type }}</td>
+                    <td><a data-toggle="modal" data-target="#postDisplay" data-post="{{ a.post.id }}">{{ a.post.post_name }}</a></td>
+                    <td>{{ a.post.company }}</td>
+                    <td>{{ a.post.post_type }}</td>
+                    <td style="color: green">{{ a.status }}</td>
                 </tr>
                 {% endfor %}
             </table>
@@ -30,11 +33,11 @@
                     <td>类型</td>
                     <td>操作</td>
                 </tr>
-                {% for p in post_fav %}
+                {% for f in fav_info %}
                     <tr>
-                        <td><a data-toggle="modal" data-target="#postDisplay" data-post="{{ p.id }}">{{ p.post_name }}</a></td>
-                        <td>{{ p.company }}</td>
-                        <td>{{ p.post_type }}</td>
+                        <td><a data-toggle="modal" data-target="#postDisplay" data-post="{{ f.post.id }}">{{ f.post.post_name }}</a></td>
+                        <td>{{ f.post.company }}</td>
+                        <td>{{ f.post.post_type }}</td>
                         <td><a href="javascript:" id="cancelFav">取消收藏</a></td>
                     </tr>
                 {% endfor %}
@@ -90,10 +93,16 @@
                 </div><!-- /.modal-content -->
 
                 <div class="modal-footer">
+                    <div id="modalPostId" class="hidden"></div>
                     {% if type == 'apply' %}
-                    <button type="button" class="btn btn-primary">取消申请</button>
+                    <button type="button" class="btn btn-primary" id="applyCancel">取消申请</button>
+                    <button type="button" class="btn btn-danger hidden" id="confirmCancel" data-postId>确认取消</button>
+                    <button type="button" class="btn btn-success hidden" id="successCancel" data-postId>取消成功</button>
                     {% elif type == 'fav' %}
-                    <button type="button" class="btn btn-primary">取消收藏</button>
+                    <button type="button" class="btn btn-primary" id="applyPost">职位申请</button>
+                    <button type="button" class="btn btn-success hidden" id="applySuccess">申请成功</button>
+                    <button type="button" class="btn btn-warning" id="favCancel">取消收藏</button>
+                    <button type="button" class="btn btn-success hidden" id="successFavCancel" data-postId>取消成功</button>
                     {% endif %}
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 </div>
