@@ -30,9 +30,9 @@
 					<div class="row">
 						 <div class="col-lg-5 col-lg-offset-1">
 							<ul class="nav navbar-nav">
-								<li><a href="">首页</a></li>
-								<li><a href="">社会招聘</a></li>
-								<li><a href="">校园招聘</a></li>
+								<li class="active"><a href="">首页</a></li>
+								<li><a href="/post/schoolPosition/">校园招聘</a></li>
+								<li><a href="/post/generalPosition">社会招聘</a></li>
 								<li><a href="">了解通号</a></li>
 								<li><a href="/center/resume/">个人中心</a></li>
 							</ul>
@@ -90,7 +90,7 @@
                                 <p>{{ p.post_requirement|linebreaksbr }}</p>
                                 <div class="hidden" id="positionID">{{ p.id }}</div>
                                 <button class="btn btn-primary btn-block" id="postApply">职位申请</button>
-                                <a class="btn btn-success btn-block" id="applySuccess" href="/center/postView/?type=apply">申请成功</a>
+                                <a class="btn btn-success btn-block hidden" id="applySuccess" href="/center/postView/?type=apply">申请成功</a>
                                 <button class="btn btn-warning btn-block" id="postStore">职位收藏</button>
                                 <a class="btn btn-success btn-block hidden" id="favSuccess" href="/center/postView/?type=fav">收藏成功</a>
                             </div>

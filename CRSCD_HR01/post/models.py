@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf.urls import url
@@ -109,13 +110,25 @@ class Post(models.Model):
     num = models.IntegerField('招聘人数', default=1)
     responsibilities = models.TextField('岗位描述', max_length=500)
     post_requirement = models.TextField('岗位要求', max_length=500)
-    applicants = models.ManyToManyField(User, related_name='applicants')
-    favorites = models.ManyToManyField(User, related_name='favorites')
     apply_num = models.IntegerField('应聘人数', default=0)
     fav_num = models.IntegerField('收藏人数', default=0)
+    is_delete = models.BooleanField('是否删除', default=0)
+
+    class Meta:
+        verbose_name_plural = '岗位管理'
+
+
+class PostApply(models.Model):
+    """职位申请"""
+    post = models.ForeignKey(Post, related_name="post", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="applicants", on_delete=models.CASCADE)
+    status = models.CharField(max_length=10, default='申请中')
     is_delete = models.BooleanField(default=0)
 
 
-    #def __str__(self):
-    class Meta:
-        verbose_name_plural = '岗位管理'
+class PostFav(models.Model):
+    """职位收藏"""
+    post = models.ForeignKey(Post, related_name="post_fav_foreignkey", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="favorites", on_delete=models.CASCADE)
+    status = models.CharField(max_length=10, default='已收藏')
+    is_delete = models.BooleanField(default=0)

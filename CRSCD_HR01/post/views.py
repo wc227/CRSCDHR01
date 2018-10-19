@@ -1,29 +1,60 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from django.contrib.auth.models import User
-from django.core.exceptions import ObjectDoesNotExist
 from . import models
 
 
-# 浏览岗位
-def post_view(request):
-    post_id = request.GET.getlist('postID')
+# 校园招聘
+def school_position(request):
+    user_name = request.user.first_name + request.user.last_name
+    positions = models.Post.objects.filter(apply_type='校园招聘')
+    context = {
+        'positions': positions,
+        'nav': 2,
+        'name': user_name,
+    }
+    return render(request, 'post/postView.html', context)
 
-    return render(request, 'index.html', {'post_id': post_id})
+
+# 社会招聘
+def general_position(request):
+    user_name = request.user.first_name + request.user.last_name
+    positions = models.Post.objects.filter(apply_type='社会招聘')
+    context = {
+        'positions': positions,
+        'nav': 3,
+        'name': user_name,
+    }
+    return render(request, 'post/postView.html', context)
 
 
-# 申请岗位
+
+
+
+
+
+
+# 职位申请和职位收藏
 def post_handle(request):
+    """职位申请和职位收藏"""
     handle_type = request.GET.get('type')
     post_id = request.GET.get('positionID')
     post = models.Post.objects.get(id=post_id)
+    # 职位申请
     if handle_type == 'apply':
-        post.applicants.add(request.user)
-        post.apply_num = post.applicants.count()
+        models.PostApply.objects.get_or_create(post=post, user=request.user)
+
+    # 职位收藏
     elif handle_type == 'fav':
-        post.favorites.add(request.user)
-        post.fav_num = post.favorites.count()
-    post.save()
+        models.PostFav.objects.get_or_create(post=post, user=request.user)
+
+    # 取消申请
+    elif handle_type == 'applyCancel':
+        models.PostApply.objects.filter(post=post).filter(user=request.user).delete()
+
+    # 取消收藏
+    elif handle_type == 'favCancel':
+        models.PostFav.objects.filter(post=post).filter(user=request.user).delete()
+
     return JsonResponse({"success": 1})
 
 

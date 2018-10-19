@@ -1,5 +1,7 @@
-{% extends 'resume_base.html' %}
+{% extends 'center/resume_base.html' %}
 {% block resume %}
+
+    <!--申请收藏职位信息-->
     <div class="container">
         <!--申请信息-->
         {% if type == 'apply' %}
@@ -8,14 +10,15 @@
                     <td>职位</td>
                     <td>工作地</td>
                     <td>类型</td>
-                    <td>操作</td>
+                    <td>状态</td>
                 </tr>
-                {% for p in post_applied %}
+
+                {% for a in apply_info %}
                 <tr>
-                    <td><a data-toggle="modal" data-target="#postDisplay">{{ p.post_name }}</a></td>
-                    <td>{{ p.company }}</td>
-                    <td>{{ p.post_type }}</td>
-                    <td><a href="javascript:" id="cancelApply">取消申请</a></td>
+                    <td><a data-toggle="modal" data-target="#postDisplay" data-post="{{ a.post.id }}">{{ a.post.post_name }}</a></td>
+                    <td>{{ a.post.company }}</td>
+                    <td>{{ a.post.post_type }}</td>
+                    <td style="color: green">{{ a.status }}</td>
                 </tr>
                 {% endfor %}
             </table>
@@ -30,11 +33,11 @@
                     <td>类型</td>
                     <td>操作</td>
                 </tr>
-                {% for p in post_fav %}
+                {% for f in fav_info %}
                     <tr>
-                        <td><a>{{ p.post_name }}</a></td>
-                        <td>{{ p.company }}</td>
-                        <td>{{ p.post_type }}</td>
+                        <td><a data-toggle="modal" data-target="#postDisplay" data-post="{{ f.post.id }}">{{ f.post.post_name }}</a></td>
+                        <td>{{ f.post.company }}</td>
+                        <td>{{ f.post.post_type }}</td>
                         <td><a href="javascript:" id="cancelFav">取消收藏</a></td>
                     </tr>
                 {% endfor %}
@@ -48,16 +51,60 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
                 </div>
                 <div class="modal-body">
-                    软件工程师
-                    软件工程师软件工程师
-
+                    <table class="table table-bordered" id="modalTable">
+                        <tr>
+                            <td class="info">岗位类型</td>
+                            <td id="modalPostType"></td>
+                            <td class="info">招聘类型</td>
+                            <td id="modalApplyType"></td>
+                        </tr>
+                        <tr>
+                            <td class="info">所在公司</td>
+                            <td id="modalCompany"></td>
+                            <td class="info">工作地</td>
+                            <td id="modalLocation"></td>
+                        </tr>
+                        <tr>
+                            <td class="info">所在部门</td>
+                            <td id="modalDepartment"></td>
+                            <td class="info">招聘人数</td>
+                            <td id="modalNum"></td>
+                        </tr>
+                        <tr>
+                            <td class="info">工作年限</td>
+                            <td id="modalExp"></td>
+                            <td class="info">学历要求</td>
+                            <td id="modalEdu"></td>
+                        </tr>
+                        <tr>
+                            <td class="info">发布日期</td>
+                            <td id="modalPublicDate"></td>
+                            <td class="info">截止日期</td>
+                            <td id="modalExpireDate"></td>
+                        </tr>
+                    </table>
+                    <label class="modalLabel">岗位描述</label>
+                    <p class="modalText" id="modalResponsibilities"></p>
+                    <label class="modalLabel">岗位要求</label>
+                    <p class="modalText" id="modalRequirement"></p>
                 </div><!-- /.modal-content -->
+
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <div id="modalPostId" class="hidden"></div>
+                    {% if type == 'apply' %}
+                    <button type="button" class="btn btn-primary" id="applyCancel">取消申请</button>
+                    <button type="button" class="btn btn-danger hidden" id="confirmCancel" data-postId>确认取消</button>
+                    <button type="button" class="btn btn-success hidden" id="successCancel" data-postId>取消成功</button>
+                    {% elif type == 'fav' %}
+                    <button type="button" class="btn btn-primary" id="applyPost">职位申请</button>
+                    <button type="button" class="btn btn-success hidden" id="applySuccess">申请成功</button>
+                    <button type="button" class="btn btn-warning" id="favCancel">取消收藏</button>
+                    <button type="button" class="btn btn-success hidden" id="successFavCancel" data-postId>取消成功</button>
+                    {% endif %}
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

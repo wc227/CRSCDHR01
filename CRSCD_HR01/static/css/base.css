@@ -1,5 +1,6 @@
 body{
 	padding-top: 50px;
+    padding-bottom: 70px;
 }
 
 .navbar-brand{
@@ -45,7 +46,6 @@ body{
 	text-align: center;
 	color: #777;
 	font-size: 12px;
-
 }
 
 .breadcrumb{

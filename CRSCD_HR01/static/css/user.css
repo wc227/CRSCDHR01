@@ -281,7 +281,6 @@ label{
     font-size: 14px;
     font-weight: normal;
     padding: 5px;
-
 }
 
 .tableTitle{
@@ -309,11 +308,85 @@ label{
 }
 
 #postList{
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 #postList tbody tr td{
+    font-size: 13px;
+    line-height: 25px;
+}
+
+#postList tbody tr td a{
+    cursor: pointer;
+}
+
+#modalTable tbody tr td{
     font-size: 12px;
+}
+
+.modalLabel{
+    font-size: 14px;
+    color: rgb(255,140,0);
+}
+
+.modalText{
+    font-size: 13px;
+}
+
+#search{
+    border: 1px solid rgb(51,122,183);
+}
+#bodyCon{
+    margin-top: 20px;
+}
+
+#searchCon{
+    margin: 20px 5px 20px 10px;
+    width: 92%;
+}
+
+#filterCon{
+    padding: 0;
+    width: 95%;
+    margin: 10px 0 0 10px;
+}
+
+.filterLabel{
+    font-size: 12px;
+    float: left;
+    margin-top: 2px;
+    margin-bottom: 10px;
+}
+
+#filterSpan{
+    line-height: 20px;
+    padding: 0;
+}
+
+#filterContent{
+    padding: 0;
 
 }
 
+#listCon{
+    width: 90%;
+    padding: 0;
+    margin: 0 0 0 10px;
+}
+
+#postViewList{
+    margin-top: 10px;
+}
+
+#postViewList tbody tr td{
+    font-size: 12px;
+    line-height: 20px;
+}
+
+#postViewList tbody tr td a{
+    cursor: pointer;
+}
+
+.listTitle td{
+    color: rgb(255,140,0);
+}
