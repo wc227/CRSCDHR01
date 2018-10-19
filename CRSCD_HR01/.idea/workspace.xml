@@ -67,7 +67,11 @@
     <session id="2109339609">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+<<<<<<< HEAD
           <entry key="project.closed" value="23" />
+=======
+          <entry key="project.closed" value="22" />
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
           <entry key="project.open.time.103" value="1" />
           <entry key="project.open.time.23" value="1" />
           <entry key="project.open.time.26" value="2" />
@@ -97,7 +101,11 @@
           <entry key="project.open.time.66" value="1" />
           <entry key="project.open.time.82" value="1" />
           <entry key="project.open.time.92" value="1" />
+<<<<<<< HEAD
           <entry key="project.opened" value="51" />
+=======
+          <entry key="project.opened" value="50" />
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -107,6 +115,7 @@
           <entry key="center_eduinfo" value="2" />
           <entry key="center_resumefile" value="3" />
           <entry key="center_workinfo" value="2" />
+<<<<<<< HEAD
           <entry key="css" value="34" />
           <entry key="django_migrations" value="1" />
           <entry key="html" value="71" />
@@ -116,18 +125,38 @@
           <entry key="post_postapply" value="1" />
           <entry key="post_postfav" value="1" />
           <entry key="py" value="133" />
+=======
+          <entry key="css" value="31" />
+          <entry key="django_migrations" value="1" />
+          <entry key="html" value="67" />
+          <entry key="jpg" value="1" />
+          <entry key="js" value="25" />
+          <entry key="post_applyinfo" value="2" />
+          <entry key="post_postapply" value="1" />
+          <entry key="post_postfav" value="1" />
+          <entry key="py" value="132" />
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
           <entry key="rnc" value="1" />
           <entry key="sql" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
+<<<<<<< HEAD
           <entry key="CSS" value="34" />
           <entry key="Database Element" value="23" />
           <entry key="HTML" value="71" />
           <entry key="Image" value="1" />
           <entry key="JavaScript" value="26" />
           <entry key="Python" value="133" />
+=======
+          <entry key="CSS" value="31" />
+          <entry key="Database Element" value="23" />
+          <entry key="HTML" value="67" />
+          <entry key="Image" value="1" />
+          <entry key="JavaScript" value="25" />
+          <entry key="Python" value="132" />
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
           <entry key="RNG Compact" value="1" />
           <entry key="Scratch" value="1" />
         </counts>
@@ -136,17 +165,28 @@
         <counts>
           <entry key="Django Console" value="194" />
           <entry key="cell" value="4" />
+<<<<<<< HEAD
           <entry key="css" value="4882" />
           <entry key="html" value="20966" />
+=======
+          <entry key="css" value="4239" />
+          <entry key="html" value="19898" />
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
           <entry key="js" value="24666" />
           <entry key="py" value="33823" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
+<<<<<<< HEAD
           <entry key="CSS" value="4882" />
           <entry key="DjangoUrlPath" value="194" />
           <entry key="HTML" value="20772" />
+=======
+          <entry key="CSS" value="4239" />
+          <entry key="DjangoUrlPath" value="194" />
+          <entry key="HTML" value="19704" />
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
           <entry key="JavaScript" value="24666" />
           <entry key="Python" value="34017" />
           <entry key="Scratch" value="4" />
@@ -156,6 +196,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/post/models.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -170,6 +211,78 @@
                 <element signature="e#3190#3218#0" />
                 <marker date="1539845613430" expanded="false" signature="3574:3579" ph="..." />
               </folding>
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/post/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="53" column="8" lean-forward="true" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="8" />
+              <folding>
+                <element signature="e#316#713#0" />
+                <element signature="e#764#1169#0" />
+                <element signature="e#1312#1534#0" />
+                <element signature="e#1583#1688#0" />
+                <element signature="e#1741#2040#0" />
+                <element signature="e#3190#3218#0" />
+                <marker date="1539845613430" expanded="false" signature="3574:3579" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CRSCD_HR01/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="11" column="25" lean-forward="true" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/center/resume_post.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="24" column="19" lean-forward="true" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
+              <folding>
+                <element signature="n#if#0;n#!!top" />
+                <element signature="e#698#718#0#HTML" expanded="true" />
+                <element signature="n#if#1;n#!!top" />
+                <element signature="e#1490#4323#0#HTML" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/post/postView.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/post/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="20" column="61" lean-forward="true" selection-start-line="20" selection-start-column="61" selection-end-line="20" selection-end-column="61" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+                <marker date="1539851999902" expanded="true" signature="197:419" ph="..." />
+                <marker date="1539851999902" expanded="true" signature="741:749" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="257">
+              <caret line="60" column="49" lean-forward="true" selection-start-line="60" selection-start-column="49" selection-end-line="60" selection-end-column="49" />
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
             </state>
           </provider>
         </entry>
@@ -187,6 +300,12 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+<<<<<<< HEAD
+=======
+      <find>#link_user</find>
+      <find>resume_upload_box</find>
+      <find>info_la</find>
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
       <find>label</find>
       <find>resume_label</find>
       <find>resume</find>
@@ -214,9 +333,12 @@
       <find>modalLabel</find>
       <find>postId</find>
       <find>apply</find>
+<<<<<<< HEAD
       <find>viewB</find>
       <find>postLI</find>
       <find>listcon</find>
+=======
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
     </findStrings>
     <replaceStrings>
       <replace>work_desc</replace>
@@ -258,6 +380,7 @@
         <option value="$PROJECT_DIR$/templates/resume_base.html" />
         <option value="$PROJECT_DIR$/center/urls.py" />
         <option value="$PROJECT_DIR$/static/css/index.css" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/static/css/base.css" />
         <option value="$PROJECT_DIR$/center/views.py" />
         <option value="$PROJECT_DIR$/post/models.py" />
@@ -274,6 +397,22 @@
         <option value="$PROJECT_DIR$/static/js/post.js" />
         <option value="$PROJECT_DIR$/templates/post/postView.html" />
         <option value="$PROJECT_DIR$/static/css/user.css" />
+=======
+        <option value="$PROJECT_DIR$/static/css/user.css" />
+        <option value="$PROJECT_DIR$/static/css/base.css" />
+        <option value="$PROJECT_DIR$/center/views.py" />
+        <option value="$PROJECT_DIR$/post/models.py" />
+        <option value="$PROJECT_DIR$/static/js/center.js" />
+        <option value="$PROJECT_DIR$/CRSCD_HR01/views.py" />
+        <option value="$PROJECT_DIR$/post/admin.py" />
+        <option value="$PROJECT_DIR$/templates/center/resume.html" />
+        <option value="$PROJECT_DIR$/templates/center/resume_post.html" />
+        <option value="$PROJECT_DIR$/templates/post/postView.html" />
+        <option value="$PROJECT_DIR$/post/views.py" />
+        <option value="$PROJECT_DIR$/post/urls.py" />
+        <option value="$PROJECT_DIR$/templates/base.html" />
+        <option value="$PROJECT_DIR$/templates/index.html" />
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
       </list>
     </option>
   </component>
@@ -309,6 +448,7 @@
             <path>
               <item name="CRSCD_HR01" type="b2602c69:ProjectViewProjectNode" />
               <item name="CRSCD_HR01" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
               <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -316,10 +456,21 @@
               <item name="CRSCD_HR01" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="css" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="post" type="462c0819:PsiDirectoryNode" />
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
             </path>
             <path>
               <item name="CRSCD_HR01" type="b2602c69:ProjectViewProjectNode" />
               <item name="CRSCD_HR01" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
+=======
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CRSCD_HR01" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CRSCD_HR01" type="462c0819:PsiDirectoryNode" />
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -404,14 +555,20 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1293" height="743" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="1" side_tool="true" />
+<<<<<<< HEAD
       <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.21651965" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32993197" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.27891156" />
+=======
+      <window_info content_ui="combo" id="Project" order="2" visible="true" weight="0.21331196" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32993197" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.28061223" />
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -420,7 +577,11 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3282313" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+<<<<<<< HEAD
       <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.27891156" />
+=======
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.27891156" />
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32993197" />
       <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32952693" />
       <window_info anchor="bottom" id="Database Console" order="14" weight="0.21555555" />
@@ -552,6 +713,20 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
+=======
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/pycharm.jar!/resources/html5-schema/html5/web-forms2.rnc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6860">
+          <caret line="324" column="22" selection-start-line="324" selection-start-column="22" selection-end-line="324" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/e9d5e0c5-18a5-4502-bc5c-7812626f59b7/console.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CRSCD_HR01/models.py" />
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
     <entry file="file://$USER_HOME$/.pyenv/versions/CRSCD_HR01/lib/python3.7/site-packages/django/contrib/admin/sites.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="785">
@@ -706,6 +881,16 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/static/css/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="58">
+          <caret line="4261" column="21" lean-forward="true" selection-start-line="4261" selection-start-column="21" selection-end-line="4261" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
     <entry file="file://$PROJECT_DIR$/user/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="256">
@@ -764,6 +949,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/static/js/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="214">
@@ -771,6 +957,22 @@
         </state>
       </provider>
     </entry>
+=======
+    <entry file="file://$PROJECT_DIR$/static/css/user.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="326" column="1" lean-forward="true" selection-start-line="326" selection-start-column="1" selection-end-line="326" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
     <entry file="das://e9d5e0c5-18a5-4502-bc5c-7812626f59b7/schema/CRSCD_HR01/table/post_postfav">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -782,6 +984,8 @@
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
+<<<<<<< HEAD
+=======
         </state>
       </provider>
     </entry>
@@ -789,6 +993,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
           <caret line="41" column="35" lean-forward="true" selection-start-line="41" selection-start-column="35" selection-end-line="41" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="646">
+          <caret line="41" column="35" lean-forward="true" selection-start-line="41" selection-start-column="35" selection-end-line="41" selection-end-column="35" />
+=======
+        <state relative-caret-position="238">
+          <caret line="24" column="19" lean-forward="true" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
@@ -800,6 +1020,8 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+<<<<<<< HEAD
+=======
         </state>
       </provider>
     </entry>
@@ -957,9 +1179,200 @@
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/center.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="170">
+          <caret line="26" column="28" lean-forward="true" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+          <folding>
+            <element signature="e#87#358#0" />
+            <element signature="e#127#350#0" />
+            <element signature="e#411#544#0" />
+            <element signature="e#601#748#0" />
+            <element signature="e#1337#1607#0" />
+            <element signature="e#1402#1515#0" />
+            <element signature="e#1528#1601#0" />
+            <element signature="e#1650#1931#0" />
+            <element signature="e#1720#1795#0" />
+            <element signature="e#1808#1925#0" />
+            <element signature="e#1971#2390#0" />
+            <element signature="e#2064#2135#0" />
+            <element signature="e#2148#2384#0" />
+            <element signature="e#2438#3046#0" />
+            <element signature="e#2502#2597#0" />
+            <element signature="e#2625#2807#0" />
+            <element signature="e#2852#3040#0" />
+            <element signature="e#3090#3304#0" />
+            <element signature="e#3123#3198#0" />
+            <element signature="e#3211#3298#0" />
+            <element signature="e#3355#3680#0" />
+            <element signature="e#3429#3570#0" />
+            <element signature="e#3583#3674#0" />
+            <element signature="e#3732#4070#0" />
+            <element signature="e#3806#3958#0" />
+            <element signature="e#3971#4064#0" />
+            <element signature="e#4120#4553#0" />
+            <element signature="e#4317#4404#0" />
+            <element signature="e#4417#4547#0" />
+            <element signature="e#5400#5477#0" />
+            <element signature="e#5528#5937#0" />
+            <element signature="e#5551#5930#0" />
+            <element signature="e#5843#5920#0" />
+            <element signature="e#6025#6509#0" />
+            <element signature="e#6076#6503#0" />
+            <element signature="e#6104#6221#0" />
+            <element signature="e#6234#6355#0" />
+            <element signature="e#6368#6493#0" />
+            <element signature="e#6568#6751#0" />
+            <element signature="e#6691#6745#0" />
+            <element signature="e#6810#6993#0" />
+            <element signature="e#6933#6987#0" />
+            <element signature="e#7048#7338#0" />
+            <element signature="e#7117#7196#0" />
+            <element signature="e#7209#7332#0" />
+            <element signature="e#7390#7682#0" />
+            <element signature="e#7460#7541#0" />
+            <element signature="e#7554#7676#0" />
+            <element signature="e#7738#8043#0" />
+            <element signature="e#7810#7892#0" />
+            <element signature="e#7905#8037#0" />
+            <element signature="e#8102#9315#0" />
+            <element signature="e#8327#8513#0" />
+            <element signature="e#8539#8766#0" />
+            <element signature="e#8792#9015#0" />
+            <element signature="e#9082#9309#0" />
+            <element signature="e#9852#10050#0" />
+            <element signature="e#9874#10044#0" />
+            <element signature="e#9975#10034#0" />
+            <element signature="e#10114#10513#0" />
+            <element signature="e#10419#10497#0" />
+            <element signature="e#10600#11376#0" />
+            <element signature="e#10651#11370#0" />
+            <element signature="e#10679#10792#0" />
+            <element signature="e#10805#10930#0" />
+            <element signature="e#10943#11056#0" />
+            <element signature="e#11069#11198#0" />
+            <element signature="e#11211#11360#0" />
+            <element signature="e#11434#11615#0" />
+            <element signature="e#11556#11609#0" />
+            <element signature="e#11673#11854#0" />
+            <element signature="e#11795#11848#0" />
+            <element signature="e#11905#12190#0" />
+            <element signature="e#11973#12050#0" />
+            <element signature="e#12063#12184#0" />
+            <element signature="e#12244#12532#0" />
+            <element signature="e#12308#12430#0" />
+            <element signature="e#12443#12526#0" />
+            <element signature="e#12588#12892#0" />
+            <element signature="e#12660#12745#0" />
+            <element signature="e#12758#12886#0" />
+            <element signature="e#12940#13213#0" />
+            <element signature="e#13001#13117#0" />
+            <element signature="e#13130#13207#0" />
+            <element signature="e#13281#13606#0" />
+            <element signature="e#13350#13493#0" />
+            <element signature="e#13506#13600#0" />
+            <element signature="e#13664#14873#0" />
+            <element signature="e#13889#14074#0" />
+            <element signature="e#14100#14326#0" />
+            <element signature="e#14352#14574#0" />
+            <element signature="e#14641#14867#0" />
+            <element signature="e#14921#15228#0" />
+            <element signature="e#15270#15547#0" />
+            <element signature="e#15296#15541#0" />
+            <element signature="e#15601#15884#0" />
+            <element signature="e#15655#15876#0" />
+            <element signature="e#15688#15866#0" />
+            <element signature="e#15933#15976#0" />
+            <element signature="e#17913#17937#0" />
+            <element signature="e#18223#18372#0" />
+            <element signature="e#18648#18918#0" />
+            <element signature="e#19048#19177#0" />
+=======
+        <state relative-caret-position="136">
+          <caret line="366" column="21" selection-start-line="366" selection-start-column="21" selection-end-line="366" selection-end-column="21" />
+          <folding>
+            <element signature="e#139#162#0#DjangoTemplate" />
+            <element signature="e#6045#6066#0#DjangoTemplate" />
+            <element signature="e#6095#6119#0#DjangoTemplate" />
+            <element signature="e#12349#12369#0#DjangoTemplate" />
+            <element signature="e#12398#12421#0#DjangoTemplate" />
+            <element signature="e#24668#24691#0#DjangoTemplate" />
+            <element signature="e#25702#25723#0#DjangoTemplate" />
+            <element signature="e#25901#25925#0#DjangoTemplate" />
+            <element signature="e#26552#26575#0#DjangoTemplate" />
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/center/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="874">
+          <caret line="289" column="31" lean-forward="true" selection-start-line="289" selection-start-column="31" selection-end-line="289" selection-end-column="31" />
+          <folding>
+            <element signature="e#374#1272#0" />
+            <element signature="e#428#1272#0" />
+            <element signature="e#826#999#0" />
+            <element signature="e#950#999#0" />
+            <element signature="e#1331#1598#0" />
+            <element signature="e#1361#1515#0" />
+            <element signature="e#1470#1515#0" />
+            <element signature="e#1658#4588#0" />
+            <element signature="e#1712#4588#0" />
+            <element signature="e#3695#3928#0" />
+            <element signature="e#4246#4545#0" />
+            <element signature="e#4641#6087#0" />
+            <element signature="e#5082#5761#0" />
+            <element signature="e#5092#5761#0" />
+            <element signature="e#5781#5925#0" />
+            <element signature="e#5791#5925#0" />
+            <element signature="e#6147#7258#0" />
+            <element signature="e#6567#7200#0" />
+            <element signature="e#7315#7665#0" />
+            <element signature="e#7351#7665#0" />
+            <element signature="e#7412#7621#0" />
+            <element signature="e#7721#8062#0" />
+            <element signature="e#7757#8062#0" />
+            <element signature="e#7816#8018#0" />
+            <marker date="1539833102292" expanded="false" signature="6142:6143" ph="..." />
+            <marker date="1539833102292" expanded="true" signature="8670:9392" ph="..." />
+=======
+    <entry file="file://$PROJECT_DIR$/post/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="53" column="8" lean-forward="true" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="8" />
+          <folding>
+            <element signature="e#316#713#0" />
+            <element signature="e#764#1169#0" />
+            <element signature="e#1312#1534#0" />
+            <element signature="e#1583#1688#0" />
+            <element signature="e#1741#2040#0" />
+            <element signature="e#3190#3218#0" />
+            <marker date="1539845613430" expanded="false" signature="3574:3579" ph="..." />
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/post/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="20" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+=======
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
     <entry file="file://$PROJECT_DIR$/post/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -967,16 +1380,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="1020">
           <caret line="60" column="49" selection-start-line="60" selection-start-column="49" selection-end-line="60" selection-end-column="49" />
+=======
+        <state relative-caret-position="234">
+          <caret line="23" lean-forward="true" selection-start-line="22" selection-start-column="25" selection-end-line="23" />
+          <folding>
+            <element signature="n#if#0;n#!!top" />
+            <element signature="n#for#0;n#!!top" />
+          </folding>
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CRSCD_HR01/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
+<<<<<<< HEAD
           <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
         </state>
       </provider>
@@ -1136,22 +1559,42 @@
             <element signature="e#27270#27344#0#HTML" />
             <element signature="e#27425#27563#0#HTML" />
           </folding>
+=======
+          <caret line="11" column="25" lean-forward="true" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="60" column="49" lean-forward="true" selection-start-line="60" selection-start-column="49" selection-end-line="60" selection-end-column="49" />
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/post/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="340">
           <caret line="38" column="48" selection-start-line="38" selection-start-column="48" selection-end-line="38" selection-end-column="48" />
           <folding>
             <element signature="n#if#0;n#!!top" />
             <element signature="n#for#0;n#!!top" />
+=======
+        <state relative-caret-position="34">
+          <caret line="20" column="61" lean-forward="true" selection-start-line="20" selection-start-column="61" selection-end-line="20" selection-end-column="61" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+            <marker date="1539851999902" expanded="true" signature="197:419" ph="..." />
+            <marker date="1539851999902" expanded="true" signature="741:749" ph="..." />
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/post/postView.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="104">
           <caret line="49" column="42" lean-forward="true" selection-start-line="49" selection-start-column="42" selection-end-line="49" selection-end-column="42" />
           <folding>
@@ -1184,6 +1627,22 @@
             <element signature="e#1741#2040#0" />
             <element signature="e#3190#3218#0" />
             <marker date="1539845613430" expanded="false" signature="3574:3579" ph="..." />
+=======
+        <state relative-caret-position="34">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/center/resume_post.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="24" column="19" lean-forward="true" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
+          <folding>
+            <element signature="n#if#0;n#!!top" />
+            <element signature="e#698#718#0#HTML" expanded="true" />
+            <element signature="n#if#1;n#!!top" />
+            <element signature="e#1490#4323#0#HTML" />
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
           </folding>
         </state>
       </provider>

@@ -314,6 +314,10 @@ label{
 #postList tbody tr td{
     font-size: 13px;
     line-height: 25px;
+<<<<<<< HEAD
+=======
+
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
 }
 
 #postList tbody tr td a{
@@ -321,6 +325,7 @@ label{
 }
 
 #modalTable tbody tr td{
+<<<<<<< HEAD
     font-size: 12px;
 }
 
@@ -361,6 +366,18 @@ label{
 #filterSpan{
     line-height: 20px;
     padding: 0;
+=======
+    font-size: 12px;
+}
+
+.modalLabel{
+    font-size: 14px;
+    color: rgb(255,140,0);
+}
+
+.modalText{
+    font-size: 13px;
+>>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
 }
 
 #filterContent{
