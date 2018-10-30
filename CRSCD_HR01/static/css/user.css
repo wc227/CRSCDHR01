@@ -314,10 +314,6 @@ label{
 #postList tbody tr td{
     font-size: 13px;
     line-height: 25px;
-<<<<<<< HEAD
-=======
-
->>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
 }
 
 #postList tbody tr td a{
@@ -325,7 +321,6 @@ label{
 }
 
 #modalTable tbody tr td{
-<<<<<<< HEAD
     font-size: 12px;
 }
 
@@ -343,6 +338,7 @@ label{
 }
 #bodyCon{
     margin-top: 20px;
+    margin-bottom: 100px;
 }
 
 #searchCon{
@@ -357,16 +353,14 @@ label{
 }
 
 .filterLabel{
-    font-size: 12px;
+    font-size: 14px;
     float: left;
-    margin-top: 2px;
     margin-bottom: 10px;
 }
 
 #filterSpan{
     line-height: 20px;
     padding: 0;
-=======
     font-size: 12px;
 }
 
@@ -377,12 +371,10 @@ label{
 
 .modalText{
     font-size: 13px;
->>>>>>> ff2cc63d3342feb4d7f010d02eb2adaf3f8a8b93
 }
 
-#filterContent{
+#typeFilter, #locationFilter{
     padding: 0;
-
 }
 
 #listCon{
@@ -396,7 +388,7 @@ label{
 }
 
 #postViewList tbody tr td{
-    font-size: 12px;
+    font-size: 13px;
     line-height: 20px;
 }
 
@@ -407,3 +399,39 @@ label{
 .listTitle td{
     color: rgb(255,140,0);
 }
+
+
+.colorChange1{
+    color: white;
+    background-color: #337ab7;
+}
+
+.filterSpan ol li a{
+    font-size: 14px;
+    padding: 2px;
+}
+
+.filterSpan ol li::before{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.colorChange2{
+     color: #337ab7;
+}
+
+
+.filterSpan ol li a.colorChange1:focus{
+    color: white;
+    text-decoration: none;
+}
+
+.filterSpan ol li a.colorChange2:focus{
+    color: #337ab7;
+    text-decoration: none;
+}
+
+#pageCon{
+    text-align: center;
+}
+

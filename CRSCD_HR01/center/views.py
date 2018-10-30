@@ -150,6 +150,7 @@ def resume(request):
     work_info = models.WorkInfo.objects.filter(work_foreignkey__exact=request.user.id)
     work_len = work_info.count()
     edu_info = models.EduInfo.objects.filter(edu_foreignkey__exact=request.user.id)
+    edu_len = edu_info.count()
     try:
         file = models.ResumeFile.objects.get(user__exact=request.user.id)
     except ObjectDoesNotExist:
@@ -179,6 +180,8 @@ def resume(request):
             # 用于前端欢迎您的姓名
             'name': request.user.first_name + request.user.last_name,
             'view_para': 0,
+            'work_len': 0,
+            'edu_len': 0,
         }
 
     # 用于前端导航条active的参数
@@ -268,7 +271,6 @@ def post_view(request):
 
 
 # 浏览职位详情
-@login_required()
 def post_modal(request):
     """浏览职位详情"""
     post_id = request.GET.get('postId')

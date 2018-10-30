@@ -11,11 +11,13 @@ $(function(){
             pickerPosition:'bottom-center',
         });
     });
+
     // 样式调整函数(输入正确）
     function input_true(field){
         field.parent().parent().addClass('has-success').removeClass('has-error');
         field.next('p').addClass('hidden');
     }
+
     // 样式调整函数(输入错误）
     function input_false(field,text){
         field.parent().parent().addClass('has-error').removeClass('has-success');
@@ -514,6 +516,7 @@ $(function(){
         });
     });
 
+
     // 表单提交函数
     $('#save').click(function(){
         $('#resume_form').submit();
@@ -540,7 +543,6 @@ $(function(){
             var num = data.num;
             var responbility = data.responsibilities;
             var requirements = data.post_requirement;
-
             var responsibilities = responbility.replace(/\n/g,'<br>',);
             var requirement = requirements.replace(/\n/g,'<br>');
             modal.find('.modal-title').text(postName);
@@ -566,6 +568,8 @@ $(function(){
         var successFavCancel = $('#successFavCancel');
         var postApply = $('#applyPost');
         var applySuccess = $('#applySuccess');
+        var addFav = $('#addFav');
+        var addFavSuccess = $('#addFavSuccess');
 
         applyCancel.removeClass('hidden');
         confirmCancel.addClass('hidden');
@@ -573,6 +577,10 @@ $(function(){
         successFavCancel.addClass('hidden');
         applySuccess.addClass('hidden');
         postApply.removeClass('hidden');
+        addFav.removeClass('hidden');
+        addFavSuccess.addClass('hidden');
+        favCancel.removeClass('hidden');
+
 
         // 取消申请
         applyCancel.click(function(){
@@ -601,25 +609,38 @@ $(function(){
 
         // 申请职位
         postApply.click(function(){
-            $.get('/post/postHandle/?type=apply&positionID='+recipient,function(){
-                $.get('/post/postHandle/?type=favCancel&positionID='+recipient, function(){
-                    button.parent().parent().remove();
-                });
-                postApply.addClass('hidden');
-                favCancel.addClass('hidden');
-                applySuccess.removeClass('hidden');
+            var next = window.location.pathname; //获取当前url，并传递给login视图，用于登录后跳转回当前页。
+            $.get('/post/postHandle/?type=apply&positionID='+recipient, function(data){
+                if(data.success===1){
+                    postApply.addClass('hidden');
+                    favCancel.addClass('hidden');
+                    applySuccess.removeClass('hidden');
+                }
+                else{
+                    loginAlert(next);
+                }
             });
         });
+
+        // 职位收藏
+        addFav.click(function(){
+            var next = window.location.pathname; //获取当前url，并传递给login视图，用于登录后跳转回当前页。
+            $.get('/post/postHandle/?type=fav&positionID='+recipient,function(data){
+                if(data.success===1){
+                    addFav.addClass('hidden');
+                    addFavSuccess.removeClass('hidden');
+                }
+                else{
+                    loginAlert(next);
+                }
+            });
+        });
+
+        // 登录提示
+        function loginAlert(next){
+            alert('请登录');
+            window.location.replace('/user/logIn/?next='+next);
+        }
     });
-
-
-    /* 取消申请
-    $('#applyCancel').click(function(){
-        var postId = $('#modalPostId').data();
-        .get('/post/postHandle/?type=applyCancel&positionID='+postId, )
-    });
-    */
-
-    // 取消收藏
 
 });

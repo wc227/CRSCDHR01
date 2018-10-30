@@ -12,21 +12,12 @@ class Post(models.Model):
 
     # 岗位类型选项
     TYPE_CHOICES = (
-        ('科研开发', '科研开发'),
-        ('设计专业', '设计专业'),
-        ('系统集成', '系统集成'),
-        ('测试专业', '测试专业'),
-        ('市场经营', '市场经营'),
-        ('生产售后', '生产售后'),
-        ('综合管理', '综合管理'),
-        ('人力资源', '人力资源'),
-        ('采购', '采购'),
-        ('法律合规', '法律合规'),
-        ('科学研究', '科学研究'),
-        ('战略规划', '战略规划'),
-        ('博士后', '博士后'),
-        ('海外市场', '海外市场'),
-        ('项目管理', '项目管理'),
+        ('科研', '科研'),
+        ('设计', '设计'),
+        ('集成', '集成'),
+        ('测试', '测试'),
+        ('市场', '市场'),
+        ('管理', '管理'),
     )
 
     # 公司选项
@@ -111,7 +102,7 @@ class Post(models.Model):
     post_requirement = models.TextField('岗位要求', max_length=500)
     apply_num = models.IntegerField('应聘人数', default=0)
     fav_num = models.IntegerField('收藏人数', default=0)
-    is_delete = models.BooleanField('是否删除', default=0)
+    is_delete = models.BooleanField('是否删除', default=1)
 
     class Meta:
         verbose_name_plural = '岗位管理'

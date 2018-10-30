@@ -1,25 +1,30 @@
-# coding=utf-8
 from django.shortcuts import render, redirect
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 
-# 访问登录页
-def login_request(request):
-    red = render(request, 'user/login.html')
-    url_next = request.GET.get('next', '/')
+# 登录
+def log_in(request):
+    url_prev = request.GET.get('next')
+    if url_prev:
+        url_next = url_prev
+    else:
+        url_next = '/index/'
+    red = render(request, 'user/login.html', {'title': '用户登录'})
     red.set_cookie('url_next', url_next)
     return red
 
 
-# 登录信息处理
+# 登录信息验证
 def login_handle(request):
     if request.method == "POST":
         post = request.POST
         login_email = post['login_email']
         login_pwd = post['login_pwd']
-        url_next = request.COOKIES.get('url_next', '/')
+        url_next = request.COOKIES['url_next']
+        print(url_next)
+        print('*'*100)
         user = authenticate(request, username=login_email, password=login_pwd)
 
     # 登录信息验证
