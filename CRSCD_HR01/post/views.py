@@ -7,31 +7,118 @@ from django.core.paginator import Paginator
 
 # 校园招聘
 def school_position(request):
+    # 从数据库获取全部校园招聘岗位
     positions = models.Post.objects.filter(apply_type='校园招聘').order_by('-public_date')
-    paginator = Paginator(positions, 2, allow_empty_first_page=True)
+    position_type = str(request.GET.get('type'))  # 从页面获取岗位类型
+    location = str(request.GET.get('location'))  # 从页面获取工作地
+
+    if position_type != 'None':  # 职位类型筛选
+        type_dic = {
+            'development': '科研',
+            'design': '设计',
+            'integration': '集成',
+            'testing': '测试',
+            'market': '市场',
+            'management': '管理',
+        }  # 职位类型转义字典
+        post_type = type_dic[position_type]  # 从字典中查找对应的职位类型
+        positions = positions.filter(post_type=post_type)  # 根据职位类型进行筛选
+    if location != 'None':  # 工作地筛选
+        location_dic = {
+            'bj': '北京',
+            'sh': '上海',
+            'gz': '广州',
+            'xa': '西安',
+            'sy': '沈阳',
+            'wh': '武汉',
+            'cd': '成都',
+            'xj': '新疆',
+        }  # 工作地转义字典
+        city = location_dic[location]  # 从字典查找对应的城市
+        positions = positions.filter(location=city)  # 根据工作地进行筛选
+
+    # 分页
+    paginator = Paginator(positions, 2)
     page = request.GET.get('page')
-    positions_display = paginator.get_page(page)
+    positions_page = paginator.get_page(page)
+
+    # 构造返回数据
+    context = {
+        'nav': 2,
+        'title': '校园招聘',
+        "positions": positions_page,
+        "post_type": position_type,
+        "location": location,
+    }
+
+    # 尝试获取登录用户姓名
     try:
         name = request.user.first_name + request.user.last_name
-        context = {'name': name, 'positions': positions_display, 'nav': 2, 'title': '校园招聘'}
-    except:
-        context = {'positions': positions_display, 'nav': 2, 'title': '校园招聘'}
+        context['name'] = name
+    except AttributeError:
+        pass
+
     return render(request, 'post/postView.html', context)
-
-
-
 
 
 # 社会招聘
 def general_position(request):
     positions = models.Post.objects.filter(apply_type='社会招聘')
+    position_type = str(request.GET.get('type'))  # 从页面获取岗位类型
+    location = str(request.GET.get('location'))  # 从页面获取工作地
+
+    if position_type != 'None':  # 职位类型筛选
+        type_dic = {
+            'development': '科研',
+            'design': '设计',
+            'integration': '集成',
+            'testing': '测试',
+            'market': '市场',
+            'management': '管理',
+        }  # 职位类型转义字典
+        post_type = type_dic[position_type]  # 从字典中查找对应的职位类型
+        positions = positions.filter(post_type=post_type)  # 根据职位类型进行筛选
+    if location != 'None':  # 工作地筛选
+        location_dic = {
+            'bj': '北京',
+            'sh': '上海',
+            'gz': '广州',
+            'xa': '西安',
+            'sy': '沈阳',
+            'wh': '武汉',
+            'cd': '成都',
+            'xj': '新疆',
+        }  # 工作地转义字典
+        city = location_dic[location]  # 从字典查找对应的城市
+        positions = positions.filter(location=city)  # 根据工作地进行筛选
+
+    # 分页
+    paginator = Paginator(positions, 2)
+    page = request.GET.get('page')
+    positions_page = paginator.get_page(page)
+
+    # 构造返回数据
+    context = {
+        'nav': 2,
+        'title': '校园招聘',
+        "positions": positions_page,
+        "post_type": position_type,
+        "location": location,
+    }
+
+    # 尝试获取登录用户姓名
     try:
         name = request.user.first_name + request.user.last_name
-        context = {'name': name, 'positions': positions, 'nav': 3, 'title': '社会招聘'}
-    except:
-        context = {'positions': positions, 'nav': 3, 'title': '社会招聘'}
+        context['name'] = name
+    except AttributeError:
+        pass
+
     return render(request, 'post/postView.html', context)
 
+
+# 职位搜索
+def position_search(request):
+    keyword = request.GET.get('keyword')
 
 
 

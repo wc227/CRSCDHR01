@@ -13,10 +13,12 @@
 
             <!--职位搜索-->
             <div class="input-group" id="searchCon">
-                <input type="text" class="form-control" placeholder="关键词" id="search">
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" type="button" id="search">Search</button>
-                </span>
+                <form method="get" action="/post/schoolPosition/">
+                    <input type="text" class="form-control" placeholder="关键词" id="keyword">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit" id="search">Search</button>
+                    </span>
+                </form>
             </div><!-- /input-group -->
 
             <!--职位筛选-->
@@ -24,26 +26,27 @@
                 <p class="filterLabel">类别：</p>
                 <span class="filterSpan" id="filterSpan">
                     <ol class="breadcrumb" id="typeFilter">
-                        <li><a href="javascript:" class="postType" data-status="0" data-type="0">科研</a></li>
-                        <li><a href="javascript:" class="postType" data-status="0" data-type="1">设计</a></li>
-                        <li><a href="javascript:" class="postType" data-status="0" data-type="2">集成</a></li>
-                        <li><a href="javascript:" class="postType" data-status="0" data-type="3">测试</a></li>
-                        <li><a href="javascript:" class="postType" data-status="0" data-type="4">市场</a></li>
-                        <li><a href="javascript:" class="postType" data-status="0" data-type="5">管理</a></li>
+                        <li><a class="{% if post_type == 'None' %}colorChange1{% endif %}" href="?location={{ location }}">全部</a></li>
+                        <li><a class="{% if post_type == "development" %}colorChange1{% endif %}" href="?type=development&location={{ location }}">科研</a></li>
+                        <li><a class="{% if post_type == "design" %}colorChange1{% endif %}" href="?type=design&location={{ location }}">设计</a></li>
+                        <li><a class="{% if post_type == "integration" %}colorChange1{% endif %}" href="?type=integration&location={{ location }}">集成</a></li>
+                        <li><a class="{% if post_type == "testing" %}colorChange1{% endif %}" href="?type=testing&location={{ location }}">测试</a></li>
+                        <li><a class="{% if post_type == "market" %}colorChange1{% endif %}" href="?type=market&location={{ location }}">市场</a></li>
+                        <li><a class="{% if post_type == "management" %}colorChange1{% endif %}" href="?type=management&location={{ location }}">管理</a></li>
                     </ol>
                 </span>
                 <div class="clearfix"></div>
                 <p class="filterLabel">地点：</p>
                 <span class="filterSpan"  id="filterSpan">
                     <ol class="breadcrumb" id="locationFilter">
-                        <li><a href="javascript:" class="postLocation" data-status="0">北京</a></li>
-                        <li><a href="javascript:" class="postLocation" data-status="0">上海</a></li>
-                        <li><a href="javascript:" class="postLocation" data-status="0">广州</a></li>
-                        <li><a href="javascript:" class="postLocation" data-status="0">成都</a></li>
-                        <li><a href="javascript:" class="postLocation" data-status="0">西安</a></li>
-                        <li><a href="javascript:" class="postLocation" data-status="0">沈阳</a></li>
-                        <li><a href="javascript:" class="postLocation" data-status="0">武汉</a></li>
-                        <li><a href="javascript:" class="postLocation" data-status="0">新疆</a></li>
+                        <li><a class="{% if location == 'None' %}colorChange1{% endif %}" href="?type={{ post_type }}">全部</a></li>
+                        <li><a class="{% if location == 'bj' %}colorChange1{% endif %}" href="?type={{ post_type }}&location=bj">北京</a></li>
+                        <li><a class="{% if location == 'sh' %}colorChange1{% endif %}" href="?type={{ post_type }}&location=sh">上海</a></li>
+                        <li><a class="{% if location == 'cd' %}colorChange1{% endif %}" href="?type={{ post_type }}&location=cd">成都</a></li>
+                        <li><a class="{% if location == 'xa' %}colorChange1{% endif %}" href="?type={{ post_type }}&location=xa">西安</a></li>
+                        <li><a class="{% if location == 'sy' %}colorChange1{% endif %}" href="?type={{ post_type }}&location=sy">沈阳</a></li>
+                        <li><a class="{% if location == 'wh' %}colorChange1{% endif %}" href="?type={{ post_type }}&location=wh">武汉</a></li>
+                        <li><a class="{% if location == 'xj' %}colorChange1{% endif %}" href="?type={{ post_type }}&location=xj">新疆</a></li>
                     </ol>
                 </span>
             </div><!--filterCon-->
@@ -80,8 +83,12 @@
                             </a>
                         </li>
                     {% endif %}
-                    {% for p < positions.paginator.num_pages%}
-                    <li><a href="?page={{ positions.number }}">{{ positions.number }}</a></li>
+                    {% for p in positions.paginator.page_range %}
+                        {% if p == positions.number %}
+                        <li class="active"><a href="?page={{ p }}&type={{ post_type }}&location={{ location }}">{{ p }}</a></li>
+                        {% else %}
+                        <li><a href="?page={{ p }}&type={{ post_type }}&location={{ location }}">{{ p }}</a></li>
+                        {% endif %}
                     {% endfor %}
                     {% if positions.has_next %}
                     <li>

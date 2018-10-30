@@ -1,7 +1,10 @@
 $(function(){
 
+
+
     // 职位类别选择器
-    var typeList = [];
+
+    /*var typeList = [];
 
     var locationList = [];
 
@@ -62,7 +65,7 @@ $(function(){
 
         }) // each
     } // function displayControl
-
+    */
 
     // 分页
 
