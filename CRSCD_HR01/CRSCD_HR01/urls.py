@@ -26,5 +26,6 @@ urlpatterns = [
     path(r'post/', include('post.urls')),
     path(r'', views.index),
     path(r'index/', views.index),
+    url(r'^search/', include('haystack.urls')),
 
 ]

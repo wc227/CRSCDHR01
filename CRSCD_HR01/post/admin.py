@@ -20,7 +20,7 @@ refresh_apply_fav.short_description = "刷新申请情况"
 class PostAdmin(admin.ModelAdmin):
 
     # 设置默认排序字段
-    ordering = ('department', '-public_date')
+    ordering = ('department', '-pub_date')
 
     # 设置列表可编辑字段
     # list_editable = ['department', 'num', 'company']
@@ -42,7 +42,7 @@ class PostAdmin(admin.ModelAdmin):
         'edu_requirement',
         'exp_requirement',
         'num',
-        'public_date',
+        'pub_date',
     ]
 
     actions = [refresh_apply_fav]

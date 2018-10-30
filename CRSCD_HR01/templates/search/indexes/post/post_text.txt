@@ -1,0 +1,6 @@
+{{ post.post_name }}
+{{ post.post_type }}
+{{ post.location }}
+{{ post.responsibilities }}
+{{ post.post_requirement }}
+
