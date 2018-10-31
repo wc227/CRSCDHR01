@@ -1,13 +1,13 @@
 from django.shortcuts import render
-from post import models
+from position.models import Position
 
 
 def index(request):
-    post = models.Post.objects.order_by('-public_date')[:4]
+    position = Position.objects.order_by('-pub_date')[:4]
     try:
         name = request.user.first_name + request.user.last_name
-        context = {'name': name, 'post': post}
+        context = {'name': name, 'position': position}
     except:
-        context = {'post': post}
+        context = {'position': position}
     return render(request, 'index.html', context)
 

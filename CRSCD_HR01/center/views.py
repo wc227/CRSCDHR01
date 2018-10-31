@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib.auth.models import User
-from post.models import Post, PostApply, PostFav
+from position.models import Position, PositionApply, PositionFav
 import os
 from django.contrib.auth.decorators import login_required
 from . import models
@@ -254,11 +254,11 @@ def edu_del(request):
 
 # 访问个人中心我的申请、我的收藏
 @login_required()
-def post_view(request):
+def position_view(request):
     """访问个人中心我的申请、我的收藏"""
     req_type = request.GET.get('type')
-    apply_info = PostApply.objects.filter(user=request.user)
-    fav_info = PostFav.objects.filter(user=request.user)
+    apply_info = PositionApply.objects.filter(user=request.user)
+    fav_info = PositionFav.objects.filter(user=request.user)
     context = {
         'apply_info': apply_info,
         'fav_info': fav_info,
@@ -267,28 +267,28 @@ def post_view(request):
         'active': req_type,
         'nav': 5,
     }
-    return render(request, 'center/resume_post.html', context)
+    return render(request, 'center/resume_position.html', context)
 
 
 # 浏览职位详情
-def post_modal(request):
+def position_modal(request):
     """浏览职位详情"""
-    post_id = request.GET.get('postId')
-    position = Post.objects.get(id=post_id)
+    position_id = request.GET.get('positionId')
+    position = Position.objects.get(id=position_id)
     context = {
-        'post_name': position.post_name,
-        'post_type': position.post_type,
+        'position_name': position.position_name,
+        'position_type': position.position_type,
         'apply_type': position.apply_type,
-        'post_company': position.company,
-        'post_location': position.location,
+        'position_company': position.company,
+        'position_location': position.location,
         'department': position.department,
-        'public_date': position.public_date,
-        'expire_date': position.expire_date,
-        'exp_requirement': position.exp_requirement,
-        'edu_requirement': position.edu_requirement,
+        'pub_date': position.pub_date,
+        'exp_date': position.exp_date,
+        'exp_req': position.exp_req,
+        'edu_req': position.edu_req,
         'num': position.num,
-        'responsibilities': position.responsibilities,
-        'post_requirement': position.post_requirement,
-        'post_id': position.id,
+        'position_detail': position.position_detail,
+        'position_req': position.position_req,
+        'position_id': position.id,
     }
     return JsonResponse(context)

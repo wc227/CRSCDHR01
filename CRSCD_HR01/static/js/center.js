@@ -528,21 +528,21 @@ $(function(){
         var button = $(event.relatedTarget);
         var recipient = button.data('post');
         var modal = $(this);
-        $.get('/center/postModal/?postId='+recipient, function(data){
+        $.get('/center/positionModal/?positionId='+recipient, function(data){
             //接收岗位数据
-            var postName = data.post_name;
-            var postType = data.post_type;
+            var postName = data.position_name;
+            var postType = data.position_type;
             var applyType = data.apply_type;
-            var company = data.post_company;
-            var location = data.post_location;
+            var company = data.position_company;
+            var location = data.position_location;
             var department = data.department;
-            var publicDate = data.public_date;
-            var expireDate = data.expire_date;
-            var exp = data.exp_requirement;
-            var edu = data.edu_requirement;
+            var publicDate = data.pub_date;
+            var expireDate = data.exp_date;
+            var exp = data.exp_req;
+            var edu = data.edu_req;
             var num = data.num;
-            var responbility = data.responsibilities;
-            var requirements = data.post_requirement;
+            var responbility = data.position_detail;
+            var requirements = data.position_req;
             var responsibilities = responbility.replace(/\n/g,'<br>',);
             var requirement = requirements.replace(/\n/g,'<br>');
             modal.find('.modal-title').text(postName);
@@ -590,7 +590,7 @@ $(function(){
 
         // 确认取消申请
         confirmCancel.click(function(){
-            $.get('/post/postHandle/?type=applyCancel&positionID='+recipient,function(){
+            $.get('/position/postHandle/?type=applyCancel&positionID='+recipient,function(){
                 button.parent().parent().remove();
                 confirmCancel.addClass('hidden');
                 successCancel.removeClass('hidden');
@@ -599,7 +599,7 @@ $(function(){
 
         // 取消收藏
         favCancel.click(function(){
-            $.get('/post/postHandle/?type=favCancel&positionID='+recipient,function(){
+            $.get('/position/postHandle/?type=favCancel&positionID='+recipient,function(){
                 button.parent().parent().remove();
                 favCancel.addClass('hidden');
                 successFavCancel.removeClass('hidden');
@@ -610,7 +610,7 @@ $(function(){
         // 申请职位
         postApply.click(function(){
             var next = window.location.pathname; //获取当前url，并传递给login视图，用于登录后跳转回当前页。
-            $.get('/post/postHandle/?type=apply&positionID='+recipient, function(data){
+            $.get('/position/postHandle/?type=apply&positionID='+recipient, function(data){
                 if(data.success===1){
                     postApply.addClass('hidden');
                     favCancel.addClass('hidden');
@@ -625,7 +625,7 @@ $(function(){
         // 职位收藏
         addFav.click(function(){
             var next = window.location.pathname; //获取当前url，并传递给login视图，用于登录后跳转回当前页。
-            $.get('/post/postHandle/?type=fav&positionID='+recipient,function(data){
+            $.get('/position/postHandle/?type=fav&positionID='+recipient,function(data){
                 if(data.success===1){
                     addFav.addClass('hidden');
                     addFavSuccess.removeClass('hidden');

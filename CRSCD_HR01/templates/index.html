@@ -31,8 +31,8 @@
 						 <div class="col-lg-5 col-lg-offset-1">
 							<ul class="nav navbar-nav">
 								<li class="active"><a href="">首页</a></li>
-								<li><a href="/post/schoolPosition/">校园招聘</a></li>
-								<li><a href="/post/generalPosition">社会招聘</a></li>
+								<li><a href="/position/schoolPosition/">校园招聘</a></li>
+								<li><a href="/position/generalPosition">社会招聘</a></li>
 								<li><a href="">了解通号</a></li>
 								<li><a href="/center/resume/">个人中心</a></li>
 							</ul>
@@ -64,35 +64,35 @@
 	<div class="container">
 		<h4>最新职位</h4>
 		<div class="row" id="postCon">
-			{% for p in post %}
+			{% for p in position %}
                 <div class="col-sm-6 col-md-4 col-lg-3">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
 
-                            <a href="/post/postView/?postId={{ p.id }}" style="color: white;" id="#postName">{{ p.post_name }}</a>
+                            <a href="/position/positionView/?positionId={{ p.id }}" style="color: white;" id="#postName">{{ p.position_name }}</a>
                         </div>
                         <div class="panel-body" id="panelBody">
                             <p>工作地：{{ p.location }}</p>
-                            <p>职位类别：{{ p.post_type }}</p>
+                            <p>职位类别：{{ p.position_type }}</p>
                             <p>招聘人数：{{ p.num }}</p>
                             <p>招聘对象：{{ p.apply_type }}</p>
 
                             <span class="glyphicon glyphicon-menu-down" aria-hidden="true" id="showDetail"></span>
 
                             <div class="hidden" id="postDes">
-                                <p>发布时间：{{ p.public_date|date:"Y-m-d" }}</p>
+                                <p>发布时间：{{ p.pub_date|date:"Y-m-d" }}</p>
                                 <p>所属部门：{{ p.department }}</p>
-                                <p>工作年限：{{ p.exp_requirement }}</p>
-                                <p>学历要求：{{ p.edu_requirement }}</p>
+                                <p>工作年限：{{ p.exp_req }}</p>
+                                <p>学历要求：{{ p.edu_req }}</p>
                                 <p>岗位描述：</p>
-                                <p>{{ p.responsibilities|linebreaksbr }}</p>
+                                <p>{{ p.position_detail|linebreaksbr }}</p>
                                 <p>岗位要求：</p>
-                                <p>{{ p.post_requirement|linebreaksbr }}</p>
+                                <p>{{ p.position_req|linebreaksbr }}</p>
                                 <div class="hidden" id="positionID">{{ p.id }}</div>
                                 <button class="btn btn-primary btn-block" id="postApply">职位申请</button>
-                                <a class="btn btn-success btn-block hidden" id="applySuccess" href="/center/postView/?type=apply">申请成功</a>
+                                <a class="btn btn-success btn-block hidden" id="applySuccess" href="/center/positionView/?type=apply">申请成功</a>
                                 <button class="btn btn-warning btn-block" id="postStore">职位收藏</button>
-                                <a class="btn btn-success btn-block hidden" id="favSuccess" href="/center/postView/?type=fav">收藏成功</a>
+                                <a class="btn btn-success btn-block hidden" id="favSuccess" href="/center/positionView/?type=fav">收藏成功</a>
                             </div>
                             <span class="glyphicon glyphicon-menu-up hidden" aria-hidden="true" id="hideDetail"></span>
                         </div>

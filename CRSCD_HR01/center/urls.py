@@ -10,6 +10,6 @@ urlpatterns = [
     url(r'^resume_modify/$', views.resume_modify),
     url(r'^work_del/$', views.work_del),
     url(r'^edu_del/$', views.edu_del),
-    url(r'^postView/$', views.post_view),
-    url(r'^postModal/$', views.post_modal),
+    url(r'^positionView/$', views.position_view),
+    url(r'^positionModal/$', views.position_modal),
 ]

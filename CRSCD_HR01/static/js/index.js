@@ -15,7 +15,7 @@ $(function(){
     // 职位申请
     postCon.delegate('#postApply', 'click', function(){
         var obj = $(this);
-        $.get('/post/postHandle/?type=apply&positionID='+$(this).siblings("#positionID").html(),function(data){
+        $.get('/position/postHandle/?type=apply&positionID='+$(this).siblings("#positionID").html(),function(data){
             if(data.success===1){
                 obj.addClass('hidden').siblings('#applySuccess').removeClass('hidden').siblings('#postStore, #favSuccess').addClass('hidden');
             }
@@ -29,7 +29,7 @@ $(function(){
     // 职位收藏
     postCon.delegate('#postStore', 'click', function(){
         var obj = $(this);
-        $.get('/post/postHandle/?type=fav&positionID='+$(this).siblings("#positionID").html(), function(data){
+        $.get('/position/postHandle/?type=fav&positionID='+$(this).siblings("#positionID").html(), function(data){
             if(data.success===1){
                 obj.addClass('hidden').next().removeClass('hidden');
             }

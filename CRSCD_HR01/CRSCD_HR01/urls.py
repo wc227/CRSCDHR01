@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'user/', include('user.urls')),
     path(r'center/', include('center.urls')),
-    path(r'post/', include('post.urls')),
+    path(r'position/', include('position.urls')),
     path(r'', views.index),
     path(r'index/', views.index),
     url(r'^search/', include('haystack.urls')),

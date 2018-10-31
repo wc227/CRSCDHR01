@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user',
     'center',
-    'post',
+    'position',
     'django_object_actions',
     'haystack',
 ]
