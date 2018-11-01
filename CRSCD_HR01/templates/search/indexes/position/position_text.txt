@@ -1,6 +1,6 @@
-{{ post.position_name }}
-{{ post.position_type }}
-{{ post.location }}
-{{ post.position_detail }}
-{{ post.position_req }}
+{{ object.position_name }}
+{{ object.position_type }}
+{{ object.location }}
+{{ object.position_detail }}
+{{ object.position_req }}
 

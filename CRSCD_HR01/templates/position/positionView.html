@@ -14,12 +14,13 @@
             <!--职位搜索-->
             <form method="get" action="/position/PositionSearch/" role="search">
                 <div class="input-group" id="searchCon">
-                    <input type="text" class="form-control" placeholder="关键词" id="keyword">
+                    <input type="text" class="form-control" placeholder="关键词" id="keyword" name="q">
                     <span class="input-group-btn">
                         <button class="btn btn-primary" type="submit">Search</button>
                     </span>
                 </div><!-- /input-group -->
             </form>
+
             <!--职位筛选-->
             <div class="container" id="filterCon">
                 <p class="filterLabel">类别：</p>
@@ -60,15 +61,27 @@
                         <td>人数</td>
                         <td>发布日期</td>
                     </tr>
-                    {% for p in positions %}
-                    <tr class="positions" data-type="{{ p.position_type }}">
-                        <td><a data-toggle="modal" data-target="#postDisplay" data-post="{{ p.id }}">{{ p.position_name }}</a></td>
-                        <td id="postLocation">{{ p.location }}</td>
-                        <td id="postType">{{ p.position_type }}</td>
-                        <td>{{ p.num }}</td>
-                        <td>{{ p.pub_date|date:'Y-m-d' }}</td>
-                    </tr>
-                    {% endfor %}
+                    {% if query %}
+                        {% for result in object_list %}
+                            <tr class="positions" data-type="{{ result.object.position_type }}">
+                                <td><a data-toggle="modal" data-target="#postDisplay" data-post="{{ result.object.id }}">{{ result.object.position_name }}</a></td>
+                                <td id="postLocation">{{ result.object.location }}</td>
+                                <td id="postType">{{ result.object.position_type }}</td>
+                                <td>{{ result.object.num }}</td>
+                                <td>{{ result.object.pub_date|date:'Y-m-d' }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        {% for p in positions %}
+                            <tr class="positions" data-type="{{ p.position_type }}">
+                                <td><a data-toggle="modal" data-target="#postDisplay" data-post="{{ p.id }}">{{ p.position_name }}</a></td>
+                                <td id="postLocation">{{ p.location }}</td>
+                                <td id="postType">{{ p.position_type }}</td>
+                                <td>{{ p.num }}</td>
+                                <td>{{ p.pub_date|date:'Y-m-d' }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
                 </table>
             </div><!--listCon-->
 

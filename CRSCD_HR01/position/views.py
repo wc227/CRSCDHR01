@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from position import models
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from haystack.views import SearchView
+from haystack.generic_views import SearchView
 
 
 # 校园招聘
@@ -119,8 +119,7 @@ def general_position(request):
 
 # 职位搜索
 class PositionSearchView(SearchView):
-    template = 'position/positionView.html'
-
+    template_name = 'position/positionView.html'
 
 
 
