@@ -1,19 +1,27 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import JsonResponse
 from position import models
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from haystack.generic_views import SearchView
+from haystack.query import SearchQuerySet
+from haystack.inputs import Exact
 
 
 # 校园招聘
 def school_position(request):
-    # 从数据库获取全部校园招聘岗位
-    positions = models.Position.objects.filter(apply_type='校园招聘').order_by('-pub_date')
-    position_type = str(request.GET.get('type'))  # 从页面获取岗位类型
-    location = str(request.GET.get('location'))  # 从页面获取工作地
+    get = request.GET.get
+    position_type = str(get('type'))       # 从页面获取岗位类型
+    location = str(get('location'))        # 从页面获取工作地
+    keyword = get('keyword')               # 从页面获取搜索关键字
 
-    if position_type != 'None':  # 职位类型筛选
+    if keyword:  # 从搜索引擎获取职位
+        results = SearchQuerySet().filter(content=keyword, apply_type=Exact('校园招聘'))  # 获取搜索结果
+        positions = [r.object for r in results]  # 遍历搜索结果并生成职位列表
+    else:  # 从数据库获取全部校园招聘职位
+        positions = models.Position.objects.filter(apply_type='校园招聘').order_by('-pub_date')
+
+    # 职位类型筛选
+    try:
         type_dic = {
             'development': '科研',
             'design': '设计',
@@ -22,9 +30,13 @@ def school_position(request):
             'market': '市场',
             'management': '管理',
         }  # 职位类型转义字典
-        city = type_dic[position_type]  # 从字典中查找对应的职位类型
-        positions = positions.filter(position_type=city)  # 根据职位类型进行筛选
-    if location != 'None':  # 工作地筛选
+        p_type = type_dic[position_type]  # 从字典中查找对应的职位类型
+        positions = positions.filter(position_type=p_type)  # 根据职位类型进行筛选
+    except KeyError:
+        pass
+
+    # 工作地筛选
+    try:
         location_dic = {
             'bj': '北京',
             'sh': '上海',
@@ -37,6 +49,8 @@ def school_position(request):
         }  # 工作地转义字典
         city = location_dic[location]  # 从字典查找对应的城市
         positions = positions.filter(location=city)  # 根据工作地进行筛选
+    except KeyError:
+        pass
 
     # 分页
     paginator = Paginator(positions, 2)
@@ -50,6 +64,7 @@ def school_position(request):
         "positions": positions_page,
         "position_type": position_type,
         "location": location,
+        "keyword": keyword,
     }
 
     # 尝试获取登录用户姓名
@@ -100,7 +115,7 @@ def general_position(request):
 
     # 构造返回数据
     context = {
-        'nav': 2,
+        'nav': 3,
         'title': '社会招聘',
         "positions": positions_page,
         "position_type": position_type,
@@ -115,12 +130,6 @@ def general_position(request):
         pass
 
     return render(request, 'position/positionView.html', context)
-
-
-# 职位搜索
-class PositionSearchView(SearchView):
-    template_name = 'position/positionView.html'
-
 
 
 # 职位申请和收藏

@@ -12,9 +12,9 @@
         <div class="viewBox">
 
             <!--职位搜索-->
-            <form method="get" action="/position/PositionSearch/" role="search">
+            <form method="get" action="/position/schoolPosition/" role="search">
                 <div class="input-group" id="searchCon">
-                    <input type="text" class="form-control" placeholder="关键词" id="keyword" name="q">
+                    <input type="text" class="form-control" placeholder="关键词" id="keyword" name="keyword">
                     <span class="input-group-btn">
                         <button class="btn btn-primary" type="submit">Search</button>
                     </span>
@@ -61,17 +61,7 @@
                         <td>人数</td>
                         <td>发布日期</td>
                     </tr>
-                    {% if query %}
-                        {% for result in object_list %}
-                            <tr class="positions" data-type="{{ result.object.position_type }}">
-                                <td><a data-toggle="modal" data-target="#postDisplay" data-post="{{ result.object.id }}">{{ result.object.position_name }}</a></td>
-                                <td id="postLocation">{{ result.object.location }}</td>
-                                <td id="postType">{{ result.object.position_type }}</td>
-                                <td>{{ result.object.num }}</td>
-                                <td>{{ result.object.pub_date|date:'Y-m-d' }}</td>
-                            </tr>
-                        {% endfor %}
-                    {% else %}
+
                         {% for p in positions %}
                             <tr class="positions" data-type="{{ p.position_type }}">
                                 <td><a data-toggle="modal" data-target="#postDisplay" data-post="{{ p.id }}">{{ p.position_name }}</a></td>
@@ -81,7 +71,7 @@
                                 <td>{{ p.pub_date|date:'Y-m-d' }}</td>
                             </tr>
                         {% endfor %}
-                    {% endif %}
+
                 </table>
             </div><!--listCon-->
 
@@ -97,9 +87,9 @@
                     {% endif %}
                     {% for p in positions.paginator.page_range %}
                         {% if p == positions.number %}
-                        <li class="active"><a href="?page={{ p }}&type={{ position_type }}&location={{ location }}">{{ p }}</a></li>
+                        <li class="active"><a href="?page={{ p }}&type={{ position_type }}&location={{ location }}&keyword={{ keyword }}">{{ p }}</a></li>
                         {% else %}
-                        <li><a href="?page={{ p }}&type={{ position_type }}&location={{ location }}">{{ p }}</a></li>
+                        <li><a href="?page={{ p }}&type={{ position_type }}&location={{ location }}&keyword={{ keyword }}">{{ p }}</a></li>
                         {% endif %}
                     {% endfor %}
                     {% if positions.has_next %}

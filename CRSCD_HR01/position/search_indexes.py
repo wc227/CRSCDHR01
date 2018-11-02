@@ -6,7 +6,7 @@ from position.models import Position
 class PostIndex(indexes.SearchIndex, indexes.Indexable):  # 类名必须为需要检索的Model_name+Index，这里需要检索Note，所以创建NoteIndex
     text = indexes.CharField(document=True, use_template=True)  # 创建一个text字段
 
-    # author = indexes.CharField(model_attr='post_name')  # 创建一个author字段
+    apply_type = indexes.CharField(model_attr='apply_type')  # 创建一个author字段
 
     # pub_date = indexes.DateTimeField(model_attr='pub_date')  # 创建一个pub_date字段
 
