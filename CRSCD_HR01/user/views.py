@@ -2,10 +2,13 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 
 
 # 登录
 def log_in(request):
+    """登录"""
     url_prev = request.GET.get('next')
     if url_prev:
         url_next = url_prev
@@ -18,13 +21,12 @@ def log_in(request):
 
 # 登录信息验证
 def login_handle(request):
+    """登录信息验证"""
     if request.method == "POST":
         post = request.POST
         login_email = post['login_email']
         login_pwd = post['login_pwd']
         url_next = request.COOKIES['url_next']
-        print(url_next)
-        print('*'*100)
         user = authenticate(request, username=login_email, password=login_pwd)
 
     # 登录信息验证
@@ -38,13 +40,16 @@ def login_handle(request):
 
 # 注销登录
 def log_out(request):
+    """注销登录"""
     logout(request)
     return redirect('/index/')
 
 
 # 注册信息处理
 def register_handle(request):
-    # 接受用户输入
+    """注册信息处理"""
+
+    # 接收用户输入
     post = request.POST
     user_email = post.get('user_email')
     user_pwd = post.get('user_pwd')
@@ -63,14 +68,37 @@ def register_handle(request):
     user.save()
 
     # 注册成功，跳转登录页
-    return redirect('/user/login_request/')
+    return redirect('/user/logIn/')
 
 
 # 判断邮箱是否已经注册
 def register_exist(request):
+    """判断邮箱是否已经注册"""
     username = request.GET.get('user_email')
     count = User.objects.filter(username=username).count()
     return JsonResponse({'count': count})
+
+
+# 更改密码
+@login_required
+@require_POST
+def change_pwd(request):
+    """用户自主更改密码"""
+    pre_pwd = request.POST['prePwd']
+    new_pwd = request.POST['newPwd']
+    re_new_pwd = request.POST['reNewPwd']
+    username = request.user.username
+
+    if new_pwd == re_new_pwd:                                       # 判断两次密码是否一致
+        user = authenticate(username=username, password=pre_pwd)   # 判断用户是否可以登录
+        if user is not None:
+            user.set_password(new_pwd)
+            user.save()
+            return JsonResponse({"success": 1})
+        else:
+            return JsonResponse({"success": 2})
+    else:
+        return JsonResponse({"success": 3})
 
 
 

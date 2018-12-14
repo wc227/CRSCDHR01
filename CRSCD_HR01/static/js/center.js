@@ -616,6 +616,9 @@ $(function(){
                     favCancel.addClass('hidden');
                     applySuccess.removeClass('hidden');
                 }
+                else if(data.success===2){
+                    resumeAlert();
+                }
                 else{
                     loginAlert(next);
                 }
@@ -630,6 +633,9 @@ $(function(){
                     addFav.addClass('hidden');
                     addFavSuccess.removeClass('hidden');
                 }
+                else if(data.success===2){
+                    resumeAlert();
+                }
                 else{
                     loginAlert(next);
                 }
@@ -641,6 +647,58 @@ $(function(){
             alert('请登录');
             window.location.replace('/user/logIn/?next='+next);
         }
+
+        // 维护简历提示
+        function resumeAlert(){
+            alert('请维护简历');
+            window.location.replace('/center/resume/')
+        }
     });
+
+
+    // 显示和隐藏修改密码框
+    $('#changePwdBtn').click(function(){
+        if($('#changePwdCon').hasClass('hidden')){
+            $('#changePwdCon').removeClass('hidden');
+        }
+        else{
+            $('#changePwdCon').addClass('hidden');
+        }
+    });
+
+
+    // 修改密码
+    $('#changePwdSubmit').click(function(){
+        var prePwd = $('#prePwd').val();
+        var newPwd = $('#newPwd').val();
+        var reNewPwd = $('#reNewPwd').val();
+        var changeWarn = $('#changeWarn');
+        var errorLength = false;
+        var errorSame = false;
+
+        if(newPwd.length<=8){
+            changeWarn.html('密码长度最短为8位。');
+            errorLength = true;
+        }
+        if(newPwd!==reNewPwd){
+            changeWarn.html('两次输入的密码不一致。')
+            errorSame = true;
+        }
+        if(errorLength===false && errorSame===false){
+            $.post('/user/changePassword/', {'prePwd': prePwd, 'newPwd': newPwd, 'reNewPwd': reNewPwd}, function(data){
+                if(data.success===2){
+                    changeWarn.html('您输入的原密码有误。');
+                }
+                else if(data.success===1){
+                    changeWarn.html('修改成功。');
+                    changeWarn.css({color: 'green'});
+                }
+            });
+        }
+
+
+    });
+
+
 
 });

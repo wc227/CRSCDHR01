@@ -4,7 +4,7 @@ from position import models
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from haystack.query import SearchQuerySet
-from haystack.inputs import Exact
+from haystack.inputs import AutoQuery
 
 
 # 校园招聘
@@ -14,10 +14,18 @@ def school_position(request):
     location = str(get('location'))        # 从页面获取工作地
     keyword = get('keyword')               # 从页面获取搜索关键字
 
-    if keyword:  # 从搜索引擎获取职位
-        results = SearchQuerySet().filter(content=keyword, apply_type=Exact('校园招聘'))  # 获取搜索结果
+    context = {
+        'nav': 2,
+        'title': '校园招聘',
+        "position_type": position_type,
+        "location": location,
+    }                        # 构造返回数据
+
+    if keyword:                            # 从搜索引擎获取职位
+        results = SearchQuerySet().filter(content=AutoQuery(keyword), apply_type='校园招聘')  # 获取搜索结果
         positions = [r.object for r in results]  # 遍历搜索结果并生成职位列表
-    else:  # 从数据库获取全部校园招聘职位
+        context['keyword'] = keyword
+    else:                                  # 从数据库获取校园招聘职位
         positions = models.Position.objects.filter(apply_type='校园招聘').order_by('-pub_date')
 
     # 职位类型筛选
@@ -53,19 +61,10 @@ def school_position(request):
         pass
 
     # 分页
-    paginator = Paginator(positions, 2)
+    paginator = Paginator(positions, 8)
     page = request.GET.get('page')
     positions_page = paginator.get_page(page)
-
-    # 构造返回数据
-    context = {
-        'nav': 2,
-        'title': '校园招聘',
-        "positions": positions_page,
-        "position_type": position_type,
-        "location": location,
-        "keyword": keyword,
-    }
+    context['positions'] = positions_page
 
     # 尝试获取登录用户姓名
     try:
@@ -79,11 +78,27 @@ def school_position(request):
 
 # 社会招聘
 def general_position(request):
-    positions = models.Position.objects.filter(apply_type='社会招聘')
-    position_type = str(request.GET.get('type'))  # 从页面获取岗位类型
-    location = str(request.GET.get('location'))  # 从页面获取工作地
+    get = request.GET.get
+    position_type = str(get('type'))       # 从页面获取岗位类型
+    location = str(get('location'))        # 从页面获取工作地
+    keyword = get('keyword')               # 从页面获取搜索关键字
 
-    if position_type != 'None':  # 职位类型筛选
+    context = {
+        'nav': 3,
+        'title': '社会招聘',
+        "position_type": position_type,
+        "location": location,
+    }                        # 构造返回数据
+
+    if keyword:                            # 从搜索引擎获取职位
+        results = SearchQuerySet().filter(content=AutoQuery(keyword), apply_type='社会招聘')  # 获取搜索结果
+        positions = [r.object for r in results]  # 遍历搜索结果并生成职位列表
+        context['keyword'] = keyword
+    else:                                  # 从数据库获取校园招聘职位
+        positions = models.Position.objects.filter(apply_type='社会招聘').order_by('-pub_date')
+
+    # 职位类型筛选
+    try:
         type_dic = {
             'development': '科研',
             'design': '设计',
@@ -92,9 +107,13 @@ def general_position(request):
             'market': '市场',
             'management': '管理',
         }  # 职位类型转义字典
-        position_type = type_dic[position_type]  # 从字典中查找对应的职位类型
-        positions = positions.filter(position_type=position_type)  # 根据职位类型进行筛选
-    if location != 'None':  # 工作地筛选
+        p_type = type_dic[position_type]  # 从字典中查找对应的职位类型
+        positions = positions.filter(position_type=p_type)  # 根据职位类型进行筛选
+    except KeyError:
+        pass
+
+    # 工作地筛选
+    try:
         location_dic = {
             'bj': '北京',
             'sh': '上海',
@@ -107,20 +126,14 @@ def general_position(request):
         }  # 工作地转义字典
         city = location_dic[location]  # 从字典查找对应的城市
         positions = positions.filter(location=city)  # 根据工作地进行筛选
+    except KeyError:
+        pass
 
     # 分页
-    paginator = Paginator(positions, 2)
+    paginator = Paginator(positions, 8)
     page = request.GET.get('page')
     positions_page = paginator.get_page(page)
-
-    # 构造返回数据
-    context = {
-        'nav': 3,
-        'title': '社会招聘',
-        "positions": positions_page,
-        "position_type": position_type,
-        "location": location,
-    }
+    context['positions'] = positions_page
 
     # 尝试获取登录用户姓名
     try:
@@ -136,28 +149,24 @@ def general_position(request):
 @login_required
 def position_handle(request):
     """职位申请和职位收藏"""
-    handle_type = request.GET.get('type')
-    position_id = request.GET.get('positionID')
-    position = models.Position.objects.get(id=position_id)
-    if request.user is not None:
-        # 职位申请
-        if handle_type == 'apply':
-            models.PositionApply.objects.get_or_create(position=position, user=request.user)
-
-        # 职位收藏
-        elif handle_type == 'fav':
-            models.PositionFav.objects.get_or_create(position=position, user=request.user)
-
-        # 取消申请
-        elif handle_type == 'applyCancel':
-            models.PositionApply.objects.filter(position=position).filter(user=request.user).delete()
-
-        # 取消收藏
-        elif handle_type == 'favCancel':
-            models.PositionFav.objects.filter(position=position).filter(user=request.user).delete()
-
-        return JsonResponse({"success": 1})
+    if request.user.is_authenticated:                       # 判断用户是否登录
+        if hasattr(request.user, 'basic_info'):             # 判断用户是否维护了简历
+            handle_type = request.GET.get('type')           # 获取职位操作类型
+            position_id = request.GET.get('positionID')     # 获取职位ID
+            position = models.Position.objects.get(id=position_id)  # 从数据库中查找ID对应的职位
+            if handle_type == 'apply':                      # 职位申请
+                models.PositionApply.objects.get_or_create(position=position, user=request.user)
+            elif handle_type == 'fav':                      # 职位收藏
+                models.PositionFav.objects.get_or_create(position=position, user=request.user)
+            elif handle_type == 'applyCancel':              # 取消申请
+                models.PositionApply.objects.filter(position=position).filter(user=request.user).delete()
+            elif handle_type == 'favCancel':                # 取消收藏
+                models.PositionFav.objects.filter(position=position).filter(user=request.user).delete()
+            return JsonResponse({"success": 1})
+        else:
+            return JsonResponse({"success": 2})
     else:
-        return JsonResponse({"success": 0})
+        return JsonResponse({"success": 3})
+
 
 

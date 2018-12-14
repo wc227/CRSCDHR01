@@ -12,9 +12,9 @@
         <div class="viewBox">
 
             <!--职位搜索-->
-            <form method="get" action="/position/schoolPosition/" role="search">
+            <form method="get" action="/position/{% if nav == 3 %}generalPosition{% else %}schoolPosition{% endif %}/" role="search">
                 <div class="input-group" id="searchCon">
-                    <input type="text" class="form-control" placeholder="关键词" id="keyword" name="keyword">
+                    <input type="text" class="form-control" placeholder="关键词" id="keyword" name="keyword" value="{{ keyword }}">
                     <span class="input-group-btn">
                         <button class="btn btn-primary" type="submit">Search</button>
                     </span>

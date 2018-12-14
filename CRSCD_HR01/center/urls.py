@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^edu_del/$', views.edu_del),
     url(r'^positionView/$', views.position_view),
     url(r'^positionModal/$', views.position_modal),
+    url(r'^accountManagement/$', views.account_management),
 ]

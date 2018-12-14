@@ -1,0 +1,25 @@
+{% extends 'center/resume_base.html' %}
+{% block account %}
+<div class="container" id="changeCon">
+    <a href="javascript:" id="changePwdBtn">修改密码</a>
+    <div id="changePwdCon" class="hidden">
+        <form method="post">
+            {% csrf_token %}
+          <div class="form-group">
+            <label for="prePwd">原密码</label>
+            <input type="password" class="form-control" id="prePwd" name="prePwd">
+          </div>
+          <div class="form-group">
+            <label for="newPwd">新密码</label>
+            <input type="password" class="form-control" id="newPwd" name="newPwd">
+          </div>
+            <div class="form-group">
+            <label for="ReNewPwd">确认密码</label>
+            <input type="password" class="form-control" id="reNewPwd" name="reNewPwd">
+          </div>
+          <div id="changeWarn"></div>
+          <button class="btn btn-default" id="changePwdSubmit">提交修改</button>
+        </form>
+    </div>
+</div>
+{% endblock account %}

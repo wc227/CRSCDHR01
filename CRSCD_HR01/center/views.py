@@ -292,3 +292,17 @@ def position_modal(request):
         'position_id': position.id,
     }
     return JsonResponse(context)
+
+
+# 个人账户管理
+@login_required()
+def account_management(request):
+    context = {
+        'name': request.user.first_name + request.user.last_name,
+        'active': 4,
+        'nav': 5,
+    }
+
+    return render(request, 'center/account_management.html', context)
+
+

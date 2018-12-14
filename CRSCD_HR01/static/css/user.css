@@ -420,7 +420,6 @@ label{
      color: #337ab7;
 }
 
-
 .filterSpan ol li a.colorChange1:focus{
     color: white;
     text-decoration: none;
@@ -434,4 +433,13 @@ label{
 #pageCon{
     text-align: center;
 }
+
+#changeCon{
+    margin-top: 30px;
+}
+
+#changeWarn{
+    color: red;
+}
+
 

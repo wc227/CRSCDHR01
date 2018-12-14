@@ -16,7 +16,7 @@
                 {% for a in apply_info %}
                 <tr>
                     <td><a data-toggle="modal" data-target="#postDisplay" data-post="{{ a.position.id }}">{{ a.position.position_name }}</a></td>
-                    <td>{{ a.position.company }}</td>
+                    <td>{{ a.position.location }}</td>
                     <td>{{ a.position.position_type }}</td>
                     <td style="color: green">{{ a.status }}</td>
                 </tr>
@@ -31,14 +31,14 @@
                     <td>职位</td>
                     <td>工作地</td>
                     <td>类型</td>
-                    <td>操作</td>
+                    <td>学历要求</td>
                 </tr>
                 {% for f in fav_info %}
                     <tr>
                         <td><a data-toggle="modal" data-target="#postDisplay" data-post="{{ f.position.id }}">{{ f.position.position_name }}</a></td>
-                        <td>{{ f.position.company }}</td>
+                        <td>{{ f.position.location }}</td>
                         <td>{{ f.position.position_type }}</td>
-                        <td><a href="javascript:" id="cancelFav">取消收藏</a></td>
+                        <td>{{ f.position.edu_req }}</td>
                     </tr>
                 {% endfor %}
             </table>
