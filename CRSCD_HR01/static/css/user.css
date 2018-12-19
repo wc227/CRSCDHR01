@@ -438,8 +438,24 @@ label{
     margin-top: 30px;
 }
 
-#changeWarn{
+.changeWarn{
     color: red;
+    margin-bottom: 10px;
 }
 
+.changeBtn{
+    display: block;
+}
 
+#changePwdCon, #changeEmailCon{
+    border: 1px solid rgb(204,204,204);
+    padding: 14px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+#prePwd{
+    font-size: 13px;
+    margin-bottom: 20px;
+}

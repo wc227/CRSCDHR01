@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
+from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
-
+import json
 
 # 登录
 def log_in(request):
@@ -79,27 +80,45 @@ def register_exist(request):
     return JsonResponse({'count': count})
 
 
+# 判断原始密码是否正确
+def pre_pwd_check(request):
+    pre_pwd = request.POST['prePwd']
+    username = request.user.username
+    user = authenticate(username=username, password=pre_pwd)
+    if user is not None:
+        return JsonResponse({"success": 1})
+    else:
+        return JsonResponse({"success": 2})
+
+
 # 更改密码
 @login_required
 @require_POST
 def change_pwd(request):
     """用户自主更改密码"""
-    pre_pwd = request.POST['prePwd']
     new_pwd = request.POST['newPwd']
-    re_new_pwd = request.POST['reNewPwd']
+    print(new_pwd)
     username = request.user.username
+    user = User.objects.get(username=username)
+    user.set_password(new_pwd)
+    user.save()
 
-    if new_pwd == re_new_pwd:                                       # 判断两次密码是否一致
-        user = authenticate(username=username, password=pre_pwd)   # 判断用户是否可以登录
-        if user is not None:
-            user.set_password(new_pwd)
-            user.save()
-            return JsonResponse({"success": 1})
-        else:
-            return JsonResponse({"success": 2})
-    else:
-        return JsonResponse({"success": 3})
+    return render(request, "user/login.html")
 
+
+# 更改邮箱
+@login_required
+@require_POST
+def change_email(request):
+    """更改邮箱"""
+    new_email = request.POST['newEmail']
+    username = request.user.username
+    user = User.objects.get(username=username)
+    user.username = new_email
+    user.email = new_email
+    user.save()
+    logout(request)
+    return render(request, "user/login.html")
 
 
 

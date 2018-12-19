@@ -183,10 +183,11 @@ $(function(){
     var work_li = $('#work_list li:first').html();
     var work_li_val = $('<li>' + work_li + '</li>');
     var work_clone = work_li_val.clone();
-    var workLen = $('#workLen').html();
+    var workLen = parseInt($('#workLen').html());
     work_add.click(function(){
         work_clone.clone().appendTo(work_list);
-        workLen += 1;
+        if(workLen===0){workLen += 2;}
+        else{workLen += 1;}
     });
 
     work_list.delegate('a', 'click', function(){
@@ -195,12 +196,10 @@ $(function(){
             $.get('/center/work_del/', {workID: workId});
             $(this).parent().parent().remove();
             workLen -= 1;
-            work_add.removeClass('hidden');
-            if(workLen===1){
-              $('#work_list li div:last').addClass('hidden');
-            }
         }
-
+        else if(workLen===1){
+            $('#work_list li div:last').addClass('hidden');
+        }
     });
 
     // 工作信息校验代理
@@ -326,7 +325,8 @@ $(function(){
     edu_add.click(function(){
         if(eduLen<4){
             edu_clone.clone().appendTo(edu_list);
-            eduLen ++;
+            if(eduLen===0){eduLen += 2}
+            else{eduLen += 1}
             if(eduLen===4){
                 edu_add.addClass('hidden');
             }
@@ -516,12 +516,10 @@ $(function(){
         });
     });
 
-
     // 表单提交函数
     $('#save').click(function(){
         $('#resume_form').submit();
     });
-
 
     // 个人中心查看申请职位详情
     $('#postDisplay').on('show.bs.modal', function(event){
@@ -655,50 +653,88 @@ $(function(){
         }
     });
 
-
     // 显示和隐藏修改密码框
     $('#changePwdBtn').click(function(){
         if($('#changePwdCon').hasClass('hidden')){
             $('#changePwdCon').removeClass('hidden');
+            $('#chgPwdBtnCon').addClass('dropup');
         }
         else{
             $('#changePwdCon').addClass('hidden');
+            $('#chgPwdBtnCon').removeClass('dropup');
         }
     });
 
+    // 显示和隐藏修改邮箱框
+    $('#changeEmailBtn').click(function(){
+        if($('#changeEmailCon').hasClass('hidden')){
+            $('#changeEmailCon').removeClass('hidden');
+            $('#chgEmailBtnCon').addClass('dropup');
+        }
+        else{
+            $('#changeEmailCon').addClass('hidden');
+            $('#chgEmailBtnCon').removeClass('dropup');
+        }
+    });
 
-    // 修改密码
-    $('#changePwdSubmit').click(function(){
+    // 更改密码
+    $('#chgPwdSubmit').click(function(){
         var prePwd = $('#prePwd').val();
         var newPwd = $('#newPwd').val();
         var reNewPwd = $('#reNewPwd').val();
-        var changeWarn = $('#changeWarn');
-        var errorLength = false;
-        var errorSame = false;
+        var chgPwdWarn = $('#chgPwdWarn');
 
-        if(newPwd.length<=8){
-            changeWarn.html('密码长度最短为8位。');
-            errorLength = true;
-        }
-        if(newPwd!==reNewPwd){
-            changeWarn.html('两次输入的密码不一致。')
-            errorSame = true;
-        }
-        if(errorLength===false && errorSame===false){
-            $.post('/user/changePassword/', {'prePwd': prePwd, 'newPwd': newPwd, 'reNewPwd': reNewPwd}, function(data){
-                if(data.success===2){
-                    changeWarn.html('您输入的原密码有误。');
+        // 校验密码
+        checkPrePwd();
+
+        // 校验原密码函数
+        function checkPrePwd(){
+            $.post('/user/checkPwd/', {"prePwd": prePwd}, function(data){
+                if(data.success===1){
+                    checkNewPwd();
                 }
-                else if(data.success===1){
-                    changeWarn.html('修改成功。');
-                    changeWarn.css({color: 'green'});
+                else{
+                    chgPwdWarn.html("您输入的原密码有误");
                 }
-            });
+            }, "json");
         }
 
-
+        // 校验新密码函数
+        function checkNewPwd(){
+            if(newPwd.length<8){
+                chgPwdWarn.html('密码长度最短为8位。');
+                return false
+            }
+            if(newPwd.length>=8 && newPwd!==reNewPwd){
+                chgPwdWarn.html('两次输入的密码不一致。');
+                return false
+            }
+            if(newPwd.length>=8 && newPwd===reNewPwd){
+                alert("修改成功，请重新登录");
+                $('#chgPwdForm').submit();
+            }
+        }
     });
 
-
-
+    // 更改邮箱
+    $('#chgEmailSubmit').click(function(){
+        var newEmail = $('#newEmail').val();
+        var re = /^[a-z0-9][\w\.\-]*@[a-z0-9\-]+(\.[a-z]{2,5}){1,2}$/;
+        var chgEmailWarn = $('#chgEmailWarn');
+        if(re.test(newEmail)){
+            // 验证邮箱是否已经注册
+            $.get('/user/register_exist/?user_email='+newEmail,function(data){
+                if(data.count===1){
+                    chgEmailWarn.html("此邮箱已注册。")
+                }
+                else{
+                    alert("修改成功，请使用新邮箱重新登录。");
+                    $('#chgEmailForm').submit();
+                }
+            })
+        }
+        else{
+            chgEmailWarn.html('请输入正确的邮箱。');
+        }
+    });
 });

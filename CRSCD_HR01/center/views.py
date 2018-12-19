@@ -150,7 +150,6 @@ def resume(request):
     work_info = models.WorkInfo.objects.filter(work_foreignkey__exact=request.user.id)
     work_len = work_info.count()
     edu_info = models.EduInfo.objects.filter(edu_foreignkey__exact=request.user.id)
-    edu_len = edu_info.count()
     try:
         file = models.ResumeFile.objects.get(user__exact=request.user.id)
     except ObjectDoesNotExist:
@@ -297,12 +296,13 @@ def position_modal(request):
 # 个人账户管理
 @login_required()
 def account_management(request):
+    email = request.user.email
     context = {
         'name': request.user.first_name + request.user.last_name,
         'active': 4,
         'nav': 5,
+        'preEmail': email
     }
-
     return render(request, 'center/account_management.html', context)
 
 

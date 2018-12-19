@@ -1,9 +1,11 @@
 {% extends 'center/resume_base.html' %}
 {% block account %}
 <div class="container" id="changeCon">
-    <a href="javascript:" id="changePwdBtn">修改密码</a>
-    <div id="changePwdCon" class="hidden">
-        <form method="post">
+    <div class="btn-group" id="chgPwdBtnCon">
+        <button class="btn btn-info" type="button" id="changePwdBtn">更改密码&nbsp<span class="caret"></span></button>
+    </div> <!--更改密码按钮-->
+    <div id="changePwdCon" class="container hidden">
+        <form method="post" id="chgPwdForm" action="/user/changePwd/">
             {% csrf_token %}
           <div class="form-group">
             <label for="prePwd">原密码</label>
@@ -17,9 +19,24 @@
             <label for="ReNewPwd">确认密码</label>
             <input type="password" class="form-control" id="reNewPwd" name="reNewPwd">
           </div>
-          <div id="changeWarn"></div>
-          <button class="btn btn-default" id="changePwdSubmit">提交修改</button>
+          <div class="changeWarn" id="chgPwdWarn"></div>
+          <button class="btn btn-warning" id="chgPwdSubmit" type="button">提交修改</button>
         </form>
-    </div>
-</div>
+    </div> <!--更改密码容器-->
+    <div class="btn-group" id="chgEmailBtnCon">
+        <button class="btn btn-info" type="button" id="changeEmailBtn">更改邮箱&nbsp<span class="caret"></span></button>
+    </div> <!--更改邮箱按钮-->
+    <div id="changeEmailCon" class="container hidden">
+        <div id="prePwd">现邮箱：{{ preEmail }}</div>
+        <form method="post" action="/user/changeEmail/" id="chgEmailForm">
+        {% csrf_token %}
+          <div class="form-group">
+            <label for="newPwd">新邮箱：</label>
+            <input type="text" class="form-control" id="newEmail" name="newEmail">
+          </div>
+          <div class="changeWarn" id="chgEmailWarn"></div>
+          <button class="btn btn-warning" id="chgEmailSubmit" type="button">提交修改</button>
+        </form>
+    </div> <!--更改邮箱容器-->
+</div> <!--changeCon-->
 {% endblock account %}

@@ -8,7 +8,9 @@ urlpatterns = [
     url(r'^register_handle/$', views.register_handle),
     url(r'^register_exist/$', views.register_exist),
     url(r'^loginHandle/$', views.login_handle),
-    url(r'^changePassword/$', views.change_pwd),
+    url(r'^checkPwd/$', views.pre_pwd_check),
+    url(r'^changePwd/$', views.change_pwd),
+    url(r'^changeEmail/$', views.change_email),
 ]
 
 
