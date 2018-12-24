@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^checkPwd/$', views.pre_pwd_check),
     url(r'^changePwd/$', views.change_pwd),
     url(r'^changeEmail/$', views.change_email),
+    url(r'^registerAgreement/$', views.register_agreement),
 ]
 
 

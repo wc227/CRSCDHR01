@@ -121,5 +121,11 @@ def change_email(request):
     return render(request, "user/login.html")
 
 
-
+# 注册声明
+def register_agreement(request):
+    """注册声明"""
+    context = {
+        "title": "隐私协议"
+    }
+    return render(request, 'user/register_agreement.html', context)
 

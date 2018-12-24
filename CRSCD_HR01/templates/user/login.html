@@ -5,7 +5,7 @@
     <script type="text/javascript">
     $(function(){
         var error_login = true;
-            if({{ login_error }}==1){
+            if({{ login_error }}===1){
                 $('#login_warn').removeClass('hidden');
                 error_login = true;
 
@@ -103,7 +103,7 @@
                         </div>
                         <div class="form-group has-feedback" id="agreeBox">
                             <input type="checkbox" id="agree">
-                            <a href="#" id="declaration">我同意通号院集团法律声明及隐私权政策。</a>
+                            <a href="/user/registerAgreement/" id="declaration" target="_blank">我同意通号院集团法律声明及隐私权政策。</a>
                             <span id="agree_warn" class="help-block">请仔细阅读声明并选择同意。</span>
                         </div>
                     </div><!--modal-body-->
